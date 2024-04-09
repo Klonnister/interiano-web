@@ -1,4 +1,6 @@
-![Interiano logo](./public/interiano-logo-shadowed.svg)
+<div align="center">
+  <img src="./public/interiano-logo-shadowed.svg"/>
+</div>
 
 # Interiano-web
 
