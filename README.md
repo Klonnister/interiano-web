@@ -1,4 +1,4 @@
-![Interiano logo](/interiano-logo-shadowed.svg)
+![Interiano logo](./public/interiano-logo-shadowed.svg)
 
 # Interiano-web
 
