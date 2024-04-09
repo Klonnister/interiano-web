@@ -1,18 +1,8 @@
-# interiano-web
+![Interiano logo](/interiano-logo-shadowed.svg)
 
-This template should help get you started developing with Vue 3 in Vite.
+# Interiano-web
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+A web app where all CRUD operations are available for a user to keep inventory control of their products, as well as for creating catalogs. It consumes the [Interiano Api](https://github.com/Klonnister/interiano) to store product data.
 
 ## Project Setup
 
@@ -26,20 +16,26 @@ npm install
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### Recommended IDE Setup
 
-```sh
-npm run build
-```
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+### Type Support for `.vue` Imports in TS
 
-```sh
-npm run test:unit
-```
+TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
 
-### Lint with [ESLint](https://eslint.org/)
+### Customize configuration
 
-```sh
-npm run lint
-```
+See [Vite Configuration Reference](https://vitejs.dev/config/).
+
+## Author
+
+Dennis Herrera
+
+- Github - [Klonnister](https://github.com/klonnister)
+- Instagram - [dennis_herrera_f](https://www.instagram.com/dennis_herrera_f/)
+
+## Collaborators
+
+- [Darin Funes](https://github.com/DarinFunes)
+- [Cristian López](https://github.com/CristianBlake)
