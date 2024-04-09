@@ -2,7 +2,7 @@
   <img src="./public/interiano-logo-shadowed.svg"/>
 </div>
 
-# Interiano-web
+<h1 align="center">Interiano web</h1>
 
 A web app where all CRUD operations are available for a user to keep inventory control of their products, as well as for creating catalogs. It consumes the [Interiano Api](https://github.com/Klonnister/interiano) to store product data.
 
