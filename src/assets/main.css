@@ -16,6 +16,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding: 0 1rem;
 }
 
 input:focus, input:focus-visible {
@@ -24,5 +25,69 @@ input:focus, input:focus-visible {
   -ms-appearance: none;
   -o-appearance: none;
   appearance:  none;
-  outline: 1px solid #E1E1E1;
+}
+
+
+/*? Prime vue component modifications */
+
+/* Inputtext */
+.p-inputtext {
+  padding: 0.6rem 1.25rem;
+  background-color: #061321;
+  color: #A8B7EA;
+  font-size: 16px;
+  border-radius: 6px;
+}
+
+/* Dropdown */
+.p-dropdown {
+  background-color: #061321;
+  color: #A8B7EA;
+  width: 100%;
+  border-radius: 6px;
+}
+
+.p-dropdown-item {
+  background-color: #061321;
+  padding: 0.6rem 1rem;
+  color: #A8B7EA;
+  font-size: 15px;
+}
+
+/* Focus box shadow */
+.p-inputtext:enabled:focus {
+  box-shadow: 5px 5px 3px rgba(0,0,0, 0.25) inset;
+}
+
+.p-focus, .p-dropdown:enabled:focus {
+  box-shadow: 3px 5px 2px rgba(0,0,0, 0.35);
+}
+
+/* Placeholder color reset */
+.p-inputtext::placeholder, .p-placeholder, .p-dropdown::placeholder, 
+.p-component::placeholder {
+  color: #737D9C;
+  opacity: 1;
+}
+
+
+/*? Local classes */
+
+/* Input shadow effects */
+.local-inset-shadow {
+  box-shadow: 2px 2px 2px rgba(0,0,0, 0.25) inset;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.local-inset-shadow:hover {
+  box-shadow: 4px 4px 3px rgba(0,0,0, 0.25) inset;
+}
+
+.local-shadow {
+  box-shadow: 2px 3px 1px rgba(0,0,0, 0.35);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.local-shadow:hover {
+  box-shadow: 3px 5px 2px rgba(0,0,0, 0.35);
 }
