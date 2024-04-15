@@ -15,10 +15,14 @@ A web app where all CRUD operations are available for a user to keep inventory c
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Compile and Hot-Reload for Development (and host)
 
 ```sh
 npm run dev
+```
+
+```sh
+npm run dev -- --host
 ```
 
 ### Recommended IDE Setup
