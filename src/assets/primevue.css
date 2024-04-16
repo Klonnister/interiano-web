@@ -1,0 +1,79 @@
+/*? Prime vue component modifications */
+
+/* Inputtext */
+.p-inputtext {
+  padding: 0.6rem 1.25rem;
+  background-color: #061321;
+  color: #A8B7EA;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+}
+
+/* Dropdown */
+.p-dropdown {
+  background-color: #061321;
+  color: #A8B7EA;
+  width: 100%;
+  border-radius: 6px;
+  border: none;
+}
+
+.p-dropdown-item {
+  background-color: #061321;
+  padding: 0.6rem 1rem;
+  color: #A8B7EA;
+  font-size: 15px;
+}
+
+/* Focus box shadow */
+.p-inputtext:enabled:focus {
+  box-shadow: 5px 5px 3px rgba(0,0,0, 0.25) inset;
+  outline: none;
+}
+
+.p-focus, .p-dropdown:enabled:focus {
+  box-shadow: 3px 5px 2px rgba(0,0,0, 0.35);
+  outline: none;
+}
+
+/* Placeholder color reset */
+.p-inputtext::placeholder, .p-placeholder, .p-dropdown::placeholder, 
+.p-component::placeholder {
+  color: #737D9C;
+  opacity: 1;
+}
+
+/* Button modifiactions */
+.p-button {
+  background-color: #061321;
+  border: none;
+  color: #A8B7EA;
+  padding: 0.60rem 1rem;
+}
+
+.p-button-icon-left {
+  height: 1rem;
+  margin-right: 0.75rem;
+}
+
+/* Dialog component modifications */
+
+.p-dialog {
+  background-color: #10273D;
+  margin: 0 1rem;
+}
+
+.p-dialog-header {
+  background-color: transparent;
+}
+
+.p-dialog-content {
+  background-color: transparent;
+}
+
+/* Link modifications */
+.p-link {
+  border: none;
+  outline: none;
+}

@@ -1,5 +1,5 @@
-
 @import './base.css';
+@import './primevue.css';
 
 #app {
   min-height: 100vh;
@@ -26,50 +26,6 @@ input:focus, input:focus-visible {
   -o-appearance: none;
   appearance:  none;
 }
-
-
-/*? Prime vue component modifications */
-
-/* Inputtext */
-.p-inputtext {
-  padding: 0.6rem 1.25rem;
-  background-color: #061321;
-  color: #A8B7EA;
-  font-size: 16px;
-  border-radius: 6px;
-}
-
-/* Dropdown */
-.p-dropdown {
-  background-color: #061321;
-  color: #A8B7EA;
-  width: 100%;
-  border-radius: 6px;
-}
-
-.p-dropdown-item {
-  background-color: #061321;
-  padding: 0.6rem 1rem;
-  color: #A8B7EA;
-  font-size: 15px;
-}
-
-/* Focus box shadow */
-.p-inputtext:enabled:focus {
-  box-shadow: 5px 5px 3px rgba(0,0,0, 0.25) inset;
-}
-
-.p-focus, .p-dropdown:enabled:focus {
-  box-shadow: 3px 5px 2px rgba(0,0,0, 0.35);
-}
-
-/* Placeholder color reset */
-.p-inputtext::placeholder, .p-placeholder, .p-dropdown::placeholder, 
-.p-component::placeholder {
-  color: #737D9C;
-  opacity: 1;
-}
-
 
 /*? Local classes */
 
