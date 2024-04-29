@@ -1,5 +1,13 @@
 <script setup lang="ts">
+
+//interfaces
 import type { logInType } from "@/typings/interfaces/Auth/LogInType";
+
+//components
+import ButtonCardComponent from "@/modules/auth/components/ButtonCardComponent.vue"
+
+
+//native imports
 import { reactive } from "vue";
 
 //variables
@@ -30,14 +38,8 @@ function submit() {
     <!-- end form -->
     <!-- link buttons -->
     <div>
-      <div>
-        <img src="" alt="" />
-        <span> Registrate </span>
-      </div>
-      <div>
-        <img src="" alt="" />
-        <span>Modo invitado</span>
-      </div>
+      <ButtonCardComponent title="regístrate" img="" />
+      <ButtonCardComponent title="Modo invitado" img="" />
     </div>
     <!-- link buttons -->
   </div>
