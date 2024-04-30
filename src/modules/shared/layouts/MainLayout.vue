@@ -78,7 +78,7 @@ const addButtonType = ref('link');
         </aside>
       </div>
 
-      <div class="pt-10 ps-72">
+      <div class="pt-14 2xl:pt-24 ps-72 2xl:ps-80">
         <RouterView />
       </div>
     </div>
