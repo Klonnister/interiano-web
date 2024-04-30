@@ -3,11 +3,7 @@ import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center min-h-screen w-full">
-    <header>
-      <img alt="Interiano logo" src="/interiano-logo-shadowed.svg"/>
-    </header>
-  
+  <div class="min-h-screen container px-4 mx-auto">  
     <RouterView />
   </div>
 </template>
