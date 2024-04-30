@@ -53,32 +53,32 @@ const addButtonType = ref('link');
       v-else
     >
       <div class="h-screen flex items-center fixed">
-        <aside class="flex flex-col gap-9 p-5 h-max">
-          <RouterLink :to="'/'" class="flex items-center gap-3 py-2 px-6 rounded-lg hover:bg-[#72838F]/15 transition-all ease-in-out duration-150 link-shadow hover:-translate-x-1">
-            <img src="/user-template.webp" alt="" class="w-10">
-            <span class="text-xl">User</span>
+        <aside class="flex flex-col gap-[5vh] 2xl:gap-12 p-5 h-max">
+          <RouterLink :to="'/'" class="flex items-center gap-3 2xl:gap-5 py-2 px-6 rounded-lg hover:bg-[#72838F]/15 transition-all ease-in-out duration-150 link-shadow hover:-translate-x-1">
+            <img src="/user-template.webp" alt="" class="w-10 2xl:w-14">
+            <span class="text-xl 2xl:text-2xl">User</span>
           </RouterLink>
   
-          <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-[2vh] 2xl:gap-6">
             <RouterLink
               v-for="link in links"
               :key="link.name"
               :to="link.path"
-              class="flex gap-2 items-center py-2 px-6 rounded-lg hover:bg-[#7BAED2]/20 transition-all ease-in-out duration-150 link-shadow hover:-translate-x-1"
+              class="flex gap-4 2xl:gap-5 items-center py-2 px-6 rounded-lg hover:bg-[#7BAED2]/20 transition-all ease-in-out duration-150 link-shadow hover:-translate-x-1"
             >
               <Icon
                 :icon="link.icon"
-                class="w-8 h-8"
+                class="w-8 h-8 2xl:w-10 2xl:h-10"
               />
-              <span class="text-lg">{{ link.name }}</span >
+              <span class="text-lg 2xl:text-xl">{{ link.name }}</span >
             </RouterLink>
           </div>
   
-          <img src="/interiano-logo-shadowed.svg" alt="" class="w-40 ps-6 hover:scale-125 hover:-rotate-2 transition-all ease-in-out duration-150">
+          <img src="/interiano-logo-shadowed.svg" alt="" class="w-40 2xl:w-48 ps-6 hover:scale-110 hover:-rotate-2 transition-all ease-in-out duration-150">
         </aside>
       </div>
 
-      <div class="pt-10 ps-60">
+      <div class="pt-10 ps-72">
         <RouterView />
       </div>
     </div>
