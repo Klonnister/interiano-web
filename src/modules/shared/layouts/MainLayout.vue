@@ -2,19 +2,12 @@
 import { useWindowSize } from '@vueuse/core';
 import { RouterView } from 'vue-router';
 import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
 import sidebarLinks from '../helpers/sidebarLinks';
+import { useLayoutStore } from '../stores/layoutStore';
 
 const links = sidebarLinks;
-
 const { width } = useWindowSize();
-const showAddButton = ref(true);
-const addButtonType = ref('button');
-// const openAddMenu = ref(false);
-const openMenu = ref(false);
-const toggleMenu = () => {
-  openMenu.value = !openMenu.value
-}
+const layoutStore = useLayoutStore();
 </script>
 
 <template>
@@ -25,7 +18,7 @@ const toggleMenu = () => {
         <div
           class=" w-full py-5 sm:py-6 mx-auto fixed top-0 left-0 right-0 flex items-center justify-between px-5 backdrop-blur-lg"
         >
-          <button @click="toggleMenu" class="z-20">
+          <button @click="layoutStore.openMenu" class="z-20">
             <Icon
               icon="mi:menu"
               class="w-7 h-7 sm:w-10 sm:h-10 text-[#D0D9F6]"
@@ -33,7 +26,10 @@ const toggleMenu = () => {
           </button>
   
           <button
-            v-if="showAddButton && addButtonType === 'button'"            
+            v-if="
+              layoutStore.showAddButton &&
+              layoutStore.addButtonType === 'button'
+            "            
             class="z-20"
           >
             <Icon
@@ -41,49 +37,24 @@ const toggleMenu = () => {
               class="w-7 h-7 sm:w-10 sm:h-10 text-[#D0D9F6]"
             />
           </button>
-          <a v-if="showAddButton && addButtonType === 'link'" href="/" class="z-20">
+          <a
+            v-if="
+              layoutStore.showAddButton &&
+              layoutStore.addButtonType === 'link'
+            " 
+            href="/" 
+            class="z-20"
+          >
             <Icon icon="ic:round-plus" class="w-7 h-7 sm:w-10 sm:h-10 text-[#D0D9F6]" />
           </a>
         </div>
 
-        <!-- Navbar modal -->
-        <div
-          class="fixed top-0 left-0 overflow-hidden flex items-center justify-center"
-          :class="openMenu ? 'h-screen w-full ' : 'h-0 w-0'"
-        > 
-          <div class="bg-[#09141F] fixed rounded-full transition-all ease-in-out duration-[900ms]" :class="openMenu ? 'w-[250vh] h-[250vh] -top-[63vh] -left-[63vh]' : 'w-0 h-0 top-8 left-8'">
-            <div class="fixed top-0 left-0 h-screen w-full flex flex-col justify-center items-center transition-all ease-in-out duration-500" :class="openMenu ? 'opacity-100 delay-300' : 'opacity-0'">
-              <button class="absolute top-6 left-5" @click="toggleMenu">
-                <Icon icon="iconamoon:close-bold" class="w-7 h-7 sm:w-10 sm:h-10 text-[#D0D9F6]"/>
-              </button>
-    
-              <div class="flex flex-col gap-4 justify-center items-center mb-5 local-menu-fix">
-                <img src="/user-template.webp" alt="" class="w-20 h-20 object-contain rounded-full">
-                <p class="text-xl font-semibold">Patty</p>
-              </div>
-    
-              <nav class="flex flex-col local-link-borders overflow-y-scroll hide-scroll-bar">
-                <RouterLink
-                  v-for="link in links"
-                  :key="link.name"
-                  :to="link.path"
-                  class="flex gap-3 items-center justify-start py-6 px-16"
-                >
-                  <Icon
-                    :icon="link.icon"
-                    class="w-6 h-6"
-                  />
-                  <span>{{ link.name }}</span >
-                </RouterLink>
-              </nav>
-            </div>
-          </div>
-        </div>
+        <NavBar />
         <img
           src="/interiano-logo-shadowed.svg"
           alt=""
           class="fixed top-0 left-0 right-0 mx-auto pt-3 sm:pt-4 hover:scale-110 hover:-rotate-2 transition-all ease-in-out duration-700 z-50"
-          :class="openMenu ? 'w-48 sm:w-56 translate-y-[3vh]' : 'w-36 sm:w-48'"
+          :class="layoutStore.showMenu ? 'w-48 sm:w-56 translate-y-[3vh]' : 'w-36 sm:w-48'"
         >
       </aside>
 
@@ -130,24 +101,6 @@ const toggleMenu = () => {
 </template>
 
 <style scoped>
-.local-link-borders > a:not(:last-child) {
-  border-bottom: 1px solid #D0D9F675;
-}
-
-.hide-scroll-bar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-.hide-scroll-bar::-webkit-scrollbar {
-  display: none;
-}
-
-@media screen and (max-height: 700px) {
-  .local-menu-fix {
-    margin-top: 6rem;
-  }
-}
-
 @media screen and (min-width: 1024px) {
   .router-link-exact-active {
     background-color: #72838F20;

@@ -10,6 +10,7 @@ declare module 'vue' {
     App: typeof import('./src/App.vue')['default']
     MainLayout: typeof import('./src/modules/shared/layouts/MainLayout.vue')['default']
     MainView: typeof import('./src/modules/products/views/MainView.vue')['default']
+    NavBar: typeof import('./src/modules/shared/components/NavBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TestView: typeof import('./src/modules/test/views/TestView.vue')['default']
