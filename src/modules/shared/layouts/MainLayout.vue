@@ -9,43 +9,82 @@ const links = sidebarLinks;
 
 const { width } = useWindowSize();
 const showAddButton = ref(true);
-const addButtonType = ref('link');
+const addButtonType = ref('button');
 // const openAddMenu = ref(false);
+const openMenu = ref(false);
+const toggleMenu = () => {
+  openMenu.value = !openMenu.value
+}
 </script>
 
 <template>
   <div>
     <!-- Small screen layout -->
     <div v-if="width < 1024">
-      <aside
-        class="w-full py-6 flex items-center justify-between"
-      >
-        <button>
-          <Icon
-            icon="mi:menu"
-            class="w-8 h-8 text-[#D0D9F6]"
-          />
-        </button>
+      <aside>
+        <div
+          class="bg-[#09141F] w-full py-5 sm:py-6 mx-auto fixed top-0 left-0 right-0 flex items-center justify-between px-5"
+        >
+          <button @click="toggleMenu">
+            <Icon
+              icon="mi:menu"
+              class="w-7 h-7 sm:w-10 sm:h-10 text-[#D0D9F6]"
+            />
+          </button>
+  
+          <button
+            v-if="showAddButton && addButtonType === 'button'"            
+          >
+            <Icon
+              icon="ic:round-plus"
+              class="w-7 h-7 sm:w-10 sm:h-10 text-[#D0D9F6]"
+            />
+          </button>
+          <a v-if="showAddButton && addButtonType === 'link'" href="/">
+            <Icon icon="ic:round-plus" class="w-7 h-7 sm:w-10 sm:h-10 text-[#D0D9F6]" />
+          </a>
+        </div>
 
+        <!-- Navbar modal -->
+        <div
+          class="fixed top-0 left-0 h-screen w-full bg-[#09141F] flex flex-col justify-center items-center"
+          :class="openMenu ? '' : '-translate-y-full'"
+        > 
+          <button class="absolute top-5 left-5" @click="toggleMenu">
+            <Icon icon="iconamoon:close-bold" class="w-7 h-7 sm:w-10 sm:h-10 text-[#D0D9F6]"/>
+          </button>
+
+          <div class="flex flex-col gap-4 justify-center items-center mb-5 local-menu-fix">
+            <img src="/user-template.webp" alt="" class="w-20 h-20 object-contain rounded-full">
+            <p class="text-xl font-semibold">Patty</p>
+          </div>
+
+          <nav class="flex flex-col local-link-borders overflow-scroll">
+            <RouterLink
+              v-for="link in links"
+              :key="link.name"
+              :to="link.path"
+              class="flex gap-3 items-center justify-start py-6 px-16"
+            >
+              <Icon
+                :icon="link.icon"
+                class="w-6 h-6"
+              />
+              <span>{{ link.name }}</span >
+            </RouterLink>
+          </nav>
+        </div>
         <img
           src="/interiano-logo-shadowed.svg"
           alt=""
-          class="w-40 sm:w-44 absolute top-0 left-0 right-0 mx-auto pt-4"
+          class="fixed top-0 left-0 right-0 mx-auto pt-3 sm:pt-4 hover:scale-110 hover:-rotate-2 transition-all ease-in-out duration-300 z-50"
+          :class="openMenu ? 'w-48 sm:w-56 translate-y-[3vh]' : 'w-36 sm:w-48'"
         >
-
-        <div v-if="showAddButton">
-          <button
-            v-if="addButtonType === 'button'"            
-          >
-            <Icon icon="ic:round-plus" class="w-8 h-8 text-[#D0D9F6]" />
-          </button>
-          <a v-if="addButtonType === 'link'" href="/">
-            <Icon icon="ic:round-plus" class="w-8 h-8 text-[#D0D9F6]" />
-          </a>
-        </div>
       </aside>
 
-      <RouterView />
+      <div class="mt-24 sm:mt-32">
+        <RouterView />
+      </div>
     </div>
     
     <!-- Large screen layout -->
@@ -86,16 +125,38 @@ const addButtonType = ref('link');
 </template>
 
 <style scoped>
-.router-link-exact-active {
-  background-color: #72838F20;
-  box-shadow: 3px 4px 4px rgba(0,0,0, 0.25);
+.local-link-borders > a:not(:last-child) {
+  border-bottom: 1px solid #D0D9F675;
 }
 
-.link-shadow:hover {
-  box-shadow: 2px 3px 4px rgba(0,0,0, 0.35);
+@media screen and (max-height: 725px) {
+  .local-menu-fix {
+    margin-top: 2rem;
+  }
 }
 
-.router-link-exact-active:hover {
-  box-shadow: 5px 6px 4px rgba(0,0,0, 0.25);
+@media screen and (max-height: 665px) {
+  .local-menu-fix {
+    margin-top: 6rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .router-link-exact-active {
+    background-color: #72838F20;
+    box-shadow: 3px 4px 4px rgba(0,0,0, 0.25);
+  }
+  
+  .link-shadow:hover {
+    box-shadow: 2px 3px 4px rgba(0,0,0, 0.35);
+  }
+  
+  .router-link-exact-active:hover {
+    box-shadow: 5px 6px 4px rgba(0,0,0, 0.25);
+  }
+  
+  .x {
+    background-image: linear-gradient(to bottom, #10273D, #09141F);
+  }
 }
 </style>
