@@ -131,12 +131,6 @@ const toggleMenu = () => {
 
 @media screen and (max-height: 725px) {
   .local-menu-fix {
-    margin-top: 2rem;
-  }
-}
-
-@media screen and (max-height: 665px) {
-  .local-menu-fix {
     margin-top: 6rem;
   }
 }
