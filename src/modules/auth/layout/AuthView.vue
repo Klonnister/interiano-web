@@ -1,11 +1,13 @@
 <script lang="ts" setup></script>
 <template>
-  <div class="flex flex-col items-center justify-center | lg:flex-row lg-justify-around">
-    <div
-      class="flex p-[1.25rem] flex text-sm items-center justify-center | sm:text-base | lg:h-[37.5rem] border-[#9FA7C3] lg:border-r lg:w-[50%] h-full"
-    >
-      <div class="flex flex-col | lg:w-[31.25rem] gap-[1.875rem]">
-        <img alt="Interiano logo" src="/interiano-logo-shadowed.svg" />
+  <div
+    class="flex flex-col container mx-auto flex min-w-full min-h-screen items-center justify-center | lg:flex-row lg-justify-around"
+  >
+    <div class="flex justify-center p-10 | lg:w-[50%]">
+      <div
+        class="flex flex-col gap-8 text-center w-[13.5rem] | sm:w-[18.75rem] | lg:w-[20rem] | xl:w-[21rem] | 2xl:w-[23rem]"
+      >
+        <img class="" alt="Interiano logo" src="/interiano-logo-shadowed.svg" />
         <p>
           Administra la disponibilidad de tus productos y exporta tu catálogo en formato
           PDF.
@@ -16,10 +18,10 @@
         </p>
       </div>
     </div>
-    <div class="lg:h-dvh" />
     <div
-      class="flex p-[1.25rem] items-center justify-center | border-[#9FA7C3] lg:h-[37.5rem] lg:border-l lg:w-[50%] h-full"
-    >
+      class="hidden | lg:block h-[30rem] min-h-[1em] w-px bg-gradient-to-tr from-transparent via-neutral-500 to-transparent opacity-25 dark:via-neutral-400"
+    ></div>
+    <div class="lg:w-[50%] items-center justify-center flex">
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
           <component :is="Component" />
