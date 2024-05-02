@@ -2,50 +2,65 @@
 import { useWindowSize } from '@vueuse/core';
 import { RouterView } from 'vue-router';
 import { Icon } from '@iconify/vue';
-import { ref } from 'vue';
 import sidebarLinks from '../helpers/sidebarLinks';
+import { useLayoutStore } from '../stores/layoutStore';
 
 const links = sidebarLinks;
-
 const { width } = useWindowSize();
-const showAddButton = ref(true);
-const addButtonType = ref('link');
-// const openAddMenu = ref(false);
+const layoutStore = useLayoutStore();
 </script>
 
 <template>
   <div>
     <!-- Small screen layout -->
     <div v-if="width < 1024">
-      <aside
-        class="w-full py-6 flex items-center justify-between"
-      >
-        <button>
-          <Icon
-            icon="mi:menu"
-            class="w-8 h-8 text-[#D0D9F6]"
-          />
-        </button>
+      <aside>
+        <div
+          class=" w-full py-5 sm:py-6 mx-auto fixed top-0 left-0 right-0 flex items-center justify-between px-5 backdrop-blur-lg"
+        >
+          <button @click="layoutStore.openMenu" class="z-20">
+            <Icon
+              icon="mi:menu"
+              class="w-7 h-7 sm:w-10 sm:h-10 text-[#D0D9F6]"
+            />
+          </button>
+  
+          <button
+            v-if="
+              layoutStore.showAddButton &&
+              layoutStore.addButtonType === 'button'
+            "            
+            class="z-20"
+          >
+            <Icon
+              icon="ic:round-plus"
+              class="w-7 h-7 sm:w-10 sm:h-10 text-[#D0D9F6]"
+            />
+          </button>
+          <a
+            v-if="
+              layoutStore.showAddButton &&
+              layoutStore.addButtonType === 'link'
+            " 
+            href="/" 
+            class="z-20"
+          >
+            <Icon icon="ic:round-plus" class="w-7 h-7 sm:w-10 sm:h-10 text-[#D0D9F6]" />
+          </a>
+        </div>
 
+        <NavBar />
         <img
           src="/interiano-logo-shadowed.svg"
           alt=""
-          class="w-40 sm:w-44 absolute top-0 left-0 right-0 mx-auto pt-4"
+          class="fixed top-0 left-0 right-0 mx-auto pt-3 sm:pt-4 hover:scale-110 hover:-rotate-2 transition-all ease-in-out duration-700 z-50"
+          :class="layoutStore.showMenu ? 'w-48 sm:w-56 translate-y-[3vh]' : 'w-36 sm:w-48'"
         >
-
-        <div v-if="showAddButton">
-          <button
-            v-if="addButtonType === 'button'"            
-          >
-            <Icon icon="ic:round-plus" class="w-8 h-8 text-[#D0D9F6]" />
-          </button>
-          <a v-if="addButtonType === 'link'" href="/">
-            <Icon icon="ic:round-plus" class="w-8 h-8 text-[#D0D9F6]" />
-          </a>
-        </div>
       </aside>
 
-      <RouterView />
+      <div class="mt-24 sm:mt-28">
+        <RouterView />
+      </div>
     </div>
     
     <!-- Large screen layout -->
@@ -86,16 +101,22 @@ const addButtonType = ref('link');
 </template>
 
 <style scoped>
-.router-link-exact-active {
-  background-color: #72838F20;
-  box-shadow: 3px 4px 4px rgba(0,0,0, 0.25);
-}
-
-.link-shadow:hover {
-  box-shadow: 2px 3px 4px rgba(0,0,0, 0.35);
-}
-
-.router-link-exact-active:hover {
-  box-shadow: 5px 6px 4px rgba(0,0,0, 0.25);
+@media screen and (min-width: 1024px) {
+  .router-link-exact-active {
+    background-color: #72838F20;
+    box-shadow: 3px 4px 4px rgba(0,0,0, 0.25);
+  }
+  
+  .link-shadow:hover {
+    box-shadow: 2px 3px 4px rgba(0,0,0, 0.35);
+  }
+  
+  .router-link-exact-active:hover {
+    box-shadow: 5px 6px 4px rgba(0,0,0, 0.25);
+  }
+  
+  .x {
+    background-image: linear-gradient(to bottom, #10273D, #09141F);
+  }
 }
 </style>

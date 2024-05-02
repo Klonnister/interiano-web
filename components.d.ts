@@ -14,6 +14,7 @@ declare module 'vue' {
     LogInComponent: typeof import('./src/modules/auth/views/LogInComponent.vue')['default']
     MainLayout: typeof import('./src/modules/shared/layouts/MainLayout.vue')['default']
     MainView: typeof import('./src/modules/products/views/MainView.vue')['default']
+    NavBar: typeof import('./src/modules/shared/components/NavBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SignupComponent: typeof import('./src/modules/auth/views/SignupComponent.vue')['default']
