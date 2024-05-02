@@ -1,18 +1,18 @@
 export default {
     path: '/sesion',
     redirect: { name: 'login' },
-    component: () => import('@/modules/auth/layout/AuthView.vue'),
+    component: () => import('@/modules/auth/layout/AuthLayout.vue'),
     children: [
       {
         path: 'inicio',
         name: 'login',
-        component: () => import('@/modules/auth/views/LogInComponent.vue'),
+        component: () => import('@/modules/auth/views/LogInView.vue'),
         props: true
       },
       {
         path: 'registro',
         name: 'signup',
-        component: () => import('@/modules/auth/views/SignupComponent.vue')
+        component: () => import('@/modules/auth/views/SignupView.vue')
       }
     ]
 }
