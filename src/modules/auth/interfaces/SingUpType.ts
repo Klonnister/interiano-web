@@ -1,5 +1,5 @@
 export interface singUpType {
-  name: string
+  username: string
   password: string
-  passwordConfirm: string
+  passwordconfirm: string
 }

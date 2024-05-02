@@ -1,4 +1,4 @@
 export interface logInType{
-  name: string,
+  username: string,
   password: string
 }
