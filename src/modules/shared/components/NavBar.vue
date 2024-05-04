@@ -28,21 +28,24 @@ const layoutStore = useLayoutStore();
           <Icon icon="iconamoon:close-bold" class="w-7 h-7 sm:w-10 sm:h-10 text-[#D0D9F6]"/>
         </button>
 
-        <div class="flex flex-col gap-4 justify-center items-center mb-5 local-menu-fix">
+        <RouterLink
+          class="flex flex-col gap-4 justify-center items-center mb-5 local-menu-fix hover:scale-105 transition-all duration-300 ease-in-out"
+          to="/"
+        >
           <img
             src="/user-template.webp"
             alt=""
             class="w-20 h-20 object-contain rounded-full"
           >
           <p class="text-xl font-semibold">Patty</p>
-        </div>
+        </RouterLink>
 
         <nav class="flex flex-col local-link-borders overflow-y-scroll hide-scroll-bar">
           <RouterLink
             v-for="link in links"
             :key="link.name"
             :to="link.path"
-            class="flex gap-3 items-center justify-start py-6 px-16"
+            class="flex gap-3 items-center justify-start py-6 px-16 hover:scale-105 transition-all duration-300 ease-in-out"
             @click="layoutStore.closeMenu"
             :class="layoutStore.showMenu ? '' : 'pointer-events-none'"
           >
