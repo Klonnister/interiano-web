@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { Icon } from '@iconify/vue';
 import { useLayoutStore } from '../stores/layoutStore';
 import sidebarLinks from '../helpers/sidebarLinks';
@@ -62,18 +62,6 @@ const layoutStore = useLayoutStore();
 </template>
 
 <style scoped>
-.local-link-borders > a:not(:last-child) {
-  border-bottom: 1px solid #D0D9F675;
-}
-
-.hide-scroll-bar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-.hide-scroll-bar::-webkit-scrollbar {
-  display: none;
-}
-
 @media screen and (max-height: 700px) {
   .local-menu-fix {
     margin-top: 6rem;

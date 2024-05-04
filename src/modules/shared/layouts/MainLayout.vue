@@ -1,9 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import { useWindowSize } from '@vueuse/core';
 import { RouterView } from 'vue-router';
 import { Icon } from '@iconify/vue';
 import sidebarLinks from '../helpers/sidebarLinks';
 import { useLayoutStore } from '../stores/layoutStore';
+import { ModalsContainer } from 'vue-final-modal'
 
 const links = sidebarLinks;
 const { width } = useWindowSize();
@@ -16,7 +17,7 @@ const layoutStore = useLayoutStore();
     <div v-if="width < 1024">
       <aside>
         <div
-          class=" w-full py-5 sm:py-6 mx-auto fixed top-0 left-0 right-0 flex items-center justify-between px-5 backdrop-blur-lg"
+          class="w-full py-5 sm:py-6 mx-auto fixed top-0 left-0 right-0 flex items-center justify-between px-5 backdrop-blur-lg"
         >
           <button @click="layoutStore.openMenu" class="z-20">
             <Icon
@@ -24,36 +25,14 @@ const layoutStore = useLayoutStore();
               class="w-7 h-7 sm:w-10 sm:h-10 text-[#D0D9F6]"
             />
           </button>
-  
-          <button
-            v-if="
-              layoutStore.showAddButton &&
-              layoutStore.addButtonType === 'button'
-            "            
-            class="z-20"
-          >
-            <Icon
-              icon="ic:round-plus"
-              class="w-7 h-7 sm:w-10 sm:h-10 text-[#D0D9F6]"
-            />
-          </button>
-          <a
-            v-if="
-              layoutStore.showAddButton &&
-              layoutStore.addButtonType === 'link'
-            " 
-            href="/" 
-            class="z-20"
-          >
-            <Icon icon="ic:round-plus" class="w-7 h-7 sm:w-10 sm:h-10 text-[#D0D9F6]" />
-          </a>
+
         </div>
 
         <NavBar />
         <img
           src="/interiano-logo-shadowed.svg"
           alt=""
-          class="fixed top-0 left-0 right-0 mx-auto pt-3 sm:pt-4 hover:scale-110 hover:-rotate-2 transition-all ease-in-out duration-700 z-50"
+          class="fixed top-0 left-0 right-0 mx-auto pt-3 sm:pt-4 hover:scale-110 hover:-rotate-2 transition-all ease-in-out duration-700 z-30"
           :class="layoutStore.showMenu ? 'w-48 sm:w-56 translate-y-[3vh]' : 'w-36 sm:w-48'"
         >
       </aside>
@@ -97,6 +76,9 @@ const layoutStore = useLayoutStore();
         <RouterView />
       </div>
     </div>
+
+    <!-- Vue final modal container -->
+    <ModalsContainer />
   </div>
 </template>
 
@@ -113,10 +95,6 @@ const layoutStore = useLayoutStore();
   
   .router-link-exact-active:hover {
     box-shadow: 5px 6px 4px rgba(0,0,0, 0.25);
-  }
-  
-  .x {
-    background-image: linear-gradient(to bottom, #10273D, #09141F);
   }
 }
 </style>
