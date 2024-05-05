@@ -9,11 +9,14 @@ declare module 'vue' {
   export interface GlobalComponents {
     AddMenu: typeof import('./src/modules/products/components/AddMenu.vue')['default']
     App: typeof import('./src/App.vue')['default']
+    CardsViewButton: typeof import('./src/modules/shared/components/CardsViewButton.vue')['default']
+    CardsViewHeader: typeof import('./src/modules/shared/components/CardsViewHeader.vue')['default']
     MainLayout: typeof import('./src/modules/shared/layouts/MainLayout.vue')['default']
     MainView: typeof import('./src/modules/products/views/MainView.vue')['default']
     NavBar: typeof import('./src/modules/shared/components/NavBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SearchBar: typeof import('./src/modules/shared/components/SearchBar.vue')['default']
     TestView: typeof import('./src/modules/test/views/TestView.vue')['default']
   }
 }
