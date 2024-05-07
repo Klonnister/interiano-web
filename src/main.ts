@@ -1,5 +1,4 @@
 import './assets/main.css'
-import { useAuthStore } from '@/modules/auth/stores/auth.store'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -22,8 +21,5 @@ app.use(PrimeVue)
 app.use(vfm)
 app.use(Toast, toastOptions)
 app.use(router)
-
-const auth = useAuthStore()
-auth.setSession()
 
 app.mount('#app')
