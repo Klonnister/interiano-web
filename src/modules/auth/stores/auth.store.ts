@@ -73,14 +73,11 @@ export const useAuthStore = defineStore('auth', () => {
     date.setTime(date.getTime() + 1 * 24 * 60 * 60 * 1000)
 
     const expires = 'expires=' + date.toUTCString() + ';'
-
-    const sameSiteStrict = 'SameSite=Strict;'
-
     const sameSiteLax = 'SameSite=Lax'
-
-    const httpOnly = 'HttpOnly;'
-
-    const secure = 'Secure;'
+    
+    // const httpOnly = 'HttpOnly;'
+    // const sameSiteStrict = 'SameSite=Strict;'
+    // const secure = 'Secure;'
 
     document.cookie = 'token=' + token + ';' + expires + 'path=/ ;' + sameSiteLax
   }
