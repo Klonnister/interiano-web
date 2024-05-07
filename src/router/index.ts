@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import TestView from '@/modules/test/views/TestView.vue';
+import { useAuthStore } from '@/modules/auth/stores/auth.store';
 import productRoutes from '@/modules/products/router'
 
 import authRoutes from "@/modules/auth/router/authRoutes";
@@ -28,14 +29,18 @@ const router = createRouter({
 
     {
       name: 'auth',
-      ...authRoutes
+      ...authRoutes,
+      meta:{
+        isAuthPage: true
+      }
     }
   ]
 })
 
-// const xd = 'si'
-// router.beforeEach((to, from, next) => {
-//   if (to.path !== '/sesion/inicio' && xd === 'si') next('/sesion/inicio')
-//   else next()
-// })
+router.beforeEach((to, from, next) => {
+  const store = useAuthStore()
+  if (to.meta.requiresAuth && store.isLogin === false) next('/sesion/inicio')
+  else if(to.meta.isAuthPage && store.isLogin === true) next('/')
+  else next()
+})
 export default router
