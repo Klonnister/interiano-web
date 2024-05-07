@@ -1,4 +1,4 @@
-import type { logInType } from '@/modules/auth/interfaces/LogInType'
+import type { logInType } from '@/modules/auth/types/LogInType'
 
 import { useAuthStore } from '@/modules/auth/stores/auth.store'
 

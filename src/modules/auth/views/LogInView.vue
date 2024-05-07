@@ -4,7 +4,7 @@
 import {logIn} from '@/modules/auth/api/LogInApi'
 
 //interfaces
-import type { logInType } from "@/modules/auth/interfaces/LogInType";
+import type { logInType } from "@/modules/auth/types/LogInType";
 
 //components
 import ButtonCardComponent from "@/modules/auth/components/ButtonCardComponent.vue";

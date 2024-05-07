@@ -1,4 +1,4 @@
-import type { singUpType } from '@/modules/auth/interfaces/SingUpType'
+import type { singUpType } from '@/modules/auth/types/SingUpType'
 
 import { useToast } from 'vue-toastification'
 
