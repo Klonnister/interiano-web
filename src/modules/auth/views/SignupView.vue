@@ -3,7 +3,7 @@
 import { signIn } from "@/modules/auth/api/SignUpApi";
 
 //interfaces
-import type { singUpType } from "@/modules/auth/interfaces/SingUpType";
+import type { singUpType } from "@/modules/auth/types/SingUpType";
 
 //native imports
 import { reactive } from "vue";
