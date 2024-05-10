@@ -33,7 +33,7 @@ function submit() {
     </div>
     <!-- end title -->
     <!-- form -->
-    <form @submit.prevent="submit" class="flex  flex-col gap-8 px-5">
+    <form @submit.prevent="submit" class="flex flex-col gap-8">
       <div class="block group">
         <label for="username" class="flex gap-[0.6rem] p-[0.1rem] mb-1">
           <img class="block" src="/auth/user.svg" alt="" />
