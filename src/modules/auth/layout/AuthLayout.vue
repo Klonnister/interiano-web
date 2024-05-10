@@ -24,7 +24,7 @@
       class="hidden | lg:block h-[30rem] min-h-[1em] w-px bg-gradient-to-tr from-transparent via-neutral-500 to-transparent opacity-25 dark:via-neutral-400"
     ></div>
     <!-- view component -->
-    <div class="lg:w-[50%] items-center justify-center flex">
+    <div class="lg:w-[50%] items-center justify-center flex pb-10 lg:pb-0">
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
           <component :is="Component" />
