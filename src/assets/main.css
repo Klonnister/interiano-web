@@ -41,7 +41,6 @@ input:focus, input:focus-visible {
 }
 
 .local-shadow {
-  padding: 5px;
   box-shadow: 2px 3px 1px rgba(0,0,0, 0.35);
   transition: box-shadow 0.3s ease-in-out;
 }

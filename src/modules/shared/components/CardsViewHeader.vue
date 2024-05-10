@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <div>
+  <div class="md:hidden">
     <h1
       class="uppercase font-semibold text-2xl text-center mb-3"
     >
@@ -46,5 +46,71 @@ const props = withDefaults(defineProps<Props>(), {
         </RouterLink>
       </div>
     </div>
+  </div>
+
+  <div class="hidden md:block lg:hidden">
+    <h1
+      class="uppercase font-semibold text-2xl text-center mb-3"
+    >
+      {{ props.title }}
+    </h1>
+      
+    <div class="flex gap-2">
+      <CardsViewButton
+        v-if="props.filtersButton"
+        name="Filtros"
+        icon="solar:filter-bold"
+      />
+
+      <SearchBar />
+
+      <CardsViewButton
+        v-if="props.addButtonType === 'button'"
+        icon="mingcute:add-fill"
+      />
+      <RouterLink
+        v-if="addButtonPath && addButtonType === 'link'"
+        :to="addButtonPath"
+      >
+        <CardsViewButton
+          name="Agregar"
+          icon="mingcute:add-fill"
+        />
+      </RouterLink>
+    </div>
+  </div>
+
+  <div class="hidden lg:flex items-center">
+    <h1
+      class="uppercase font-semibold text-3xl text-center me-auto"
+    >
+      {{ props.title }}
+    </h1>
+
+    <div class="flex gap-2 items-stretch">
+      <CardsViewButton
+        v-if="props.filtersButton"
+        name="Filtros"
+        icon="solar:filter-bold"
+      />
+
+      <SearchBar />
+  
+      <CardsViewButton
+        v-if="props.addButtonType === 'button'"
+        icon="mingcute:add-fill"
+      />
+      
+      <RouterLink
+        v-if="addButtonPath && addButtonType === 'link'"
+        :to="addButtonPath"
+      >
+        <CardsViewButton
+          icon="mingcute:add-fill"
+          :shrink="true"
+        />
+      </RouterLink>
+    </div>
+
   </div>
 </template>

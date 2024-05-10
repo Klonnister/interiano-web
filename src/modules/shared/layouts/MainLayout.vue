@@ -48,7 +48,7 @@ const layoutStore = useLayoutStore();
     >
       <div class="h-screen flex items-center fixed">
         <aside class="flex flex-col gap-[5vh] 2xl:gap-12 p-5 h-max">
-          <RouterLink :to="'/'" class="flex items-center gap-3 2xl:gap-5 py-2 px-6 rounded-lg hover:bg-[#72838F]/15 transition-all ease-in-out duration-150 link-shadow hover:-translate-x-1">
+          <RouterLink :to="'/'" class="flex items-center gap-3 2xl:gap-4 py-2 px-6 rounded-lg hover:bg-[#72838F]/15 transition-all ease-in-out duration-150 link-shadow hover:-translate-x-1">
             <img src="/user-template.webp" alt="" class="w-10 2xl:w-14">
             <span class="text-xl 2xl:text-2xl">User</span>
           </RouterLink>
@@ -62,7 +62,7 @@ const layoutStore = useLayoutStore();
             >
               <Icon
                 :icon="link.icon"
-                class="w-8 h-8 2xl:w-10 2xl:h-10"
+                class="w-8 h-8 2xl:w-9 2xl:h-9"
               />
               <span class="text-lg 2xl:text-xl">{{ link.name }}</span >
             </RouterLink>
@@ -72,7 +72,7 @@ const layoutStore = useLayoutStore();
         </aside>
       </div>
 
-      <div class="pt-14 2xl:pt-24 ps-72 2xl:ps-80">
+      <div class="pt-14 2xl:pt-24 ps-64 pe-4 2xl:ps-72 2xl:pe-12">
         <RouterView />
       </div>
     </div>

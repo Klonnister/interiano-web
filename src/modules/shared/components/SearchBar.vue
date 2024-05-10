@@ -7,7 +7,7 @@ const filterStore = useFilterStore();
 </script>
 
 <template>
-  <div class="w-full flex h-9 local-shadow rounded-lg">
+  <div class="w-full flex h-9 local-shadow rounded-lg md:min-w-96 lg:min-w-72 xl:min-w-96">
     <InputText
       type="text"
       v-model="filterStore.search"
