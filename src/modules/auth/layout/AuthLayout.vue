@@ -1,12 +1,12 @@
 <script lang="ts" setup></script>
 <template>
   <div
-    class="flex flex-col container mx-auto flex min-w-full min-h-screen items-center justify-center | lg:flex-row lg-justify-around"
+    class="flex flex-col container mx-auto min-h-screen items-center justify-center | lg:flex-row lg-justify-around max-w-72 | sm:max-w-80 lg:max-w-none"
   >
   <!-- layout -->
-    <div class="flex justify-center p-10 | lg:w-[50%]">
+    <div class="flex justify-center py-10 | lg:w-[50%]">
       <div
-        class="flex flex-col gap-8 text-center w-[13.5rem] | sm:w-[18.75rem] | lg:w-[20rem] | xl:w-[21rem] | 2xl:w-[23rem]"
+        class="flex flex-col gap-8 w-full text-justify last-center lg:max-w-80 2xl:max-w-96"
       >
         <img class="" alt="Interiano logo" src="/interiano-logo-shadowed.svg" />
         <p>

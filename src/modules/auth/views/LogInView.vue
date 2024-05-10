@@ -11,6 +11,7 @@ import ButtonCardComponent from "@/modules/auth/components/ButtonCardComponent.v
 
 //native imports
 import { reactive } from "vue";
+import InputText from 'primevue/inputtext';
 
 //variables
 const form = reactive<logInType>({
@@ -25,41 +26,40 @@ function submit() {
 </script>
 
 <template>
-  <div class="flex flex-col gap-[3rem] | sm:w-[18.75rem] | lg:w-[20rem] | xl:w-[21rem] | 2xl:w-[23rem]">
+  <div class="flex flex-col gap-8 w-full lg:max-w-80 2xl:max-w-96">
     <!-- title -->
     <div class="text-center">
       <span class="text-[1.5rem] | lg:text-[2.5rem]"> Inicia sesión </span>
     </div>
     <!-- end title -->
     <!-- form -->
-    <form @submit.prevent="submit" class="flex  flex-col gap-[3rem] px-5">
+    <form @submit.prevent="submit" class="flex  flex-col gap-8 px-5">
       <div class="block group">
-        <div class="flex gap-[0.6rem] p-[0.1rem]">
+        <label for="username" class="flex gap-[0.6rem] p-[0.1rem] mb-1">
           <img class="block" src="/auth/user.svg" alt="" />
           <span class="group-hover:translate-x-1 duration-500">Usuario</span>
-        </div>
-        <input
-          class="local-inset-shadow w-full"
+        </label>
+        <InputText
           type="text"
-          name="name"
-          id="name"
+          id="username"
           v-model="form.username"
+          class="w-full local-inset-shadow"
         />
       </div>
       <div class="block group">
-        <div class="flex gap-[0.6rem] p-[0.1rem]">
+        <label for="password" class="flex gap-[0.6rem] p-[0.1rem] mb-1">
           <img class="block" src="/auth/password.svg" alt="" />
           <span class="group-hover:translate-x-1 duration-500">Contraseña</span>
-        </div>
-        <input
-          class="local-inset-shadow w-full"
-          type="password"
+        </label>
+        <InputText
+          type="text"
           name="password"
           id="password"
-          v-model="form.password"
+          v-model="form.username"
+          class="w-full local-inset-shadow"
         />
       </div>
-      <button class="local-shadow bg-[#15395A]" type="submit" >
+      <button class="local-shadow bg-[#15395A] py-2 rounded-sm" type="submit" >
         Ingresar
       </button>
     </form>
