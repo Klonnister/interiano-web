@@ -9,25 +9,18 @@ declare module 'vue' {
   export interface GlobalComponents {
     AddMenu: typeof import('./src/modules/products/components/AddMenu.vue')['default']
     App: typeof import('./src/App.vue')['default']
-<<<<<<< HEAD
+    AuthLayout: typeof import('./src/modules/auth/layout/AuthLayout.vue')['default']
+    ButtonCardComponent: typeof import('./src/modules/auth/components/ButtonCardComponent.vue')['default']
     CardsViewButton: typeof import('./src/modules/shared/components/CardsViewButton.vue')['default']
     CardsViewHeader: typeof import('./src/modules/shared/components/CardsViewHeader.vue')['default']
-=======
-    AuthView: typeof import('./src/modules/auth/layout/AuthView.vue')['default']
-    ButtonCardComponent: typeof import('./src/modules/auth/components/ButtonCardComponent.vue')['default']
-    HolaMundo: typeof import('./src/modules/test/components/HolaMundo.vue')['default']
-    LogInComponent: typeof import('./src/modules/auth/views/LogInComponent.vue')['default']
->>>>>>> parent of 85c31af (Revert "Inicio de sesion y registro de usuario.")
+    LogInView: typeof import('./src/modules/auth/views/LogInView.vue')['default']
     MainLayout: typeof import('./src/modules/shared/layouts/MainLayout.vue')['default']
     MainView: typeof import('./src/modules/products/views/MainView.vue')['default']
     NavBar: typeof import('./src/modules/shared/components/NavBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-<<<<<<< HEAD
     SearchBar: typeof import('./src/modules/shared/components/SearchBar.vue')['default']
-=======
-    SignupComponent: typeof import('./src/modules/auth/views/SignupComponent.vue')['default']
->>>>>>> parent of 85c31af (Revert "Inicio de sesion y registro de usuario.")
+    SignupView: typeof import('./src/modules/auth/views/SignupView.vue')['default']
     TestView: typeof import('./src/modules/test/views/TestView.vue')['default']
   }
 }

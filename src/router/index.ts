@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router';
 import TestView from '@/modules/test/views/TestView.vue';
 import { useAuthStore } from '@/modules/auth/stores/auth.store';
 import productRoutes from '@/modules/products/router'
-
 import authRoutes from "@/modules/auth/router/authRoutes";
 
 const router = createRouter({
@@ -17,22 +16,18 @@ const router = createRouter({
     {
       path: '/',
       component: () => import('@/modules/shared/layouts/MainLayout.vue'),
+      meta: { requiresAuth: true },
       children: [
 
         ...productRoutes,
         
       ],
-      meta: {
-        requiresAuth: true
-      }
     },
 
     {
       name: 'auth',
+      meta:{ isAuthPage: true },
       ...authRoutes,
-      meta:{
-        isAuthPage: true
-      }
     }
   ]
 })
