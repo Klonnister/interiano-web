@@ -52,10 +52,10 @@ function submit() {
           <span class="group-hover:translate-x-1 duration-500">Contraseña</span>
         </label>
         <InputText
-          type="text"
+          type="password"
           name="password"
           id="password"
-          v-model="form.username"
+          v-model="form.password"
           class="w-full local-inset-shadow"
         />
       </div>
