@@ -19,7 +19,7 @@ const product = {
 </script>
 
 <template>
-  <div class="h-[12rem] | sm:h-[13rem] | xl:h-[14rem] 2xl:h-[16rem] bg-white w-full relative rounded-lg overflow-hidden p-1 mx-auto select-none cursor-pointer hover:scale-[101%] transition-all duration-300 ease-in-out">
+  <div class="h-[12rem] | sm:h-[13rem] | xl:h-[14rem] 2xl:h-[16rem] bg-white w-full relative rounded-lg overflow-hidden p-1 mx-auto select-none cursor-pointer hover:scale-[101%] custom-shadow transition-all duration-[.4s] ease-in-out">
     <div class="h-[78%] flex items-center justify-center">
       <img
         :src="product.image"
@@ -40,4 +40,15 @@ const product = {
 .black-gradient {
   background-image: linear-gradient(to bottom, #00000000, #0c152dcc);
 }
+
+.custom-shadow {
+  box-shadow: 3px 5px 2px rgba(0,0,0, 0.35);
+}
+
+.custom-shadow:hover {
+  box-shadow: 5px 8px 2px rgba(0,0,0, 0.35);
+}
+
+
+
 </style>
