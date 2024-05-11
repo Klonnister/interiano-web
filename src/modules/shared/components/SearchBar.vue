@@ -7,7 +7,7 @@ const filterStore = useFilterStore();
 </script>
 
 <template>
-  <div class="w-full flex h-9 local-shadow rounded-lg md:min-w-96 lg:min-w-64 xl:min-w-96">
+  <div class="w-full flex h-9 local-shadow rounded-lg md:min-w-96 lg:min-w-64 xl:min-w-96 hover:-translate-y-[1px] searchbar-transition">
     <InputText
       type="text"
       v-model="filterStore.search"
@@ -26,17 +26,25 @@ const filterStore = useFilterStore();
 <style scoped>
 /* Inputtext */
 .p-inputtext {
-  padding: 0.6rem 1.25rem;
+  padding: 0.6rem 1rem;
   background-color: white;
   color: #10273D;
   font-size: 16px;
   border-radius: 6px 0px 0px 6px;
   border: none;
   min-width: 0;
+  box-shadow: none
 }
 
 .p-inputtext:focus {
   box-shadow: none
 }
 
+.p-inputtext:hover {
+  box-shadow: none
+}
+
+.searchbar-transition {
+  transition: transform .3s ease-in-out;
+}
 </style>

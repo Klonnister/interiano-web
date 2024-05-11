@@ -18,14 +18,14 @@ const { width } = useWindowSize();
     <div
       class="fixed top-0 right-0 bg-[#0E2032] h-max w-full sm:w-[22rem] 2xl:w-[25rem] sm:min-h-screen"
     > 
-      <div class="bg-[#09141F] px-8 py-6">
+      <div class="bg-[#050e17] px-8 py-6">
         <button @click="emit('close')" class="fixed right-6">
           <Icon
             icon="iconamoon:close-bold"
-            class="w-7 h-7 text-[#D0D9F6]"
+            class="w-7 h-7 text-white"
           />
         </button>
-        <p class="text-2xl text-center sm:text-start">Menú agregar</p>
+        <p class="text-2xl text-center text-white sm:text-start">Menú agregar</p>
       </div>
       
       <div class="flex flex-col local-link-borders px-8 pt-2 pb-4">
