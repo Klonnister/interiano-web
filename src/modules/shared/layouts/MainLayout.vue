@@ -32,12 +32,12 @@ const layoutStore = useLayoutStore();
         <img
           src="/interiano-logo-shadowed.svg"
           alt=""
-          class="fixed top-0 left-0 right-0 mx-auto pt-3 hover:scale-110 hover:-rotate-2 transition-all ease-in-out duration-700 z-30"
+          class="fixed top-0 left-0 right-0 mx-auto pt-3 hover:scale-110 hover:-rotate-2 transition-all ease-in-out duration-700 z-50"
           :class="layoutStore.showMenu ? 'w-48 sm:w-56 translate-y-[3vh]' : 'w-40 sm:w-48'"
         >
       </aside>
 
-      <div class="mt-[5.75rem] sm:mt-28">
+      <div class="mt-[6.5rem] mb-12 sm:mt-28">
         <RouterView />
       </div>
     </div>
@@ -58,13 +58,13 @@ const layoutStore = useLayoutStore();
               v-for="link in links"
               :key="link.name"
               :to="link.path"
-              class="flex gap-4 2xl:gap-5 items-center py-2 px-6 rounded-lg hover:bg-[#7BAED2]/20 transition-all ease-in-out duration-150 link-shadow hover:-translate-x-1"
+              class="flex gap-4 2xl:gap-5 items-center py-2 px-6 2xl:py-3 2xl:px-8 rounded-lg hover:bg-[#7BAED2]/20 transition-all ease-in-out duration-150 link-shadow hover:-translate-x-1"
             >
               <Icon
                 :icon="link.icon"
                 class="w-8 h-8 2xl:w-9 2xl:h-9"
               />
-              <span class="text-lg 2xl:text-xl">{{ link.name }}</span >
+              <span class="text-lg 2xl:text-2xl">{{ link.name }}</span >
             </RouterLink>
           </div>
   
@@ -72,7 +72,7 @@ const layoutStore = useLayoutStore();
         </aside>
       </div>
 
-      <div class="pt-14 2xl:pt-24 ps-64 pe-4 2xl:ps-72 2xl:pe-12">
+      <div class="py-14 2xl:pt-24 ps-72 pe-8 2xl:ps-[21rem] 2xl:pe-12 min-h-screen content-center">
         <RouterView />
       </div>
     </div>

@@ -34,13 +34,13 @@ const open = () => {
 <template>
   <div class="md:hidden">
     <h1
-      class="uppercase font-semibold text-2xl text-center mb-3"
+      class="uppercase font-semibold text-2xl sm:text-3xl text-center mb-4 sm:mb-6"
     >
       {{ props.title }}
     </h1>
-    <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-4">
       <SearchBar />
-      <div class="flex gap-2">
+      <div class="flex gap-3 sm:gap-6">
         <CardsViewButton
           v-if="props.filtersButton"
           name="Filtros"
@@ -68,12 +68,12 @@ const open = () => {
 
   <div class="hidden md:block lg:hidden">
     <h1
-      class="uppercase font-semibold text-2xl text-center mb-3"
+      class="uppercase font-semibold text-3xl text-center mb-6"
     >
       {{ props.title }}
     </h1>
       
-    <div class="flex gap-2">
+    <div class="flex gap-6">
       <CardsViewButton
         v-if="props.filtersButton"
         name="Filtros"
@@ -103,12 +103,12 @@ const open = () => {
 
   <div class="hidden lg:flex items-center">
     <h1
-      class="uppercase font-semibold text-3xl text-center me-auto"
+      class="uppercase font-semibold text-3xl 2xl:text-4xl text-center me-auto pe-8"
     >
       {{ props.title }}
     </h1>
 
-    <div class="flex gap-2 items-stretch">
+    <div class="flex gap-4 xl:gap-4 items-stretch">
       <CardsViewButton
         v-if="props.filtersButton"
         name="Filtros"
