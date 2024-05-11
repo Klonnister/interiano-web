@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import AddMenu from '@/modules/products/components/AddMenu.vue';
+import { useModal } from 'vue-final-modal';
 import type { RouteLocationRaw } from 'vue-router';
 
 interface Props {
@@ -12,6 +14,21 @@ const props = withDefaults(defineProps<Props>(), {
   filtersButton: false,
   addButtonType: 'button'
 })
+
+const addProductModal = useModal({
+  component: AddMenu,
+  attrs: {
+    onClose: () => {
+      addProductModal.close();
+    }
+  }
+})
+
+const open = () => {
+  if(props.title === 'productos') {
+    addProductModal.open();
+  }
+}
 </script>
 
 <template>
@@ -33,6 +50,7 @@ const props = withDefaults(defineProps<Props>(), {
           v-if="props.addButtonType === 'button'"
           name="Agregar"
           icon="mingcute:add-fill"
+          @click="open"
         />
         <RouterLink
           v-if="addButtonPath && addButtonType === 'link'"
@@ -62,15 +80,18 @@ const props = withDefaults(defineProps<Props>(), {
         icon="solar:filter-bold"
       />
 
-      <SearchBar />
+      <SearchBar :class="{ 'md:w-96': !props.filtersButton }" />
 
       <CardsViewButton
         v-if="props.addButtonType === 'button'"
+        name="Agregar"
         icon="mingcute:add-fill"
+        @click="open"
       />
       <RouterLink
         v-if="addButtonPath && addButtonType === 'link'"
         :to="addButtonPath"
+        :class="{'w-full': props.filtersButton} "
       >
         <CardsViewButton
           name="Agregar"
@@ -99,6 +120,8 @@ const props = withDefaults(defineProps<Props>(), {
       <CardsViewButton
         v-if="props.addButtonType === 'button'"
         icon="mingcute:add-fill"
+        :shrink="true"
+        @click="open"
       />
       
       <RouterLink
