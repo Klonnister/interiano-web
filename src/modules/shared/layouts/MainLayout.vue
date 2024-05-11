@@ -17,7 +17,7 @@ const layoutStore = useLayoutStore();
     <div v-if="width < 1024">
       <aside>
         <div
-          class="w-full pt-6 pb-6 mx-auto fixed top-0 left-0 right-0 flex items-center justify-between px-5 bg-[#0E1D2C]"
+          class="w-full pt-6 pb-6 mx-auto fixed top-0 left-0 right-0 flex items-center justify-between px-5 bg-[#0E1D2C] z-40"
         >
           <button @click="layoutStore.openMenu" class="z-20">
             <Icon
@@ -46,7 +46,7 @@ const layoutStore = useLayoutStore();
     <div
       v-else
     >
-      <div class="h-screen flex items-center fixed">
+      <div class="h-screen flex items-center fixed z-40">
         <aside class="flex flex-col gap-[5vh] 2xl:gap-12 p-5 h-max">
           <RouterLink :to="'/'" class="flex items-center gap-3 2xl:gap-4 py-2 px-6 rounded-lg hover:bg-[#72838F]/15 transition-all ease-in-out duration-150 link-shadow hover:-translate-x-1">
             <img src="/user-template.webp" alt="" class="w-10 2xl:w-14">

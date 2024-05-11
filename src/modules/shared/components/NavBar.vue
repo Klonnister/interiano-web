@@ -9,7 +9,7 @@ const layoutStore = useLayoutStore();
 
 <template>
   <div
-    class="fixed top-0 left-0 overflow-hidden flex items-center justify-center"
+    class="fixed top-0 left-0 overflow-hidden flex items-center justify-center z-40"
     :class="layoutStore.showMenu ? 'h-screen w-full' : 'h-0 w-0 -translate-y-full delay-700'"
   > 
     <div
