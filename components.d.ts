@@ -11,6 +11,7 @@ declare module 'vue' {
     App: typeof import('./src/App.vue')['default']
     AuthLayout: typeof import('./src/modules/auth/layout/AuthLayout.vue')['default']
     ButtonCardComponent: typeof import('./src/modules/auth/components/ButtonCardComponent.vue')['default']
+    CardButtonBase: typeof import('./src/modules/shared/components/CardButtonBase.vue')['default']
     CardsViewButton: typeof import('./src/modules/shared/components/CardsViewButton.vue')['default']
     CardsViewHeader: typeof import('./src/modules/shared/components/CardsViewHeader.vue')['default']
     LogInView: typeof import('./src/modules/auth/views/LogInView.vue')['default']
