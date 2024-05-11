@@ -19,7 +19,7 @@ const product = {
 </script>
 
 <template>
-  <div class="bg-white w-full h-[12rem] relative rounded-lg overflow-hidden p-1 mx-auto">
+  <div class="h-[12rem] | sm:h-[13rem] | xl:h-[14rem] 2xl:h-[16rem] bg-white w-full relative rounded-lg overflow-hidden p-1 mx-auto select-none cursor-pointer hover:scale-[101%] transition-all duration-300 ease-in-out">
     <div class="h-[78%] flex items-center justify-center">
       <img
         :src="product.image"
@@ -28,7 +28,7 @@ const product = {
       >
     </div>
     
-    <p class="absolute bottom-2 right-0 left-0 text-center text-sm leading-4 z-20 h-[17%] overflow-hidden px-2 text-white max-w-[26ch] mx-auto">
+    <p class="absolute bottom-2 right-0 left-0 text-center text-sm leading-4 2xl:leading-5 z-20 h-[17%] overflow-hidden px-2 text-white max-w-[24ch] mx-auto">
       {{ product.title }}
     </p>
     <div class="absolute bottom-0 left-0 black-gradient w-full h-[60%] z-10">
