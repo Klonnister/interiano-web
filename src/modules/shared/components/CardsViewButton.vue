@@ -10,7 +10,7 @@ const props = defineProps<{
 
 <template>
   <button
-    class="bg-[#15395A] flex gap-2 items-center justify-center py-1.5 px-4 rounded-lg local-shadow h-full"
+    class="bg-[#15395A] flex gap-2 items-center justify-center py-1.5 px-4 rounded-lg local-shadow"
     :class="{'w-full': !props.shrink }"
   >
     <Icon

@@ -35,4 +35,8 @@ const filterStore = useFilterStore();
   min-width: 0;
 }
 
+.p-inputtext:focus {
+  box-shadow: none
+}
+
 </style>
