@@ -56,6 +56,7 @@ input:focus, input:focus-visible {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
 .hide-scroll-bar::-webkit-scrollbar {
   display: none;
 }

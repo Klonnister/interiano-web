@@ -43,7 +43,6 @@ function submit() {
           type="text"
           id="username"
           v-model="form.username"
-          class="w-full local-inset-shadow"
         />
       </div>
       <div class="block group">
@@ -56,7 +55,6 @@ function submit() {
           name="password"
           id="password"
           v-model="form.password"
-          class="w-full local-inset-shadow"
         />
       </div>
       <button class="local-shadow bg-[#15395A] py-2 rounded-sm" type="submit" >

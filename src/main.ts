@@ -13,12 +13,13 @@ import "vue-toastification/dist/index.css";
 import toastOptions from './plugins/toastOptions'
 import { createVfm } from 'vue-final-modal'
 import 'vue-final-modal/style.css'
+import { primeVueOptions } from './plugins/primeVueOptions'
 
 const vfm = createVfm();
 const app = createApp(App)
 
 app.use(createPinia())
-app.use(PrimeVue)
+app.use(PrimeVue, primeVueOptions)
 app.use(vfm)
 app.use(Toast, toastOptions)
 app.use(router)
