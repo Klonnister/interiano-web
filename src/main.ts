@@ -25,6 +25,6 @@ app.use(Toast, toastOptions)
 app.use(router)
 
 const auth = useAuthStore()
-// auth.setSession()
+auth.setSession()
 
 app.mount('#app')
