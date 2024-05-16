@@ -62,7 +62,7 @@ const deleteFromCatalog = () => {
   <div class="h-[12rem] | sm:h-[13rem] | xl:h-[14rem] 2xl:h-[16rem] bg-white w-full relative rounded-xl overflow-hidden pt-4 px-4 pb-2 mx-auto select-none cursor-pointer hover:scale-[101%] custom-shadow transition-all duration-[.4s] ease-in-out">
     <div class="h-[78%] flex items-center justify-center">
       <img
-      :src="props.product.image"
+      :src="`http://192.168.1.5:3000${props.product.image}`"
       alt=""
         class="h-full w-full object-contain"
       >
@@ -70,7 +70,7 @@ const deleteFromCatalog = () => {
     
     <!-- Product title -->
     <p
-      class="absolute bottom-2 right-0 left-0 text-center text-sm leading-4 2xl:leading-5 z-30 h-[17%] overflow-hidden px-2 text-white max-w-[24ch] mx-auto"
+      class="absolute bottom-2 right-0 left-0 text-center text-[0.82rem] lg:text-sm leading-4 lg:leading-4 2xl:leading-4 z-30 h-[17%] overflow-hidden px-2 text-white max-w-[24ch] mx-auto"
       @click="toggleMenu"
     >
       {{ props.product.title }}
@@ -85,14 +85,14 @@ const deleteFromCatalog = () => {
       class="absolute top-2 right-2 font-hind text-[#534949] font-medium text-sm sm:text-base transition-all duration-300 ease-in-out"
       :class="{ 'opacity-0': showMenu }"
     >
-      Q{{ props.product.price.toFixed(2) }}
+      Q{{ Number(props.product.price).toFixed(2) }}
     </p>
     <p
       v-if="props.product.sale"
       class="absolute top-2 right-2 font-hind text-[#46941f] font-medium animated-text text-sm sm:text-base transition-all duration-300 ease-in-out"
       :class="{ 'opacity-0': showMenu }"
     >
-      Q{{ props.product.sale_price.toFixed(2) }}
+      Q{{ Number(props.product.sale_price).toFixed(2) }}
     </p>
 
     <!-- Stock -->
@@ -120,6 +120,7 @@ const deleteFromCatalog = () => {
           class="absolute bottom-0 left-0 w-full h-full z-20 bg-black opacity-40"
           @click="closeMenu"
         ></div>
+        
         <div class="absolute inset-0 w-32 sm:w-36 h-max flex flex-wrap justify-center items-center gap-2 sm:gap-2.5 mx-auto my-auto">
 
           <RouterLink :to="{ name: 'home' }" class="z-30 rounded-md">
