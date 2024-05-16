@@ -2,8 +2,15 @@ export interface Product {
   id: number;
   category_id: number;
   trademark_id: number;
-  category: string;
-  trademark: string;
+  category: {
+    id: number,
+    name: string,
+  };
+  trademark: {
+    id: number,
+    name: string,
+    image: string | null,
+  };
   title: string;
   image: string;
   size?: string;
