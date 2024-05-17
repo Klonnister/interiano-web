@@ -1,24 +1,34 @@
 <script lang="ts" setup>
-//api
-import { signIn } from "@/modules/auth/api/SignUpApi";
-
-//interfaces
-import type { singUpType } from "@/modules/auth/types/SingUpType";
-
 //native imports
 import { reactive } from "vue";
 import InputText from 'primevue/inputtext';
+import { apiAuthRequest } from "@/modules/shared/helpers/api";
+import { saveUserInfo } from "@/modules/shared/helpers/auth";
+import { useAuthStore } from "../stores/auth.store";
+import { useToast } from "vue-toastification";
+import { useRouter } from "vue-router";
+import type { loginResponse, signUpForm } from "../types/auth.types";
+
+const authStore = useAuthStore();
+const toast = useToast();
+const router = useRouter();
 
 //variables
-const form = reactive<singUpType>({
+const form = reactive<signUpForm>({
   username: "",
   password: "",
   passwordconfirm: "",
 });
 
 //submit
-function submit() {
-  signIn(form);
+async function submit() {
+  const response: loginResponse = await apiAuthRequest('/auth/register', { method: 'POST', body: form })
+  if ( response ) {
+    saveUserInfo(response)
+    authStore.setSession();
+    toast.success(`Bienvenido(a) ${response.username}`)
+    router.push({ name: 'home' })
+  }
 }
 </script>
 
@@ -40,18 +50,23 @@ function submit() {
           type="text"
           name="createName"
           id="createName"
+          required
           v-model="form.username"
         />
       </div>
       <div class="block group">
         <div class="flex gap-[0.6rem] p-[0.1rem] mb-1">
           <img class="block" src="/auth/password.svg" alt="" />
-          <span class="group-hover:translate-x-1 duration-500">crear Contraseña</span>
+          <span class="group-hover:translate-x-1 duration-500">Crear contraseña</span>
         </div>
         <InputText
           type="password"
           name="createPassword"
           id="createPassword"
+          required
+          minlength="6"
+          pattern="^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$"
+          title="Debe contener al menos 1 letra mayúscula, 1 carácter especial y un número"
           v-model="form.password"
         />
       </div>
@@ -64,6 +79,10 @@ function submit() {
           type="password"
           name="createPasswordConfirm"
           id="createPasswordConfirm"
+          required
+          minlength="6"
+          pattern="^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$"
+          title="Debe contener al menos 1 letra mayúscula, 1 carácter especial y un número"
           v-model="form.passwordconfirm"
         />
       </div>

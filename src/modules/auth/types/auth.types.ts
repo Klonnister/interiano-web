@@ -8,3 +8,9 @@ export interface loginResponse {
   username: string,
   image: string,
 }
+
+export interface signUpForm {
+  username: string
+  password: string
+  passwordconfirm: string
+}

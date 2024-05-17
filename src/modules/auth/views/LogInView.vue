@@ -1,6 +1,6 @@
 <script setup lang="ts">
 //interfaces
-import type { loginForm, loginResponse } from "@/modules/auth/types/LogInType";
+import type { loginForm, loginResponse } from "@/modules/auth/types/auth.types";
 
 //components
 import ButtonCardComponent from "@/modules/auth/components/ButtonCardComponent.vue";

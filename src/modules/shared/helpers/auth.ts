@@ -1,4 +1,4 @@
-import type { loginResponse } from "@/modules/auth/types/LogInType";
+import type { loginResponse } from "@/modules/auth/types/auth.types";
 
 export  function getToken() {
   const cookies: any = document.cookie
