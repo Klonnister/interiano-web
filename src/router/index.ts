@@ -16,7 +16,7 @@ const router = createRouter({
     {
       path: '/',
       component: () => import('@/modules/shared/layouts/MainLayout.vue'),
-      // meta: { requiresAuth: true },
+      meta: { requiresAuth: true },
       children: [
 
         ...productRoutes,
@@ -34,8 +34,8 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const store = useAuthStore()
-  if (to.meta.requiresAuth && store.isLogin === false) next('/sesion/inicio')
-  else if(to.meta.isAuthPage && store.isLogin === true) next('/')
+  if (to.meta.requiresAuth && store.isLogged === false) next('/sesion/inicio')
+  else if(to.meta.isAuthPage && store.isLogged === true) next('/')
   else next()
 })
 export default router
