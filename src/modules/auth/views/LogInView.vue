@@ -41,11 +41,11 @@ async function submit() {
   <div class="flex flex-col gap-8 w-full lg:max-w-80 2xl:max-w-96">
     <!-- title -->
     <div class="text-center">
-      <span class="text-[1.5rem] | lg:text-[2.5rem]"> Inicia sesión </span>
+      <span class="text-[1.6rem] | lg:text-[2.5rem]"> Inicia sesión </span>
     </div>
     <!-- end title -->
     <!-- form -->
-    <form @submit.prevent="submit" class="flex flex-col gap-8">
+    <form @submit.prevent="submit" class="flex flex-col gap-8 mb-10 lg:mb-2">
       <div class="block group">
         <label for="username" class="flex gap-[0.6rem] p-[0.1rem] mb-1">
           <img class="block" src="/auth/user.svg" alt="" />
@@ -80,7 +80,7 @@ async function submit() {
     <div
      class="flex w-full justify-around p-5">
       <ButtonCardComponent
-        title="regístrate"
+        title="Regístrate"
         img="/auth/signup.svg"
         path="/sesion/registro"
       />
