@@ -11,7 +11,8 @@ const filterStore = useFilterStore();
     <InputText
       type="text"
       v-model="filterStore.search"
-      class="w-full"
+      placeholder="Buscar..."
+      class="w-full text-sm lg:text-base"
     />
     <div class="w-1 bg-[#D0D9F6]"></div>
     <button class="bg-[#15395A] px-2 rounded-e-lg">
@@ -29,7 +30,6 @@ const filterStore = useFilterStore();
   padding: 0.6rem 1rem;
   background-color: white;
   color: #10273D;
-  font-size: 16px;
   border-radius: 6px 0px 0px 6px;
   border: none;
   min-width: 0;
