@@ -38,7 +38,11 @@ const layoutStore = useLayoutStore();
       </aside>
 
       <div class="mt-[6.5rem] mb-12 sm:mt-28">
-        <RouterView />
+        <router-view v-slot="{ Component }">
+          <transition name="fade" mode="out-in">
+            <component :is="Component" />
+          </transition>
+        </router-view>
       </div>
     </div>
     
@@ -73,7 +77,11 @@ const layoutStore = useLayoutStore();
       </div>
 
       <div class="py-14 2xl:pt-24 ps-72 pe-8 2xl:ps-[21rem] 2xl:pe-12 min-h-screen content-center">
-        <RouterView />
+        <router-view v-slot="{ Component }">
+          <transition name="fade" mode="out-in">
+            <component :is="Component" />
+          </transition>
+        </router-view>
       </div>
     </div>
 
@@ -97,4 +105,15 @@ const layoutStore = useLayoutStore();
     box-shadow: 5px 6px 4px rgba(0,0,0, 0.25);
   }
 }
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
 </style>
