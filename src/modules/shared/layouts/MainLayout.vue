@@ -12,7 +12,7 @@ import { watch } from 'vue';
 const links = sidebarLinks;
 const { width } = useWindowSize();
 const layoutStore = useLayoutStore();
-const { showProductsMenu } = storeToRefs(layoutStore);
+const { showMenu, showProductsMenu } = storeToRefs(layoutStore);
 
 const addProductModal = useModal({
   component: AddMenu,
@@ -27,6 +27,15 @@ const addProductModal = useModal({
 watch(showProductsMenu, () => {
   if(showProductsMenu.value) addProductModal.open()
 })
+
+watch(showMenu, () => {
+  if(showMenu.value) {
+    document.body.classList.add("overflow-y-hidden")
+  } else {
+    document.body.classList.remove("overflow-y-hidden")
+  }
+})
+
 
 
 </script>
