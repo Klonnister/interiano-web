@@ -3,6 +3,10 @@ import InputText from 'primevue/inputtext';
 import { Icon } from '@iconify/vue';
 import { useFilterStore } from '../stores/filterStore';
 
+const props = defineProps<{
+  id: string
+}>();
+
 const filterStore = useFilterStore();
 </script>
 
@@ -10,6 +14,7 @@ const filterStore = useFilterStore();
   <div class="w-full flex h-9 local-shadow rounded-lg md:min-w-96 lg:min-w-64 xl:min-w-96 hover:-translate-y-[1px] searchbar-transition">
     <InputText
       type="text"
+      :id="props.id"
       v-model="filterStore.search"
       placeholder="Buscar..."
       class="w-full text-sm lg:text-base"

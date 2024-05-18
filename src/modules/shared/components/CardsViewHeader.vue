@@ -31,7 +31,7 @@ const open = () => {
       {{ props.title }}
     </h1>
     <div class="flex flex-col gap-4">
-      <SearchBar />
+      <SearchBar id="search1" />
       <div class="flex gap-3 sm:gap-6">
         <CardsViewButton
           v-if="props.filtersButton"
@@ -72,7 +72,7 @@ const open = () => {
         icon="solar:filter-bold"
       />
 
-      <SearchBar :class="{ 'md:w-96': !props.filtersButton }" />
+      <SearchBar id="search2" :class="{ 'md:w-96': !props.filtersButton }" />
 
       <CardsViewButton
         v-if="props.addButtonType === 'button'"
@@ -107,7 +107,7 @@ const open = () => {
         icon="solar:filter-bold"
       />
 
-      <SearchBar />
+      <SearchBar id="search3" />
   
       <CardsViewButton
         v-if="props.addButtonType === 'button'"
