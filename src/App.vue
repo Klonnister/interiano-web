@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ModalsContainer } from 'vue-final-modal';
 import { RouterView } from 'vue-router'
 </script>
 
@@ -9,6 +10,9 @@ import { RouterView } from 'vue-router'
         <component :is="Component" />
       </transition>
     </router-view>
+    
+    <!-- Vue final modal container -->
+    <ModalsContainer />
   </div>
 </template>
 

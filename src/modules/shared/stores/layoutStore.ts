@@ -6,15 +6,15 @@ export const useLayoutStore = defineStore('layoutStore', () => {
   const openMenu = () => {
     showMenu.value = true;
   }
-  const closeMenu = () => {
-    showMenu.value = false;
-  }
+
+  const showProductsMenu = ref(false);
 
   const resetLayout = () => {
     showMenu.value = false;
+    showProductsMenu.value = false;
   }
-
+  
   return {
-    showMenu, openMenu, closeMenu, resetLayout
+    showMenu, openMenu, resetLayout, showProductsMenu
   }
 })

@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import AddMenu from '@/modules/products/components/AddMenu.vue';
-import { useModal } from 'vue-final-modal';
 import type { RouteLocationRaw } from 'vue-router';
+import { useLayoutStore } from '../stores/layoutStore';
 
 interface Props {
   title: string
@@ -15,18 +14,11 @@ const props = withDefaults(defineProps<Props>(), {
   addButtonType: 'button'
 })
 
-const addProductModal = useModal({
-  component: AddMenu,
-  attrs: {
-    onClose: () => {
-      addProductModal.close();
-    }
-  }
-})
+const layoutStore = useLayoutStore();
 
 const open = () => {
   if(props.title === 'productos') {
-    addProductModal.open();
+    layoutStore.showProductsMenu = true;
   }
 }
 </script>

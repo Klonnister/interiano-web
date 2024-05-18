@@ -4,11 +4,31 @@ import { RouterView } from 'vue-router';
 import { Icon } from '@iconify/vue';
 import sidebarLinks from '../helpers/sidebarLinks';
 import { useLayoutStore } from '../stores/layoutStore';
-import { ModalsContainer } from 'vue-final-modal'
+import { useModal } from 'vue-final-modal';
+import AddMenu from '@/modules/products/components/AddMenu.vue';
+import { storeToRefs } from 'pinia';
+import { watch } from 'vue';
 
 const links = sidebarLinks;
 const { width } = useWindowSize();
 const layoutStore = useLayoutStore();
+const { showProductsMenu } = storeToRefs(layoutStore);
+
+const addProductModal = useModal({
+  component: AddMenu,
+  attrs: {
+    onClose: () => {
+      layoutStore.resetLayout();
+      addProductModal.close()
+    }
+  }
+})
+
+watch(showProductsMenu, () => {
+  if(showProductsMenu.value) addProductModal.open()
+})
+
+
 </script>
 
 <template>
@@ -84,9 +104,6 @@ const layoutStore = useLayoutStore();
         </router-view>
       </div>
     </div>
-
-    <!-- Vue final modal container -->
-    <ModalsContainer />
   </div>
 </template>
 

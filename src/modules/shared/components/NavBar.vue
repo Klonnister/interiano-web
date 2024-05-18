@@ -22,7 +22,7 @@ const layoutStore = useLayoutStore();
       >
         <button
           class="absolute top-6 left-5"
-          @click="layoutStore.closeMenu"
+          @click="layoutStore.resetLayout"
           :disabled="!layoutStore.showMenu"
         >
           <Icon icon="iconamoon:close-bold" class="w-7 h-7 sm:w-10 sm:h-10 text-[#D0D9F6]"/>
@@ -46,7 +46,7 @@ const layoutStore = useLayoutStore();
             :key="link.name"
             :to="link.path"
             class="flex gap-3 items-center justify-start py-6 px-16 hover:scale-105 transition-all duration-300 ease-in-out"
-            @click="layoutStore.closeMenu"
+            @click="layoutStore.resetLayout"
             :class="layoutStore.showMenu ? '' : 'pointer-events-none'"
           >
             <Icon
