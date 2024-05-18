@@ -8,25 +8,34 @@ const props = defineProps<{
 }>();
 
 const filterStore = useFilterStore();
+
+const submit = (event: Event) => {
+  event.preventDefault();
+}
 </script>
 
 <template>
-  <div class="w-full flex h-9 local-shadow rounded-lg md:min-w-96 lg:min-w-64 xl:min-w-96 hover:-translate-y-[1px] searchbar-transition">
-    <InputText
-      type="text"
-      :id="props.id"
-      v-model="filterStore.search"
-      placeholder="Buscar..."
-      class="w-full text-sm lg:text-base"
-    />
-    <div class="w-1 bg-[#D0D9F6]"></div>
-    <button class="bg-[#15395A] px-2 rounded-e-lg">
-      <Icon
-        icon="ic:baseline-search"
-        class="w-7 h-7"
+  <form @submit="submit">
+    <div class="w-full flex h-9 local-shadow rounded-lg md:min-w-96 lg:min-w-64 xl:min-w-96 hover:-translate-y-[1px] searchbar-transition">
+      <InputText
+        type="text"
+        :id="props.id"
+        v-model="filterStore.search"
+        placeholder="Buscar..."
+        class="w-full text-sm lg:text-base"
       />
-    </button>
-  </div>
+      <div class="w-1 bg-[#D0D9F6]"></div>
+      <button
+        class="bg-[#15395A] px-2 rounded-e-lg"
+        @click="submit"
+      >
+        <Icon
+          icon="ic:baseline-search"
+          class="w-7 h-7"
+        />
+      </button>
+    </div>
+  </form>
 </template>
 
 <style scoped>
