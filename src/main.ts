@@ -18,13 +18,13 @@ import { primeVueOptions } from './plugins/primeVueOptions'
 const vfm = createVfm();
 const app = createApp(App)
 
-app.use(createPinia())
 app.use(PrimeVue, primeVueOptions)
 app.use(vfm)
 app.use(Toast, toastOptions)
+app.use(createPinia())
 app.use(router)
+
+app.mount('#app')
 
 const auth = useAuthStore()
 auth.setSession()
-
-app.mount('#app')
