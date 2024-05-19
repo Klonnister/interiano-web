@@ -1,10 +1,6 @@
 <script setup lang="ts">
-
-//api
-import {logIn} from '@/modules/auth/api/LogInApi'
-
 //interfaces
-import type { logInType } from "@/modules/auth/types/LogInType";
+import type { loginForm, loginResponse } from "@/modules/auth/types/auth.types";
 
 //components
 import ButtonCardComponent from "@/modules/auth/components/ButtonCardComponent.vue";
@@ -12,17 +8,33 @@ import ButtonCardComponent from "@/modules/auth/components/ButtonCardComponent.v
 //native imports
 import { reactive } from "vue";
 import InputText from 'primevue/inputtext';
+import { apiAuthRequest } from '@/modules/shared/helpers/api';
+import { useAuthStore } from "../stores/auth.store";
+import { saveUserInfo } from "@/modules/shared/helpers/auth";
+import { useToast } from "vue-toastification";
+import { useRouter } from "vue-router";
 
 //variables
-const form = reactive<logInType>({
+const authStore = useAuthStore();
+const toast = useToast();
+const router = useRouter();
+
+const form = reactive<loginForm>({
   username: "",
   password: "",
 });
 
 //submit
-function submit() {
-  logIn(form);
+async function submit() {
+  const response: loginResponse = await apiAuthRequest('/auth/login', { method: 'POST', body: form })
+  if ( response ) {
+    saveUserInfo(response)
+    authStore.setSession();
+    toast.success(`Bienvenido(a) ${response.username}`)
+    router.push({ name: 'home' })
+  }
 }
+
 </script>
 
 <template>
@@ -42,6 +54,7 @@ function submit() {
         <InputText
           type="text"
           id="username"
+          required
           v-model="form.username"
         />
       </div>
@@ -54,6 +67,7 @@ function submit() {
           type="password"
           name="password"
           id="password"
+          required
           v-model="form.password"
         />
       </div>
@@ -63,7 +77,8 @@ function submit() {
     </form>
     <!-- end form -->
     <!-- link buttons -->
-    <div class="flex w-full justify-around p-5">
+    <div
+     class="flex w-full justify-around p-5">
       <ButtonCardComponent
         title="Regístrate"
         img="/auth/signup.svg"
