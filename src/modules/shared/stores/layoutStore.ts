@@ -8,13 +8,16 @@ export const useLayoutStore = defineStore('layoutStore', () => {
   }
 
   const showProductsMenu = ref(false);
+  const showFilters = ref(false);
 
   const resetLayout = () => {
     showMenu.value = false;
     showProductsMenu.value = false;
+    showFilters.value = false;
   }
   
   return {
-    showMenu, openMenu, resetLayout, showProductsMenu
+    showMenu, openMenu, resetLayout, showProductsMenu,
+    showFilters
   }
 })

@@ -8,11 +8,12 @@ import { useModal } from 'vue-final-modal';
 import AddMenu from '@/modules/products/components/AddMenu.vue';
 import { storeToRefs } from 'pinia';
 import { watch } from 'vue';
+import FiltersModal from '../components/FiltersModal.vue';
 
 const links = sidebarLinks;
 const { width } = useWindowSize();
 const layoutStore = useLayoutStore();
-const { showMenu, showProductsMenu } = storeToRefs(layoutStore);
+const { showMenu, showProductsMenu, showFilters } = storeToRefs(layoutStore);
 
 const addProductModal = useModal({
   component: AddMenu,
@@ -24,8 +25,22 @@ const addProductModal = useModal({
   }
 })
 
+const filtersModal = useModal({
+  component: FiltersModal,
+  attrs: {
+    onClose: () => {
+      layoutStore.resetLayout();
+      filtersModal.close()
+    }
+  }
+})
+
 watch(showProductsMenu, () => {
   if(showProductsMenu.value) addProductModal.open()
+})
+
+watch(showFilters, () => {
+  if(showFilters.value) filtersModal.open()
 })
 
 watch(showMenu, () => {

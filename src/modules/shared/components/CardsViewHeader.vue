@@ -21,6 +21,12 @@ const open = () => {
     layoutStore.showProductsMenu = true;
   }
 }
+
+const openFilters = () => {
+  if(props.filtersButton) {
+    layoutStore.showFilters = true;
+  }
+}
 </script>
 
 <template>
@@ -37,6 +43,7 @@ const open = () => {
           v-if="props.filtersButton"
           name="Filtros"
           icon="solar:filter-bold"
+          @click="openFilters"
         />
         <CardsViewButton
           v-if="props.addButtonType === 'button'"
@@ -70,6 +77,7 @@ const open = () => {
         v-if="props.filtersButton"
         name="Filtros"
         icon="solar:filter-bold"
+        @click="openFilters"
       />
 
       <SearchBar id="search2" :class="{ 'md:w-96': !props.filtersButton }" />
@@ -105,6 +113,7 @@ const open = () => {
         v-if="props.filtersButton"
         name="Filtros"
         icon="solar:filter-bold"
+        @click="openFilters"
       />
 
       <SearchBar id="search3" />
