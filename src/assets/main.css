@@ -1,5 +1,6 @@
 @import './base.css';
 @import './primevue.css';
+@import 'primeicons/primeicons.css';
 
 #app {
   min-height: 100vh;
