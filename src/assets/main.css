@@ -65,3 +65,75 @@ input:focus, input:focus-visible {
 .last-center {
   text-align-last: center;
 }
+
+label {
+  color: #D0D9F6;
+}
+
+input[type="number"] {
+  background-color: #061321;
+  color: #A8B7EA;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  border: none;
+  width: 100%;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.local-money-input {
+  position: relative;
+}
+
+.local-money-input > input[type="number"] {
+  padding: 0.625rem 2.5rem;
+}
+
+.local-money-input > span {
+  position: absolute;
+  left: 0;
+  padding: 0.625rem 1rem;
+  color: #D0D9F6;
+}
+
+/* ? Local Transitions */
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* Longer fade transition */
+.fade-5-enter-active,
+.fade-5-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-5-enter-from,
+.fade-5-leave-to {
+  opacity: 0;
+}
+
+.swipe-up-enter-active,
+.swipe-up-leave-active {
+  transition: all 0.2s ease-in-out;
+}
+
+.swipe-up-enter-from {
+  opacity: 0;
+  transform: translateY(25%)
+}
+
+.swipe-up-leave-to {
+  opacity: 0;
+  transform: translateY(-25%)
+}

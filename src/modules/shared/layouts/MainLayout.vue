@@ -146,15 +146,4 @@ watch(showMenu, () => {
     box-shadow: 5px 6px 4px rgba(0,0,0, 0.25);
   }
 }
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease-in-out;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
 </style>

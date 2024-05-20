@@ -30,7 +30,7 @@
     <!-- view component -->
     <div class="lg:w-[50%] items-center justify-center flex pt-6 pb-10 lg:pb-0">
       <router-view v-slot="{ Component }">
-        <transition name="fade" mode="out-in">
+        <transition name="fade-5" mode="out-in">
           <component :is="Component" />
         </transition>
       </router-view>
@@ -38,15 +38,3 @@
         <!-- view component -->
   </div>
 </template>
-
-<style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
