@@ -5,11 +5,11 @@ import { useToast } from "vue-toastification";
 const authStore = useAuthStore();
 const toast = useToast();
 
-export const apiUrl = 'http://localhost:3000';
+export const apiUrl = 'http://192.168.1.5:3000';
 
-export const apiRequest = (path: string, params: apiParams) => {
-  fetch(`${apiUrl}${path}`, {
-    method: params.method || 'GET',
+export const apiRequest = async(path: string, params?: apiParams) => {
+  return await fetch(`${apiUrl}/${path}`, {
+    method: params?.method || 'GET',
     mode: 'cors',
     cache: 'no-cache',
     credentials: 'include',
@@ -19,7 +19,7 @@ export const apiRequest = (path: string, params: apiParams) => {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${getToken()}`,
     },
-    body: JSON.stringify(params.body)
+    body: JSON.stringify(params?.body)
   })
     .then(async(rawResponse) => {
       const response = await rawResponse.json();
@@ -47,7 +47,7 @@ export const apiRequest = (path: string, params: apiParams) => {
 }
 
 export const apiAuthRequest = (path: string, params: apiParams) => {
-  return fetch(`${apiUrl}${path}`, {
+  return fetch(`${apiUrl}/${path}`, {
     method: params.method || 'GET',
     mode: 'cors',
     cache: 'no-cache',

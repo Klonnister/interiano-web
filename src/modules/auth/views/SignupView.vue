@@ -22,7 +22,7 @@ const form = reactive<signUpForm>({
 
 //submit
 async function submit() {
-  const response: loginResponse = await apiAuthRequest('/auth/register', { method: 'POST', body: form })
+  const response: loginResponse = await apiAuthRequest('auth/register', { method: 'POST', body: form })
   if ( response ) {
     saveUserInfo(response)
     authStore.setSession();
