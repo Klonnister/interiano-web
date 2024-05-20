@@ -5,6 +5,7 @@ import { storeToRefs } from 'pinia';
 import { ref, watch } from 'vue';
 import { useCatalogStore } from '../stores/catalogStore';
 import { useToast } from 'vue-toastification';
+import { apiUrl } from '../helpers/api';
 
 const props = defineProps<{
   product: Product,
@@ -62,7 +63,7 @@ const deleteFromCatalog = () => {
   <div
     class="h-[12rem] | sm:h-[13rem] | xl:h-[14rem] 2xl:h-[16rem] bg-white w-full relative rounded-xl overflow-hidden pt-4 px-4 pb-2 mx-auto select-none cursor-pointer hover:scale-[101%] custom-shadow transition-all duration-[.4s] ease-in-out">
     <div class="h-[78%] flex items-center justify-center">
-      <img :src="`http://192.168.1.5:3000${props.product.image}`" alt="" class="h-full w-full object-contain">
+      <img :src="`${apiUrl}${props.product.image}`" alt="" class="h-full w-full object-contain">
     </div>
 
     <!-- Product title -->
