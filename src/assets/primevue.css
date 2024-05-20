@@ -22,3 +22,45 @@
   border: none;
   outline: none;
 }
+
+/* Accordion */
+.p-accordion-content {
+  background-color: #071524;
+  border-radius: 1rem;
+  margin: 0 1.5rem 0 1rem;
+  padding: 1.25rem 1.5rem;
+}
+
+.p-accordion  .p-accordion-header-link {
+  background-color: #0E2032;
+}
+
+.p-accordion .p-accordion-header .p-accordion-header-link{
+  background-color: #0E2032;
+}
+
+.p-accordion-tab {
+  border-bottom: none;
+}
+
+.p-togglebutton .p-togglebutton-input {
+  border: none;
+}
+
+.p-togglebutton .p-button {
+  background-color: #071524;
+  border: none;
+}
+
+.p-togglebutton.p-highlight .p-button::before {
+  background-color: #071524;
+}
+
+.p-togglebutton.p-highlight .p-button .p-button-icon-left, .p-togglebutton.p-highlight .p-button .p-button-icon-right {
+  color: #2dd4bf;
+}
+
+.p-togglebutton.p-highlight .p-button {
+  background-color: #2dd4bf;
+  color: #2dd4bf;
+}

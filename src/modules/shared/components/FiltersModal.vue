@@ -7,11 +7,13 @@ import { useFilterStore } from '../stores/filterStore';
 import { watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import ToggleButton from 'primevue/togglebutton';
+import { useWindowSize } from '@vueuse/core';
 
 const emit = defineEmits<{
   (e: 'close'): void
 }>()
 
+const { width } = useWindowSize();
 const filterStore = useFilterStore();
 const { priceMin, priceMax } = storeToRefs(filterStore);
 
@@ -31,11 +33,11 @@ watch(priceMax, (newValue) => {
 <template>
   <VueFinalModal
     overlay-transition="vfm-fade"
-    content-transition="vfm-fade"
+    :content-transition="width < 640 ? 'vfm-fade' : 'vfm-slide-right'"
     @closed="emit('close')"
   > 
     <div
-      class="fixed bottom-0 right-0 bg-[#0E2032] h-max w-full sm:w-[22rem] 2xl:w-[25rem] sm:min-h-screen rounded-t-2xl sm:rounded-none"
+      class="fixed bottom-0 sm:top-0 right-0 bg-[#0E2032] h-max w-full sm:w-[22rem] 2xl:w-[25rem] sm:min-h-screen rounded-t-2xl sm:rounded-none sm:rounded-s-2xl overflow-hidden"
     > 
       <div class="bg-[#071524] px-8 py-4 overflow-hidden rounded-t-2xl sm:rounded-none">
         <button @click="emit('close')" class="fixed right-6">
@@ -127,6 +129,7 @@ watch(priceMax, (newValue) => {
                       type="number"
                       class="local-inset-shadow"
                       step="0.01"
+                      placeholder="1"
                     />
                     <span>Q</span>
                   </div>
@@ -141,6 +144,7 @@ watch(priceMax, (newValue) => {
                       type="number"
                       class="local-inset-shadow"
                       step="0.01"
+                      placeholder="9999"
                     />
                     <span>Q</span>
                   </div>
@@ -153,68 +157,13 @@ watch(priceMax, (newValue) => {
           name="sale"
           v-model="filterStore.sale"
           onLabel="Solo ofertas"
-          offLabel="Todos"
+          offLabel="Mostrar todos"
           onIcon="pi pi-tag"
           offIcon="pi pi-box"
-          class="mx-auto w-40 my-4"
-          aria-label="Do you confirm"
+          class="mx-auto w-44 my-4 quepex"
+          aria-label="Mostrar solo ofertas"
         />
       </div> 
     </div>
   </VueFinalModal>
 </template>
-
-<style>
-.p-accordion-content {
-  background-color: #071524;
-  border-radius: 1rem;
-  margin: 0 1.5rem 0 1rem;
-  padding: 1.25rem 1.5rem;
-}
-
-.p-accordion  .p-accordion-header-link {
-  background-color: #0E2032;
-}
-
-.p-accordion .p-accordion-header .p-accordion-header-link{
-  background-color: #0E2032;
-}
-
-.p-accordion-tab {
-  border-bottom: none;
-}
-
-label {
-  color: #D0D9F6;
-}
-
-input[type="number"] {
-  background-color: #061321;
-  color: #A8B7EA;
-  padding: 0.625rem 1.25rem;
-  border-radius: 0.5rem;
-  border: none;
-  width: 100%;
-}
-
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
-}
-
-.local-money-input {
-  position: relative;
-}
-
-.local-money-input > input[type="number"] {
-  padding: 0.625rem 2.5rem;
-}
-
-.local-money-input > span {
-  position: absolute;
-  left: 0;
-  padding: 0.625rem 1rem;
-  color: #D0D9F6;
-}
-</style>
