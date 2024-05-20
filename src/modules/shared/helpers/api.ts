@@ -5,7 +5,7 @@ import { useToast } from "vue-toastification";
 const authStore = useAuthStore();
 const toast = useToast();
 
-export const apiUrl = 'http://192.168.1.5:3000';
+export const apiUrl = 'http://localhost:3000';
 
 export const apiRequest = async(path: string, params?: apiParams) => {
   return await fetch(`${apiUrl}/${path}`, {
