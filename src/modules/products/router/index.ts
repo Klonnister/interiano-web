@@ -6,6 +6,6 @@ export default [
   },
   {
     path: '',
-    redirect: { name: 'home' },
+    redirect: { name: 'products' },
   },
 ]
