@@ -14,6 +14,8 @@ export const useFilterStore = defineStore('filterStore', () => {
   const selectedTrademarks: Ref<number[]> = ref([]);
   const priceMin: Ref<number|null> = ref(null);
   const priceMax: Ref<number|null> = ref(null);
+  const orderBy: Ref<string> = ref('price');
+  const orderType: Ref<string> = ref('asc');
   const sale: Ref<Boolean> = ref(false);
 
 
@@ -21,5 +23,6 @@ export const useFilterStore = defineStore('filterStore', () => {
     trademarks, categories, search,
     selectedTrademarks, selectedCategories,
     priceMin, priceMax, sale,
+    orderBy, orderType,
   }
 })

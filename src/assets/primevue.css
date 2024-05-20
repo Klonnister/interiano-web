@@ -5,10 +5,9 @@
   outline: none;
 }
 
-.p-focus, .p-dropdown:enabled:focus {
-  box-shadow: 3px 5px 2px rgba(0,0,0, 0.35);
+/* .p-focus, .p-dropdown:enabled:focus {
   outline: none;
-}
+} */
 
 /* Placeholder color reset */
 .p-inputtext::placeholder, .p-placeholder, .p-dropdown::placeholder, 

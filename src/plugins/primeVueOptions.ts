@@ -7,8 +7,9 @@ export const primeVueOptions: PrimeVueConfiguration = {
     },
 
     dropdown: {
-      root: 'bg-[#061321] text-[#A8B7EA] w-full rounded-md border-0',
-      item: 'bg-[#061321] text-[#A8B7EA] text-[15px] py-[0.6rem] px-4',
+      root: 'bg-[#061321] text-[#A8B7EA] w-full rounded-md border-0 local-shadow',
+      wrapper: 'bg-[#061321] rounded-md',
+      item: 'bg-[#061321] text-[#A8B7EA] text-[15px] py-[0.6rem] px-4 hover:text-white',
     },
 
     button: {

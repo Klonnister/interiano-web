@@ -37,9 +37,9 @@ watch(priceMax, (newValue) => {
     @closed="emit('close')"
   > 
     <div
-      class="fixed bottom-0 sm:top-0 right-0 bg-[#0E2032] h-[88vh] w-full sm:w-[22rem] 2xl:w-[25rem] sm:min-h-screen rounded-t-2xl sm:rounded-none sm:rounded-s-2xl overflow-hidden"
+      class="fixed bottom-0 sm:top-0 right-0 bg-[#0E2032] h-[88vh] w-full sm:w-[22rem] 2xl:w-[25rem] sm:min-h-screen rounded-t-2xl sm:rounded-none sm:rounded-s-2xl overflow-y-scroll hide-scroll-bar"
     > 
-      <div class="bg-[#071524] px-8 py-4 overflow-hidden rounded-t-2xl sm:rounded-none">
+      <div class="fixed w-full sm:w-[22rem] 2xl:w-[25rem] bg-[#071524] px-8 py-4 overflow-hidden rounded-t-2xl sm:rounded-none sm:rounded-tl-2xl z-30">
         <button @click="emit('close')" class="fixed right-6">
           <Icon
             icon="iconamoon:close-bold"
@@ -49,9 +49,9 @@ watch(priceMax, (newValue) => {
         <p class="text-2xl text-center text-white sm:text-start">Filtros</p>
       </div>
       
-      <div class="flex flex-col px-4 pt-2 pb-4">
+      <div class="flex flex-col px-4 pt-[4.5rem] pb-[5rem]">
         <Accordion>
-          <AccordionTab class="bg-white">
+          <AccordionTab>
               <template #header>
                   <div class="w-full flex items-center gap-4">
                       <span>Categorias</span>
@@ -94,40 +94,15 @@ watch(priceMax, (newValue) => {
                   </Transition>
                 </div>
               </template>
-              <div
-                class="flex flex-col gap-4"
-              > 
-                <div class="flex flex-col gap-2">
-                  <label for="priceMin" class="text-[0.90rem]">Precio mínimo</label>
-                  <div class="local-money-input">
-                    <input
-                      id="priceMin"
-                      name="priceMin"
-                      v-model="filterStore.priceMin"
-                      type="number"
-                      class="local-inset-shadow"
-                      step="0.01"
-                      placeholder="1"
-                    />
-                    <span>Q</span>
-                  </div>
+              <PriceFilter />
+          </AccordionTab>
+          <AccordionTab>
+              <template #header>
+                <div class="w-full flex items-center gap-4">
+                  <span>Orden</span>
                 </div>
-                <div class="flex flex-col gap-2">
-                  <label for="priceMin" class="text-[0.90rem]">Precio máximo</label>
-                  <div class="local-money-input">
-                    <input
-                      id="priceMax"
-                      name="priceMax"
-                      v-model="filterStore.priceMax"
-                      type="number"
-                      class="local-inset-shadow"
-                      step="0.01"
-                      placeholder="9999"
-                    />
-                    <span>Q</span>
-                  </div>
-                </div>
-              </div>
+              </template>
+              <OrderFilter />
           </AccordionTab>
         </Accordion>
         <ToggleButton
@@ -142,6 +117,14 @@ watch(priceMax, (newValue) => {
           aria-label="Mostrar solo ofertas"
         />
       </div> 
+      <div class=" bg-[#0E2032] fixed bottom-0 py-5 flex justify-center gap-3 w-full sm:w-[22rem] 2xl:w-[25rem] sm:rounded-bl-2xl">
+        <button class="bg-[#722A2A] py-2.5 w-36 rounded-lg local-shadow uppercase text-sm font-medium">
+          Limpiar
+        </button>
+        <button class="bg-[#15395A] py-2 w-36 rounded-lg local-shadow uppercase text-sm font-medium">
+          Aplicar
+        </button>
+      </div>
     </div>
   </VueFinalModal>
 </template>

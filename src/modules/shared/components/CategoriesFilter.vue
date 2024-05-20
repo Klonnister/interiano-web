@@ -6,15 +6,9 @@ const filterStore = useFilterStore();
 
 <template>
   <div
-    class="max-h-64 flex flex-col gap-4 overflow-y-scroll hide-scroll-bar"
+    class="max-h-52 2xl:max-h-[21rem] flex flex-col gap-4 overflow-y-scroll hide-scroll-bar"
     v-if="filterStore.categories.length"
   >   
-    <CategoryCheckbox
-      v-for="category in filterStore.categories"
-      :key="category.id"
-      :name="category.name"
-      :id="category.id"
-    />
     <CategoryCheckbox
       v-for="category in filterStore.categories"
       :key="category.id"
