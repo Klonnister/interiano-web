@@ -2,6 +2,7 @@
 import { ref, watch } from 'vue';
 import { useFilterStore } from '../stores/filterStore';
 import InputSwitch from 'primevue/inputswitch';
+import { storeToRefs } from 'pinia';
 
 const props = defineProps<{
   id: number,
@@ -9,6 +10,7 @@ const props = defineProps<{
 }>()
 
 const filterStore = useFilterStore();
+const { selectedCategories } = storeToRefs(filterStore);
 
 const checked = ref(filterStore.selectedCategories.includes(props.id));
 
@@ -21,6 +23,10 @@ watch(checked, () => {
       1
     );
   }
+})
+
+watch(selectedCategories, (categories) => {
+  checked.value = categories.includes(props.id);
 })
 </script>
 

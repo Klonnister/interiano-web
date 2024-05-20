@@ -37,7 +37,7 @@ watch(priceMax, (newValue) => {
     @closed="emit('close')"
   > 
     <div
-      class="fixed bottom-0 sm:top-0 right-0 bg-[#0E2032] h-max w-full sm:w-[22rem] 2xl:w-[25rem] sm:min-h-screen rounded-t-2xl sm:rounded-none sm:rounded-s-2xl overflow-hidden"
+      class="fixed bottom-0 sm:top-0 right-0 bg-[#0E2032] h-[88vh] w-full sm:w-[22rem] 2xl:w-[25rem] sm:min-h-screen rounded-t-2xl sm:rounded-none sm:rounded-s-2xl overflow-hidden"
     > 
       <div class="bg-[#071524] px-8 py-4 overflow-hidden rounded-t-2xl sm:rounded-none">
         <button @click="emit('close')" class="fixed right-6">
@@ -58,62 +58,40 @@ watch(priceMax, (newValue) => {
                       <Transition name="fade">
                         <Icon
                           icon="mdi:check-bold"
-                          class="text-[#6AAD41] w-[1.1rem] h-[1.1rem] opacity-80"
+                          class="text-[#6AAD41] w-[1.1rem] h-[1.1rem] opacity-60"
                           v-if="filterStore.selectedCategories.length"
                         />
                       </Transition>
                   </div>
               </template>
-              <div
-                class="flex flex-col gap-4"
-                v-if="filterStore.categories.length"
-              >
-                <CategoryCheckbox
-                  v-for="category in filterStore.categories"
-                  :key="category.id"
-                  :name="category.name"
-                  :id="category.id"
-                />
-              </div>
-              <p v-else class="text-sm">
-                No hay categorías para mostrar
-              </p>
+              <CategoriesFilter />
           </AccordionTab>
           <AccordionTab>
               <template #header>
                 <div class="w-full flex items-center gap-4">
                   <span>Marcas</span>
-                  <Icon
-                    icon="mdi:check-bold"
-                    class="text-[#6AAD41]"
-                    v-if="filterStore.selectedTrademarks.length"
-                  />
+                  <Transition name="fade">
+                    <Icon
+                      icon="mdi:check-bold"
+                      class="text-[#6AAD41] w-[1.1rem] h-[1.1rem] opacity-60"
+                      v-if="filterStore.selectedTrademarks.length"
+                    />
+                  </Transition>
                 </div>
               </template>
-              <div
-                class="flex flex-col gap-4"
-                v-if="filterStore.trademarks.length"
-              >
-                <TrademarkCheckbox
-                  v-for="trademark in filterStore.trademarks"
-                  :key="trademark.id"
-                  :name="trademark.name"
-                  :id="trademark.id"
-                />
-              </div>
-              <p v-else class="text-sm">
-                No hay categorías para mostrar
-              </p>
+              <TrademarksFilter />
           </AccordionTab>
           <AccordionTab>
               <template #header>
                 <div class="w-full flex items-center gap-4">
                   <span>Por precio</span>
-                  <Icon
-                    icon="mdi:check-bold"
-                    class="text-[#6AAD41]"
-                    v-if="filterStore.priceMin || filterStore.priceMin"
-                  />
+                  <Transition name="fade">
+                    <Icon
+                      icon="mdi:check-bold"
+                      class="text-[#6AAD41] w-[1.1rem] h-[1.1rem] opacity-60"
+                      v-if="filterStore.priceMin || filterStore.priceMax"
+                    />
+                  </Transition>
                 </div>
               </template>
               <div

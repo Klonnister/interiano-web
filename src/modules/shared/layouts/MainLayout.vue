@@ -95,7 +95,7 @@ watch(showMenu, () => {
       v-else
     >
       <div class="h-screen flex items-center fixed z-40">
-        <aside class="flex flex-col gap-[5vh] 2xl:gap-12 p-5 h-max">
+        <aside class="flex flex-col gap-[5vh] 2xl:gap-12 p-5 ml-4 h-max">
           <RouterLink :to="'/'" class="flex items-center gap-3 2xl:gap-4 py-2 px-6 rounded-lg hover:bg-[#72838F]/15 transition-all ease-in-out duration-150 link-shadow hover:-translate-x-1">
             <img src="/user-template.webp" alt="" class="w-10 2xl:w-14">
             <span class="text-xl 2xl:text-2xl">User</span>
@@ -120,7 +120,7 @@ watch(showMenu, () => {
         </aside>
       </div>
 
-      <div class="py-14 2xl:pt-24 ps-72 pe-8 2xl:ps-[21rem] 2xl:pe-12 min-h-screen content-center">
+      <div class="py-14 2xl:pt-24 ps-72 pe-14 2xl:ps-[21rem] 2xl:pe-12 min-h-screen content-center">
         <router-view v-slot="{ Component }">
           <transition name="fade" mode="out-in">
             <component :is="Component" />
