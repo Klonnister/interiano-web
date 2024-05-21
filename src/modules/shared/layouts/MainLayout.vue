@@ -81,7 +81,7 @@ watch(showMenu, () => {
         >
       </aside>
 
-      <div class="mt-[6.5rem] mb-12 sm:mt-28">
+      <div class="pt-[6.5rem] pb-12 sm:pt-28">
         <router-view v-slot="{ Component }">
           <transition name="fade" mode="out-in">
             <component :is="Component" />
@@ -120,7 +120,7 @@ watch(showMenu, () => {
         </aside>
       </div>
 
-      <div class="py-14 2xl:pt-24 ps-72 pe-14 2xl:ps-[21rem] 2xl:pe-12 min-h-screen content-center">
+      <div class="py-14 2xl:pt-24 ps-72 pe-14 2xl:ps-[21rem] 2xl:pe-12 content-center">
         <router-view v-slot="{ Component }">
           <transition name="fade" mode="out-in">
             <component :is="Component" />
