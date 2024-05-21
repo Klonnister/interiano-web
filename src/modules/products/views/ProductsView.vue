@@ -3,7 +3,6 @@ import { ref, type Ref } from 'vue';
 import type { Product, ProductResponse } from '../../shared/types/product.interface';
 import { useFilterStore } from '@/modules/shared/stores/filterStore';
 import { apiRequest } from '@/modules/shared/helpers/api';
-import type { Trademark } from '@/modules/shared/types/trademark.interface';
 import type { Category } from '@/modules/shared/types/category.interface';
 
 const products: Ref<Product[]> = ref([]);
@@ -11,16 +10,16 @@ const products: Ref<Product[]> = ref([]);
 const filterStore = useFilterStore();
 
 const setViewInfo = async () => {
-
   // Products request
-  const apiProducts: ProductResponse = await apiRequest('products');
-  products.value = apiProducts.data;
+  const productsResponse: ProductResponse = await apiRequest('products');
+  products.value = productsResponse.data;
+  filterStore.trademarks = productsResponse.trademarks;
 
-  const trademarks: Trademark[] = await apiRequest('trademarks/products');
-  filterStore.trademarks = trademarks;
-
-  const categories: Category[] = await apiRequest('categories?raw=true');
-  filterStore.categories = categories;
+  // Categories request
+  if (!filterStore.categories.length) {
+    const categories: Category[] = await apiRequest('categories?raw=true');
+    filterStore.categories = categories;
+  }
 }
 
 setViewInfo();

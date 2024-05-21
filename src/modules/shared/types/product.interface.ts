@@ -1,3 +1,5 @@
+import type { Trademark } from "./trademark.interface";
+
 export interface Product {
   id: number;
   category_id: number;
@@ -26,6 +28,7 @@ export interface Product {
 
 export interface ProductResponse {
   data: Product[];
+  trademarks: Trademark[]
   meta: {
     total: number;
     lastPage: number;
