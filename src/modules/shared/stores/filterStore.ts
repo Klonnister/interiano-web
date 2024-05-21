@@ -18,11 +18,41 @@ export const useFilterStore = defineStore('filterStore', () => {
   const orderBy: Ref<string> = useStorage('orderBy', 'price');
   const orderType: Ref<string> = useStorage('orderType', 'asc');
   const sale: Ref<boolean> = useStorage('sale', false);
+  const onlyStock: Ref<boolean> = useStorage('onlyStock', false);
+
+
+  const clearFilters = () => {
+    search.value = '';
+    selectedCategories.value = [];
+    selectedTrademarks.value = [];
+    priceMin.value = null;
+    priceMax.value = null;
+    orderBy.value = 'price';
+    orderType.value = 'asc';
+    sale.value = false;
+    onlyStock.value = false;
+  }
+
+  const clearCategories = () => {
+    selectedCategories.value = [];
+  }
+  const clearTrademarks = () => {
+    selectedTrademarks.value = [];
+  }
+  const clearPrices = () => {
+    priceMin.value = null;
+    priceMax.value = null;
+  }
+  const resetOrder = () => {
+    orderBy.value = 'price';
+    orderType.value = 'asc';
+  }
 
   return {
-    trademarks, categories, search,
+    trademarks, categories, search, sale, onlyStock,
     selectedTrademarks, selectedCategories,
-    priceMin, priceMax, sale,
-    orderBy, orderType,
+    priceMin, priceMax, orderBy, orderType,
+    clearFilters, clearCategories, clearTrademarks,
+    clearPrices, resetOrder,
   }
 })

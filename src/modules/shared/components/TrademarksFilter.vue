@@ -6,9 +6,16 @@ const filterStore = useFilterStore();
 
 <template>
   <div
-    class="max-h-52 2xl:max-h-[21rem] flex flex-col gap-4 overflow-y-scroll hide-scroll-bar"
+    class="max-h-[16rem] 2xl:max-h-[21rem] flex flex-col gap-4 overflow-y-scroll hide-scroll-bar"
     v-if="filterStore.trademarks.length"
   >
+    <button
+      class="text-sm underline text-[#D0D9F6] -m-px"
+      v-if="filterStore.selectedTrademarks.length"
+      @click="filterStore.clearTrademarks"
+    >
+      Limpiar
+    </button>
     <TrademarkCheckbox
       v-for="trademark in filterStore.trademarks"
       :key="trademark.id"

@@ -37,10 +37,12 @@ watch(selectedCategories, (categories) => {
       :binary="true"
       :inputId="props.name"
       :name="props.name"
+      class="min-w-10"
     />
     <label
       :for="props.name"
-      class="ml-4 text-[0.9rem]"
+      class="ml-4 cursor-pointer"
+      :class="props.name.length > 25 ? 'text-[0.8rem] my-1 lg:my-0' : 'text-[0.9rem]'"
     >
       {{ props.name }}
     </label>

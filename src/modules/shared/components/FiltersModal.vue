@@ -4,8 +4,6 @@ import { Icon } from '@iconify/vue';
 import Accordion from 'primevue/accordion';
 import AccordionTab from 'primevue/accordiontab';
 import { useFilterStore } from '../stores/filterStore';
-import { watch } from 'vue';
-import { storeToRefs } from 'pinia';
 import ToggleButton from 'primevue/togglebutton';
 import { useWindowSize } from '@vueuse/core';
 
@@ -15,19 +13,6 @@ const emit = defineEmits<{
 
 const { width } = useWindowSize();
 const filterStore = useFilterStore();
-const { priceMin, priceMax } = storeToRefs(filterStore);
-
-watch(priceMin, (newValue) => {
-  if(newValue) {
-    priceMin.value = Number(newValue.toFixed(2));
-  }
-})
-
-watch(priceMax, (newValue) => {
-  if(newValue) {
-    priceMax.value = Number(newValue.toFixed(2));
-  }
-})
 </script>
 
 <template>
@@ -37,9 +22,10 @@ watch(priceMax, (newValue) => {
     @closed="emit('close')"
   > 
     <div
-      class="fixed bottom-0 sm:top-0 right-0 bg-[#0E2032] h-[88vh] w-full sm:w-[22rem] 2xl:w-[25rem] sm:min-h-screen rounded-t-2xl sm:rounded-none sm:rounded-s-2xl overflow-y-scroll hide-scroll-bar"
+      class="fixed bottom-0 sm:top-0 right-0 bg-[#0E2032] h-[88vh] w-full sm:w-[24rem] 2xl:w-[25rem] sm:min-h-screen rounded-t-2xl sm:rounded-none sm:rounded-s-2xl overflow-y-scroll hide-scroll-bar"
     > 
-      <div class="fixed w-full sm:w-[22rem] 2xl:w-[25rem] bg-[#071524] px-8 py-4 overflow-hidden rounded-t-2xl sm:rounded-none sm:rounded-tl-2xl z-30">
+      <!-- Modal title -->
+      <div class="fixed w-full sm:w-[24rem] 2xl:w-[25rem] bg-[#071524] px-8 py-4 overflow-hidden rounded-t-2xl sm:rounded-none sm:rounded-tl-2xl z-30">
         <button @click="emit('close')" class="fixed right-6">
           <Icon
             icon="iconamoon:close-bold"
@@ -48,23 +34,24 @@ watch(priceMax, (newValue) => {
         </button>
         <p class="text-2xl text-center text-white sm:text-start">Filtros</p>
       </div>
-      
-      <div class="flex flex-col px-4 pt-[4.5rem] pb-[5rem]">
+
+      <!-- Modal body -->
+      <div class="flex flex-col px-4 pt-[4.5rem] pb-[8rem]">
         <Accordion>
           <AccordionTab>
-              <template #header>
-                  <div class="w-full flex items-center gap-4">
-                      <span>Categorias</span>
-                      <Transition name="fade">
-                        <Icon
-                          icon="mdi:check-bold"
-                          class="text-[#6AAD41] w-[1.1rem] h-[1.1rem] opacity-60"
-                          v-if="filterStore.selectedCategories.length"
-                        />
-                      </Transition>
-                  </div>
-              </template>
-              <CategoriesFilter />
+            <template #header>
+                <div class="w-full flex items-center gap-4">
+                    <span>Categorias</span>
+                    <Transition name="fade">
+                      <Icon
+                        icon="mdi:check-bold"
+                        class="text-[#6AAD41] w-[1.1rem] h-[1.1rem] opacity-60"
+                        v-if="filterStore.selectedCategories.length"
+                      />
+                    </Transition>
+                </div>
+            </template>
+            <CategoriesFilter />
           </AccordionTab>
           <AccordionTab>
               <template #header>
@@ -100,6 +87,16 @@ watch(priceMax, (newValue) => {
               <template #header>
                 <div class="w-full flex items-center gap-4">
                   <span>Orden</span>
+                  <Transition name="fade">
+                    <Icon
+                      icon="mdi:check-bold"
+                      class="text-[#6AAD41] w-[1.1rem] h-[1.1rem] opacity-60"
+                      v-if="
+                        filterStore.orderBy !== 'price' || 
+                        filterStore.orderType !== 'asc'
+                      "
+                    />
+                  </Transition>
                 </div>
               </template>
               <OrderFilter />
@@ -113,18 +110,23 @@ watch(priceMax, (newValue) => {
           offLabel="Mostrar todos"
           onIcon="pi pi-tag"
           offIcon="pi pi-box"
-          class="mx-auto w-44 my-4 quepex"
+          class="mx-auto w-44 mt-4 mb-4 quepex"
           aria-label="Mostrar solo ofertas"
         />
+        <ToggleButton
+          input-id="onlyStock"
+          name="onlyStock"
+          v-model="filterStore.onlyStock"
+          onLabel="Ocultar sin existencias"
+          offLabel="Mostrar sin existencias"
+          onIcon="pi pi-eye-slash"
+          offIcon="pi pi-eye"
+          class="mx-auto w-60"
+          aria-label="Mostrar sin existencias"
+        />
       </div> 
-      <div class=" bg-[#0E2032] fixed bottom-0 py-5 flex justify-center gap-3 w-full sm:w-[22rem] 2xl:w-[25rem] sm:rounded-bl-2xl">
-        <button class="bg-[#722A2A] py-2.5 w-36 rounded-lg local-shadow uppercase text-sm font-medium">
-          Limpiar
-        </button>
-        <button class="bg-[#15395A] py-2 w-36 rounded-lg local-shadow uppercase text-sm font-medium">
-          Aplicar
-        </button>
-      </div>
+      
+      <FiltersButtons />
     </div>
   </VueFinalModal>
 </template>

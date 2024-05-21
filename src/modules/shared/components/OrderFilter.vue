@@ -7,8 +7,8 @@ import { storeToRefs } from 'pinia';
 const filterStore = useFilterStore();
 const { orderBy } = storeToRefs(filterStore);
 
-watch(orderBy, () => {
-  if (orderBy.value === 'price') filterStore.orderType = 'asc'
+watch(orderBy, (newOrderBy) => {
+  if (orderBy.value === newOrderBy) filterStore.orderType = 'asc'
 })
 
 const columns = ref([
@@ -41,7 +41,17 @@ const otherOrder = ref([
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col gap-4 ">
+    <button
+      class="text-sm underline text-[#D0D9F6] -m-px"
+      v-if="
+        filterStore.orderBy !== 'price' || 
+        filterStore.orderType !== 'asc'
+      "
+      @click="filterStore.resetOrder"
+    >
+      Reestablecer
+    </button>
     <div class="flex flex-col gap-2 mb-6">
       <label for="priceMin" class="text-[0.90rem]">Ordenar por</label>
       <Dropdown

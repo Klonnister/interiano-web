@@ -2,6 +2,7 @@
 import { ref, watch } from 'vue';
 import InputSwitch from 'primevue/inputswitch';
 import { useFilterStore } from '../stores/filterStore';
+import { storeToRefs } from 'pinia';
 
 const props = defineProps<{
   id: number,
@@ -9,6 +10,7 @@ const props = defineProps<{
 }>()
 
 const filterStore = useFilterStore();
+const { selectedTrademarks } = storeToRefs(filterStore)
 
 const checked = ref(filterStore.selectedTrademarks.includes(props.id));
 
@@ -22,6 +24,10 @@ watch(checked, () => {
     );
   }
 })
+
+watch(selectedTrademarks, (selectedTrademarks) => {
+  checked.value = selectedTrademarks.includes(props.id);
+})
 </script>
 
 <template>
@@ -31,10 +37,12 @@ watch(checked, () => {
       :binary="true"
       :inputId="props.name"
       :name="props.name"
+      class="min-w-10"
     />
     <label
       :for="props.name"
-      class="ml-4 text-[0.9rem]"
+      class="ml-4 cursor-pointer"
+      :class="props.name.length > 25 ? 'text-[0.8rem] my-1 lg:my-0' : 'text-[0.9rem]'"
     >
       {{ props.name }}
     </label>
