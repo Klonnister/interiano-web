@@ -1,6 +1,5 @@
 import router from '@/router'
 import { defineStore } from 'pinia'
-import { useToast } from 'vue-toastification'
 import { ref } from 'vue'
 import { validateToken } from '@/modules/shared/helpers/auth'
 import { invalidateToken } from '../../shared/helpers/auth';
