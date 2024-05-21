@@ -18,7 +18,7 @@ const catalogStore = useCatalogStore();
 const { openProduct } = storeToRefs(cardsStore)
 const { catalog } = storeToRefs(catalogStore);
 
-const showMenu = ref(false);
+const showMenu = ref(cardsStore.openProduct === props.product.id);
 
 const openMenu = () => {
   openProduct.value = props.product.id;
