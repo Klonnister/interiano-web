@@ -31,7 +31,7 @@ async function submit() {
     saveUserInfo(response)
     authStore.setSession();
     toast.success(`Bienvenido(a) ${response.username}`)
-    router.push({ name: 'home' })
+    router.push({ name: 'products' })
   }
 }
 
@@ -56,6 +56,7 @@ async function submit() {
           id="username"
           required
           v-model="form.username"
+          autocomplete="on"
         />
       </div>
       <div class="block group">
@@ -69,6 +70,7 @@ async function submit() {
           id="password"
           required
           v-model="form.password"
+          autocomplete="off"
         />
       </div>
       <button class="local-shadow bg-[#15395A] py-2 rounded-sm" type="submit" >

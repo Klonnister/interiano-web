@@ -27,7 +27,7 @@ async function submit() {
     saveUserInfo(response)
     authStore.setSession();
     toast.success(`Bienvenido(a) ${response.username}`)
-    router.push({ name: 'home' })
+    router.push({ name: 'products' })
   }
 }
 </script>
@@ -52,6 +52,7 @@ async function submit() {
           id="createName"
           required
           v-model="form.username"
+          autocomplete="on"
         />
       </div>
       <div class="block group">
@@ -68,6 +69,7 @@ async function submit() {
           pattern="^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$"
           title="Debe contener al menos 1 letra mayúscula, 1 carácter especial y un número"
           v-model="form.password"
+          autocomplete="off"
         />
       </div>
       <div class="block group">
@@ -84,6 +86,7 @@ async function submit() {
           pattern="^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$"
           title="Debe contener al menos 1 letra mayúscula, 1 carácter especial y un número"
           v-model="form.passwordconfirm"
+          autocomplete="off"
         />
       </div>
       <button class="local-shadow bg-[#15395A] py-2 rounded-sm" type="submit">Ingresar</button>
