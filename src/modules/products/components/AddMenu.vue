@@ -33,7 +33,7 @@ const { width } = useWindowSize();
         <RouterLink
           class="flex gap-3 items-center justify-center sm:justify-start py-6 px-4 sm:px- hover:translate-x-[2px] transition-all duration-300 ease-in-out max-w-80 w-full mx-auto"
           @click="emit('close')"
-          :to="{ name: 'home' }"
+          :to="{ name: 'dev' }"
         >
           <Icon
             icon="mdi:add"
