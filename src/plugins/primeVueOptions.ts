@@ -19,5 +19,8 @@ export const primeVueOptions: PrimeVueConfiguration = {
     dialog: {
       root: 'bg-[#061321] mx-4',
     },
+    paginator: {
+      root: 'bg-[#0E1D2C] local-shadow',
+    }
   }
 }
