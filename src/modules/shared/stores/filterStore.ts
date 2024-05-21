@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { ref, type Ref } from "vue";
 import type { Trademark } from "../types/trademark.interface";
 import type { Category } from "../types/category.interface";
+import { useStorage } from "@vueuse/core";
 
 export const useFilterStore = defineStore('filterStore', () => {
   // Store applicable filters
@@ -9,15 +10,14 @@ export const useFilterStore = defineStore('filterStore', () => {
   const categories: Ref<Category[]> = ref([]);
   
   // Filters to apply
-  const search: Ref<string> = ref('');
-  const selectedCategories: Ref<number[]> = ref([]);
-  const selectedTrademarks: Ref<number[]> = ref([]);
-  const priceMin: Ref<number|null> = ref(null);
-  const priceMax: Ref<number|null> = ref(null);
-  const orderBy: Ref<string> = ref('price');
-  const orderType: Ref<string> = ref('asc');
-  const sale: Ref<Boolean> = ref(false);
-
+  const search: Ref<string> = useStorage('search', '');
+  const selectedCategories: Ref<number[]> = useStorage('selectedCategories', []);
+  const selectedTrademarks: Ref<number[]> = useStorage('selectedTrademarks', []);
+  const priceMin: Ref<number|null> = useStorage('priceMin', null);
+  const priceMax: Ref<number|null> = useStorage('priceMax', null);
+  const orderBy: Ref<string> = useStorage('orderBy', 'price');
+  const orderType: Ref<string> = useStorage('orderType', 'asc');
+  const sale: Ref<boolean> = useStorage('sale', false);
 
   return {
     trademarks, categories, search,
