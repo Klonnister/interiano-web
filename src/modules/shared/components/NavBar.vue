@@ -33,7 +33,7 @@ const layoutStore = useLayoutStore();
           to="/"
         >
           <img
-            src="/user-template.webp"
+            src="/other/user-template.webp"
             alt=""
             class="w-20 h-20 object-contain rounded-full"
           >
