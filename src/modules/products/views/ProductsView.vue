@@ -1,20 +1,37 @@
 <script setup lang="ts">
-import { ref, type Ref } from 'vue';
-import type { Product, ProductResponse } from '../../shared/types/product.interface';
+import { reactive, ref, watch, type Ref } from 'vue';
+import type { Meta, MetaInfo, Product, ProductResponse } from '../../shared/types/product.interface';
 import { useFilterStore } from '@/modules/shared/stores/filterStore';
 import { apiRequest } from '@/modules/shared/helpers/api';
 import type { Category } from '@/modules/shared/types/category.interface';
-import Paginator from 'primevue/paginator';
+import Paginator, { type PageState } from 'primevue/paginator';
+import { storeToRefs } from 'pinia';
 
-const products: Ref<Product[]> = ref([]);
 
 const filterStore = useFilterStore();
+const { applyFilters } = storeToRefs(filterStore);
+const products: Ref<Product[]> = ref([]);
+const metaInfo: MetaInfo = reactive({
+  total: undefined,
+  perPage: undefined,
+  lastPage: undefined,
+})
 
-const setViewInfo = async () => {
+const updatePages = (pagesInfo: Meta) => {
+  metaInfo.total = pagesInfo.total;
+  metaInfo.perPage = pagesInfo.perPage;
+  metaInfo.lastPage = pagesInfo.lastPage;
+  filterStore.page = pagesInfo.currentPage;
+}
+
+const getProducts = async () => {
   // Products request
-  const productsResponse: ProductResponse = await apiRequest('products');
+  const queries = filterStore.getQueries();
+  const productsResponse: ProductResponse = await apiRequest(`products${queries}`);
   products.value = productsResponse.data;
-  filterStore.trademarks = productsResponse.trademarks;
+  filterStore.updateTrademarks(productsResponse.trademarks);
+  updatePages(productsResponse.meta);
+  applyFilters.value = false;
 
   // Categories request
   if (!filterStore.categories.length) {
@@ -22,8 +39,19 @@ const setViewInfo = async () => {
     filterStore.categories = categories;
   }
 }
+getProducts();
 
-setViewInfo();
+const paginate = (pageState: PageState) => {
+  const selectedPage = pageState.page + 1;
+  if (selectedPage !== filterStore.page) {
+    filterStore.page = selectedPage;
+    getProducts();
+  }
+}
+
+watch(applyFilters, (apply) => {
+  if (apply) getProducts();
+})
 </script>
 
 <template>
@@ -35,8 +63,9 @@ setViewInfo();
     />
 
     <div class="w-full min-h-[40vh] lg:min-h-[65vh]">
+      <Transition />
       <div v-if="products.length" class="w-full">
-        <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-x-5 gap-y-8 sm:gap-8 lg:gap-10 2xl:gap-14 min-h-96">
+        <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-x-5 gap-y-8 sm:gap-8 lg:gap-10 2xl:gap-14 min-h-[40vh] lg:min-h-[65vh]">
           <ProductCard
             v-for="product in products"
             :product="product"
@@ -44,14 +73,16 @@ setViewInfo();
           />
         </div>
         <Paginator
+          v-if="metaInfo.total && metaInfo.lastPage"
           :template="{
               '640px': 'FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink',
               default: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink'
           }"
           current-page-report-template="({currentPage} de {totalPages})"
-          :rows="12"
-          :totalRecords="60"
+          :rows="metaInfo.perPage"
+          :totalRecords="metaInfo.total"
           class="w-max mx-auto mt-10"
+          @page="paginate"
         />
       </div>
 

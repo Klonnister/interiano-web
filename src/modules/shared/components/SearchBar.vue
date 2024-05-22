@@ -9,13 +9,15 @@ const props = defineProps<{
 
 const filterStore = useFilterStore();
 
-const submit = (event: Event) => {
+const applyFilter = (event: Event) => {
   event.preventDefault();
+  filterStore.page = 1;
+  filterStore.applyFilters = true;
 }
 </script>
 
 <template>
-  <form @submit="submit">
+  <form @submit="applyFilter">
     <div class="w-full flex h-9 local-shadow rounded-lg md:min-w-96 lg:min-w-64 xl:min-w-96 hover:-translate-y-[1px] searchbar-transition">
       <InputText
         type="text"
@@ -27,7 +29,7 @@ const submit = (event: Event) => {
       <div class="w-1 bg-[#D0D9F6]"></div>
       <button
         class="bg-[#15395A] px-2 rounded-e-lg"
-        @click="submit"
+        @click="applyFilter"
       >
         <Icon
           icon="ic:baseline-search"
