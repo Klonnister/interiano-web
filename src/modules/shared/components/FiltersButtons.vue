@@ -1,20 +1,16 @@
 <script setup lang="ts">
 import { useFilterStore } from '../stores/filterStore';
-import { useLayoutStore } from '../stores/layoutStore';
 
 const filterStore = useFilterStore();
-const layoutStore = useLayoutStore();
 
 const clearFilters = () => {
   filterStore.clearFilters();
   filterStore.applyFilters = true;
-  layoutStore.resetLayout();
 }
 
 const applyFilters = () => {
   filterStore.page = 1;
   filterStore.applyFilters = true;
-  layoutStore.resetLayout();
 }
 </script>
 

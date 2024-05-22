@@ -6,9 +6,15 @@ import { apiRequest } from '@/modules/shared/helpers/api';
 import type { Category } from '@/modules/shared/types/category.interface';
 import Paginator, { type PageState } from 'primevue/paginator';
 import { storeToRefs } from 'pinia';
+import { useCardsStore } from '@/modules/shared/stores/cardsStore';
+import { useLayoutStore } from '@/modules/shared/stores/layoutStore';
 
-
+// Stores to use
+const layoutStore = useLayoutStore();
+const cardsStore = useCardsStore();
 const filterStore = useFilterStore();
+
+// Page Information
 const { applyFilters } = storeToRefs(filterStore);
 const products: Ref<Product[]> = ref([]);
 const metaInfo: MetaInfo = reactive({
@@ -16,6 +22,7 @@ const metaInfo: MetaInfo = reactive({
   perPage: undefined,
   lastPage: undefined,
 })
+
 
 const updatePages = (pagesInfo: Meta) => {
   metaInfo.total = pagesInfo.total;
@@ -26,6 +33,8 @@ const updatePages = (pagesInfo: Meta) => {
 
 const getProducts = async () => {
   // Products request
+  layoutStore.resetLayout();
+  cardsStore.resetCards();
   const queries = filterStore.getQueries();
   const productsResponse: ProductResponse = await apiRequest(`products${queries}`);
   products.value = productsResponse.data;
