@@ -2,7 +2,10 @@
 import { Icon } from '@iconify/vue';
 import { useLayoutStore } from '../stores/layoutStore';
 import sidebarLinks from '../helpers/sidebarLinks';
+import { apiUrl } from '../helpers/api';
 
+const username = localStorage.getItem('userName');
+const userImage = localStorage.getItem('userImage');
 const links = sidebarLinks;
 const layoutStore = useLayoutStore();
 </script>
@@ -33,11 +36,14 @@ const layoutStore = useLayoutStore();
           to="/"
         >
           <img
-            src="/other/user-template.webp"
+            :src="userImage
+              ? `${apiUrl}${userImage}`
+              : '/other/user-template.webp'
+            "
             alt=""
-            class="w-20 h-20 object-contain rounded-full"
+            class="w-20 h-20 object-cover rounded-full"
           >
-          <p class="text-xl font-semibold">Patty</p>
+          <p class="text-xl font-semibold">{{ username }}</p>
         </RouterLink>
 
         <nav class="flex flex-col local-link-borders overflow-y-scroll hide-scroll-bar">

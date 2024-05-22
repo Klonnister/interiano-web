@@ -9,11 +9,15 @@ import AddMenu from '@/modules/products/components/AddMenu.vue';
 import { storeToRefs } from 'pinia';
 import { watch } from 'vue';
 import FiltersModal from '../components/FiltersModal.vue';
+import { apiUrl } from '../helpers/api';
 
-const links = sidebarLinks;
-const { width } = useWindowSize();
 const layoutStore = useLayoutStore();
+const { width } = useWindowSize();
 const { showMenu, showProductsMenu, showFilters } = storeToRefs(layoutStore);
+const links = sidebarLinks;
+
+const username = localStorage.getItem('userName')
+const userImage = localStorage.getItem('userImage')
 
 const addProductModal = useModal({
   component: AddMenu,
@@ -89,8 +93,15 @@ watch(showMenu, () => {
       <div class="h-screen flex items-center fixed z-40">
         <aside class="flex flex-col gap-[5vh] 2xl:gap-12 p-5 ml-4 h-max">
           <RouterLink :to="'/'" class="flex items-center gap-3 2xl:gap-4 py-2 px-6 rounded-lg hover:bg-[#72838F]/15 transition-all ease-in-out duration-150 link-shadow hover:-translate-x-1">
-            <img src="/other/user-template.webp" alt="" class="w-10 2xl:w-14">
-            <span class="text-xl 2xl:text-2xl">User</span>
+            <img
+              :src="userImage
+                ? `${apiUrl}${userImage}`
+                : '/other/user-template.webp'
+              "
+              alt=""
+              class="w-10 h-10 2xl:w-14 rounded-full object-cover"
+            >
+            <span class="text-xl 2xl:text-2xl">{{ username }}</span>
           </RouterLink>
   
           <div class="flex flex-col gap-[2vh] 2xl:gap-6">
