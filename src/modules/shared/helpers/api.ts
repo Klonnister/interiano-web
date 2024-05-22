@@ -46,8 +46,8 @@ export const apiRequest = async(path: string, params?: apiParams) => {
     })
 }
 
-export const apiAuthRequest = (path: string, params: apiParams) => {
-  return fetch(`${apiUrl}/${path}`, {
+export const apiAuthRequest = async(path: string, params: apiParams) => {
+  return await fetch(`${apiUrl}/${path}`, {
     method: params.method || 'GET',
     mode: 'cors',
     cache: 'no-cache',
@@ -79,7 +79,6 @@ export const apiAuthRequest = (path: string, params: apiParams) => {
           return;
       }
     })
-
 }
 
 interface apiParams {
