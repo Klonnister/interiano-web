@@ -86,11 +86,14 @@ export const useFilterStore = defineStore('filterStore', () => {
     if (priceMax.value) 
       queryParamsArr.push(`priceMax=${priceMax.value}`)
 
-    if (orderBy.value !== 'price') 
-      queryParamsArr.push(`orderBy=${orderBy.value}`)
+    if(orderBy.value !== 'price' || orderType.value !== 'asc')
+      queryParamsArr.push(`order=${orderBy.value},${orderType.value}`)
 
-    if (orderType.value !== 'asc') 
-      queryParamsArr.push(`orderType=${orderType.value}`)
+    // if (orderBy.value !== 'price') 
+    //   queryParamsArr.push(`orderBy=${orderBy.value}`)
+
+    // if (orderType.value !== 'asc') 
+    //   queryParamsArr.push(`orderType=${orderType.value}`)
 
     if (sale.value) 
       queryParamsArr.push('sale=true')

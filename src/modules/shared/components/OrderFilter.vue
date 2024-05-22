@@ -15,6 +15,7 @@ const columns = ref([
     { name: 'Precio', value: 'price' },
     { name: 'Nombre', value: 'name' },
     { name: 'Marca', value: 'trademark' },
+    { name: 'Categoría', value: 'category' },
 ]);
 
 const priceOrder = ref([
