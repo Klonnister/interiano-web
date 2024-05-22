@@ -27,12 +27,6 @@ const addProductModal = useModal({
 
 const filtersModal = useModal({
   component: FiltersModal,
-  attrs: {
-    onClose: () => {
-      layoutStore.resetLayout();
-      filtersModal.close()
-    }
-  }
 })
 
 watch(showProductsMenu, () => {
@@ -41,14 +35,12 @@ watch(showProductsMenu, () => {
 
 watch(showFilters, () => {
   if(showFilters.value) filtersModal.open()
+  if(!showFilters.value) filtersModal.close()
 })
 
 watch(showMenu, () => {
-  if(showMenu.value) {
-    document.body.classList.add("overflow-y-hidden")
-  } else {
-    document.body.classList.remove("overflow-y-hidden")
-  }
+  if(showMenu.value) document.body.classList.add("overflow-y-hidden")
+  if(!showMenu.value) document.body.classList.remove("overflow-y-hidden")
 })
 
 

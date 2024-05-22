@@ -6,27 +6,25 @@ import AccordionTab from 'primevue/accordiontab';
 import { useFilterStore } from '../stores/filterStore';
 import ToggleButton from 'primevue/togglebutton';
 import { useWindowSize } from '@vueuse/core';
-
-const emit = defineEmits<{
-  (e: 'close'): void
-}>()
+import { useLayoutStore } from '../stores/layoutStore';
 
 const { width } = useWindowSize();
 const filterStore = useFilterStore();
+const layoutStore = useLayoutStore();
 </script>
 
 <template>
   <VueFinalModal
     overlay-transition="vfm-fade"
     :content-transition="width < 640 ? 'vfm-fade' : 'vfm-slide-right'"
-    @closed="emit('close')"
+    @closed="layoutStore.resetLayout"
   > 
     <div
       class="fixed bottom-0 sm:top-0 right-0 bg-[#0E2032] h-[88vh] w-full sm:w-[24rem] 2xl:w-[25rem] sm:min-h-screen rounded-t-2xl sm:rounded-none sm:rounded-s-2xl overflow-y-scroll hide-scroll-bar"
     > 
       <!-- Modal title -->
       <div class="fixed w-full sm:w-[24rem] 2xl:w-[25rem] bg-[#071524] px-8 py-4 overflow-hidden rounded-t-2xl sm:rounded-none sm:rounded-tl-2xl z-30">
-        <button @click="emit('close')" class="fixed right-6">
+        <button @click="layoutStore.resetLayout" class="fixed right-6">
           <Icon
             icon="iconamoon:close-bold"
             class="w-7 h-7 text-white"
