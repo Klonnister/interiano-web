@@ -63,7 +63,12 @@ const deleteFromCatalog = () => {
   <div
     class="h-[12rem] | sm:h-[13rem] | xl:h-[14rem] 2xl:h-[16rem] bg-white w-full relative rounded-xl overflow-hidden pt-4 px-4 pb-2 mx-auto select-none cursor-pointer hover:scale-[101%] custom-shadow transition-all duration-[.4s] ease-in-out">
     <div class="h-[78%] flex items-center justify-center">
-      <img :src="`${apiUrl}${props.product.image}`" alt="" class="h-full w-full object-contain">
+      <img
+        :src="`${apiUrl}${props.product.image}`"
+        alt=""
+        class="h-full w-full object-contain"
+        :class="{ 'grayscale': !props.product.stock }"
+      >
     </div>
 
     <!-- Product title -->
@@ -101,6 +106,9 @@ const deleteFromCatalog = () => {
     <Transition name="fade">
       <div v-if="showMenu" class="absolute top-0 left-0 h-full w-full z-20">
         <div class="absolute bottom-0 left-0 w-full h-full z-20 bg-black opacity-40" @click="closeMenu"></div>
+        <p class="absolute top-1.5 left-2 text-[#c5cce3] text-sm sm:text-base z-30 mx-auto">
+          {{ props.product.trademark.name }}
+        </p>
 
         <div
           class="absolute inset-0 w-32 sm:w-36 h-max flex flex-wrap justify-center items-center gap-2 sm:gap-2.5 mx-auto my-auto">
