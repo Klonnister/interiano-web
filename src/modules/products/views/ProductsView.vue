@@ -68,7 +68,7 @@ watch(applyFilters, (apply) => {
     <CardsViewHeader
       title="productos"
       :filters-button="true"
-      add-button-type="button"
+      :modal-button="true"
     />
 
     <div class="w-full min-h-[40vh] lg:min-h-[65vh]">
