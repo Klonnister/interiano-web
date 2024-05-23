@@ -108,7 +108,7 @@ const deleteFromCatalog = () => {
         <div class="absolute bottom-0 left-0 w-full h-full z-20 bg-black opacity-40" @click="closeMenu"></div>
 
         <!-- Trademark name -->
-        <p class="absolute top-1.5 left-2 text-[#d8dee8] text-sm sm:text-base z-30 mx-auto">
+        <p class="absolute top-1.5 left-2 text-[#d8dee8] text-sm sm:text-base z-30 mx-auto" @click="closeMenu">
           {{ props.product.trademark.name }}
         </p>
 
