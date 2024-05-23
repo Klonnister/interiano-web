@@ -47,7 +47,7 @@ watch(showMenu, (newValue) => {
 </script>
 
 <template>
-  <div class="flex flex-col lg:flex-row lg:py-12 2xl:py-16 lg:gap-8 xl:gap-12 2xl:gap-20 lg:justify-center">
+  <div class="flex flex-col lg:flex-row lg:py-12 2xl:py-16 lg:gap-8 xl:gap-12 2xl:gap-20 lg:justify-center lg:px-4">
     <aside>
       <div
         class="w-full pt-6 pb-6 mx-auto fixed top-0 left-0 right-0 flex items-center justify-between px-5 bg-[#0E1D2C] z-40 lg:hidden"
@@ -67,7 +67,7 @@ watch(showMenu, (newValue) => {
         <NavBar />
       </div>
 
-      <div class="hidden lg:flex flex-col justify-center gap-[5vh] 2xl:gap-12 p-5 ps-0 sticky top-14 py-8 lg:h-[82vh] 2xl:h-max -ms-4 xl:-ms-6 2xl:-ms-8">
+      <div class="hidden lg:flex flex-col justify-center gap-[5vh] 2xl:gap-12 p-5 ps-0 sticky top-14 py-8 lg:h-[82vh] 2xl:h-max 2xl:-ms-8">
         <RouterLink :to="'/'" class="flex items-center gap-3 2xl:gap-4 py-2 px-6 2xl:py-3 2xl:px-8 rounded-lg hover:bg-[#72838F]/15 transition-all ease-in-out duration-150 link-shadow hover:-translate-x-1">
           <img
             :src="userImage
@@ -99,7 +99,7 @@ watch(showMenu, (newValue) => {
       </div>
     </aside>
 
-    <div class="pt-[6.5rem] pb-12 sm:pt-28 lg:p-0 content-center">
+    <div class="pt-[6.5rem] pb-12 sm:pt-28 lg:p-0 lg:w-[45rem] xl:w-[58rem] 2xl:min-w-[70rem]">
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
           <component :is="Component" />

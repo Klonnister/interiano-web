@@ -13,6 +13,7 @@ import { useLayoutStore } from '@/modules/shared/stores/layoutStore';
 const layoutStore = useLayoutStore();
 const cardsStore = useCardsStore();
 const filterStore = useFilterStore();
+const loading = ref(true);
 
 // Page Information
 const { applyFilters } = storeToRefs(filterStore);
@@ -33,6 +34,7 @@ const updatePages = (pagesInfo: Meta) => {
 
 const getProducts = async () => {
   // Products request
+  loading.value = true;
   layoutStore.resetLayout();
   cardsStore.resetCards();
   const queries = filterStore.getQueries();
@@ -47,6 +49,7 @@ const getProducts = async () => {
     const categories: Category[] = await apiRequest('categories?raw=true');
     filterStore.categories = categories;
   }
+  loading.value = false;
 }
 getProducts();
 
@@ -71,33 +74,38 @@ watch(applyFilters, (apply) => {
       :modal-button="true"
     />
 
-    <div class="w-full min-h-[40vh] lg:min-h-[65vh]">
-      <Transition />
-      <div v-if="products.length" class="w-full">
-        <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-x-5 gap-y-8 sm:gap-8 lg:gap-10 2xl:gap-14 min-h-[40vh] lg:min-h-[65vh]">
-          <ProductCard
-            v-for="product in products"
-            :product="product"
-            :key="product.id"
+    <div class="w-full min-h-[40vh] lg:min-h-[5vh]">
+      <Transition name="fade" mode="out-in">
+        <div v-if="products.length && !loading" class="w-full">
+          <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-x-5 gap-y-8 sm:gap-8 lg:gap-10 2xl:gap-14 min-h-[40vh] lg:min-h-[55vh]">
+            <ProductCard
+              v-for="product in products"
+              :product="product"
+              :key="product.id"
+            />
+          </div>
+          <Paginator
+            v-if="metaInfo.total && metaInfo.lastPage"
+            :template="{
+                '640px': 'FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink',
+                default: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink'
+            }"
+            current-page-report-template="({currentPage} de {totalPages})"
+            :rows="metaInfo.perPage"
+            :totalRecords="metaInfo.total"
+            class="w-max mx-auto mt-10"
+            @page="paginate"
           />
         </div>
-        <Paginator
-          v-if="metaInfo.total && metaInfo.lastPage"
-          :template="{
-              '640px': 'FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink',
-              default: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink'
-          }"
-          current-page-report-template="({currentPage} de {totalPages})"
-          :rows="metaInfo.perPage"
-          :totalRecords="metaInfo.total"
-          class="w-max mx-auto mt-10"
-          @page="paginate"
-        />
-      </div>
 
-      <div v-else class="min-h-[40vh] lg:min-h-[65vh] flex justify-center items-center w-full">
-        <p class="lg:text-xl 2xl:text-2xl opacity-70">No hay productos para mostrar</p>
-      </div>
+        <div v-else-if="loading">
+          <ProductsSkeleton />
+        </div>
+  
+        <div v-else class="min-h-[40vh] lg:min-h-[65vh] flex justify-center items-center w-full">
+          <p class="lg:text-xl 2xl:text-2xl opacity-70">No hay productos para mostrar</p>
+        </div>
+      </Transition>
     </div>
   </div>
 </template>
