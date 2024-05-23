@@ -116,7 +116,7 @@ const deleteFromCatalog = () => {
         <div
           class="absolute inset-0 w-32 sm:w-36 h-max flex flex-wrap justify-center items-center gap-2 sm:gap-2.5 mx-auto my-auto">
 
-          <RouterLink :to="{ name: 'dev' }" class="z-30 rounded-md">
+          <RouterLink :to="{ name: 'product-id', params: { id: props.product.id } }" class="z-30 rounded-md">
             <CardButtonBase background="bg-[#15395A]" icon="ri:edit-2-fill" />
           </RouterLink>
 
