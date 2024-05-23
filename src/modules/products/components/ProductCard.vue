@@ -3,9 +3,9 @@ import { useCardsStore } from '@/modules/shared/stores/cardsStore';
 import type { Product } from '@/modules/shared/types/product.interface';
 import { storeToRefs } from 'pinia';
 import { ref, watch } from 'vue';
-import { useCatalogStore } from '../stores/catalogStore';
+import { useCatalogStore } from '../../shared/stores/catalogStore';
 import { useToast } from 'vue-toastification';
-import { apiUrl } from '../helpers/api';
+import { apiUrl } from '../../shared/helpers/api';
 
 const props = defineProps<{
   product: Product,
@@ -61,7 +61,7 @@ const deleteFromCatalog = () => {
 
 <template>
   <div
-    class="h-[12rem] | sm:h-[13rem] | xl:h-[14rem] 2xl:h-[16rem] bg-white w-full relative rounded-xl overflow-hidden pt-4 px-4 pb-2 mx-auto select-none cursor-pointer hover:scale-[101%] custom-shadow transition-all duration-[.4s] ease-in-out">
+    class="h-[12rem] | sm:h-[13rem] | xl:h-[14rem] 2xl:h-[16rem] bg-white w-full relative rounded-xl overflow-hidden pt-4 px-4 pb-2 mx-auto select-none cursor-pointer hover:scale-[102%] custom-shadow transition-all duration-[.4s] ease-in-out">
     <div class="h-[78%] flex items-center justify-center">
       <img
         :src="`${apiUrl}${props.product.image}`"
@@ -94,7 +94,7 @@ const deleteFromCatalog = () => {
 
     <!-- Stock -->
     <span
-      class="absolute top-2 left-3 font-hind text-[#534949] font-medium animated-text text-sm sm:text-base bg-[#ccc8c8] px-2 rounded-md lg:rounded-sm transition-all duration-300 ease-in-out"
+      class="absolute top-2 left-3 font-hind text-[#534949] font-medium animated-text text-sm sm:text-base bg-[#ccc8c8] px-2 rounded-md transition-all duration-300 ease-in-out"
       :class="{ 'opacity-0': showMenu }">
       {{ props.product.stock }}
     </span>
@@ -106,10 +106,13 @@ const deleteFromCatalog = () => {
     <Transition name="fade">
       <div v-if="showMenu" class="absolute top-0 left-0 h-full w-full z-20">
         <div class="absolute bottom-0 left-0 w-full h-full z-20 bg-black opacity-40" @click="closeMenu"></div>
-        <p class="absolute top-1.5 left-2 text-[#c5cce3] text-sm sm:text-base z-30 mx-auto">
+
+        <!-- Trademark name -->
+        <p class="absolute top-1.5 left-2 text-[#d8dee8] text-sm sm:text-base z-30 mx-auto">
           {{ props.product.trademark.name }}
         </p>
 
+        <!-- Toggleable menu -->
         <div
           class="absolute inset-0 w-32 sm:w-36 h-max flex flex-wrap justify-center items-center gap-2 sm:gap-2.5 mx-auto my-auto">
 
