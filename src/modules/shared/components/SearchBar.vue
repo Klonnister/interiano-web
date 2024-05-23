@@ -9,6 +9,12 @@ const props = defineProps<{
 
 const filterStore = useFilterStore();
 
+const clearSearch = (event: Event) => {
+  event.preventDefault();
+  filterStore.search = '';
+  filterStore.applyFilters = true;
+}
+
 const applyFilter = (event: Event) => {
   event.preventDefault();
   filterStore.page = 1;
@@ -18,7 +24,7 @@ const applyFilter = (event: Event) => {
 
 <template>
   <form @submit="applyFilter">
-    <div class="w-full flex h-9 local-shadow rounded-lg md:min-w-96 lg:min-w-64 xl:min-w-96 hover:-translate-y-[1px] searchbar-transition">
+    <div class="w-full flex h-9 local-shadow rounded-lg md:min-w-96 lg:min-w-64 xl:min-w-96 hover:-translate-y-[1px] searchbar-transition relative">
       <InputText
         type="text"
         :id="props.id"
@@ -26,8 +32,22 @@ const applyFilter = (event: Event) => {
         placeholder="Buscar..."
         class="w-full text-sm lg:text-base"
       />
+      <Transition name="fade">
+        <button
+          class="bg-white absolute top-0 bottom-0 h-max my-auto right-14"
+          type="button"
+          v-if="filterStore.search"
+          @click="clearSearch"
+        >
+          <Icon
+            icon="ic:round-close"
+            class="text-[#676e69] text-lg"
+          />
+        </button>
+      </Transition>
       <div class="w-1 bg-[#D0D9F6]"></div>
       <button
+        type="button"
         class="bg-[#15395A] px-2 rounded-e-lg"
         @click="applyFilter"
       >
