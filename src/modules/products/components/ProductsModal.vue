@@ -2,11 +2,14 @@
 import { VueFinalModal } from 'vue-final-modal'
 import { Icon } from '@iconify/vue';
 import { useWindowSize } from '@vueuse/core';
+import { useLayoutStore } from '@/modules/shared/stores/layoutStore';
 
-const emit = defineEmits<{
-  (e: 'close'): void
-}>()
+const layoutStore = useLayoutStore()
 const { width } = useWindowSize();
+
+const closeMenu = () => {
+  layoutStore.resetLayout();
+}
 </script>
 
 <template>
@@ -14,25 +17,25 @@ const { width } = useWindowSize();
     overlay-transition="vfm-fade"
     :content-transition="width < 640 ? 'vfm-slide-up' : 'vfm-slide-right'"
     :reserve-scroll-bar-gap="true"
-    @closed="emit('close')"
+    @closed="closeMenu"
   > 
     <div
-      class="fixed top-0 right-0 bg-[#0E2032] h-max w-full sm:w-[22rem] 2xl:w-[25rem] sm:min-h-screen"
+      class="fixed top-0 right-0 bg-[#0E2032] h-max w-full sm:w-[22rem] 2xl:w-[25rem] sm:min-h-screen rounded-b-xl sm:rounded-s-2xl overflow-hidden"
     > 
       <div class="bg-[#050e17] px-8 py-6">
-        <button @click="emit('close')" class="fixed right-6">
+        <button @click="closeMenu" class="fixed right-6">
           <Icon
             icon="iconamoon:close-bold"
             class="w-7 h-7 text-white"
           />
         </button>
-        <p class="text-2xl text-center text-white sm:text-start">Menú agregar</p>
+        <p class="text-2xl text-center text-white sm:text-start">Más opciones</p>
       </div>
       
       <div class="flex flex-col local-link-borders px-8 pt-2 pb-4">
         <RouterLink
           class="flex gap-3 items-center justify-center sm:justify-start py-6 px-4 sm:px- hover:translate-x-[2px] transition-all duration-300 ease-in-out max-w-80 w-full mx-auto"
-          @click="emit('close')"
+          @click="closeMenu"
           :to="{ name: 'dev' }"
         >
           <Icon
@@ -44,7 +47,7 @@ const { width } = useWindowSize();
 
         <button
           class="flex gap-3 items-center justify-center sm:justify-start py-6 px-4 sm:px- hover:translate-x-[2px] transition-all duration-300 ease-in-out max-w-80 w-full mx-auto"
-          @click="emit('close')"
+          @click="closeMenu"
         >
           <Icon
             icon="mdi:file-plus"
@@ -55,7 +58,7 @@ const { width } = useWindowSize();
 
         <button
           class="flex gap-3 items-center justify-center sm:justify-start py-6 px-4 sm:px- hover:translate-x-[2px] transition-all duration-300 ease-in-out max-w-80 w-full mx-auto"
-          @click="emit('close')"
+          @click="closeMenu"
         >
           <Icon
             icon="mdi:file-check"

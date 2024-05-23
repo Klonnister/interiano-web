@@ -3,15 +3,15 @@ import type { RouteLocationRaw } from 'vue-router';
 import { useLayoutStore } from '../stores/layoutStore';
 
 interface Props {
-  title: string
-  filtersButton?: boolean
-  addButtonType: 'button' | 'link'
-  addButtonPath?: RouteLocationRaw
+  title: string;
+  filtersButton?: boolean;
+  modalButton?: boolean;
+  addButtonPath?: RouteLocationRaw;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   filtersButton: false,
-  addButtonType: 'button'
+  modalButton: false,
 })
 
 const layoutStore = useLayoutStore();
@@ -46,19 +46,19 @@ const openFilters = () => {
           @click="openFilters"
         />
         <CardsViewButton
-          v-if="props.addButtonType === 'button'"
-          name="Agregar"
-          icon="mingcute:add-fill"
+          v-if="props.modalButton"
+          name="Opciones"
+          icon="tabler:menu-deep"
           @click="open"
         />
         <RouterLink
-          v-if="addButtonPath && addButtonType === 'link'"
+          v-if="addButtonPath"
           :to="addButtonPath"
           class="w-full"
         >
           <CardsViewButton
             name="Agregar"
-            icon="mingcute:add-fill"
+            icon="tabler:menu-deep"
           />
         </RouterLink>
       </div>
@@ -83,19 +83,19 @@ const openFilters = () => {
       <SearchBar id="search2" :class="{ 'md:w-96': !props.filtersButton }" />
 
       <CardsViewButton
-        v-if="props.addButtonType === 'button'"
+        v-if="props.modalButton"
         name="Agregar"
-        icon="mingcute:add-fill"
+        icon="healthicons:ui-menu-grid"
         @click="open"
       />
       <RouterLink
-        v-if="addButtonPath && addButtonType === 'link'"
+        v-if="addButtonPath"
         :to="addButtonPath"
         :class="{'w-full': props.filtersButton} "
       >
         <CardsViewButton
           name="Agregar"
-          icon="mingcute:add-fill"
+          icon="healthicons:ui-menu-grid"
         />
       </RouterLink>
     </div>
@@ -119,18 +119,18 @@ const openFilters = () => {
       <SearchBar id="search3" />
   
       <CardsViewButton
-        v-if="props.addButtonType === 'button'"
-        icon="mingcute:add-fill"
+        v-if="props.modalButton"
+        icon="tabler:menu-deep"
         :shrink="true"
         @click="open"
       />
       
       <RouterLink
-        v-if="addButtonPath && addButtonType === 'link'"
+        v-if="addButtonPath"
         :to="addButtonPath"
       >
         <CardsViewButton
-          icon="mingcute:add-fill"
+          icon="tabler:menu-deep"
           :shrink="true"
         />
       </RouterLink>
