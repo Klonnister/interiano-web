@@ -8,6 +8,12 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      name: 'auth',
+      meta:{ isAuthPage: true },
+      ...authRoutes,
+    },
+
+    {
       path: '/dev',
       name: 'dev',
       component: TestView
@@ -23,12 +29,6 @@ const router = createRouter({
         
       ],
     },
-
-    {
-      name: 'auth',
-      meta:{ isAuthPage: true },
-      ...authRoutes,
-    }
   ]
 })
 
