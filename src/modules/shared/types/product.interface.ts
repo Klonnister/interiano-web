@@ -30,6 +30,7 @@ export interface ProductResponse {
   data: Product[];
   trademarks: Trademark[];
   meta: Meta;
+  statusCode?: number;
 }
 
 export interface Meta {

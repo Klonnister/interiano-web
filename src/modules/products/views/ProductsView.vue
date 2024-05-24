@@ -13,7 +13,6 @@ import { useLayoutStore } from '@/modules/shared/stores/layoutStore';
 const layoutStore = useLayoutStore();
 const cardsStore = useCardsStore();
 const filterStore = useFilterStore();
-const loading = ref(true);
 
 // Page Information
 const { applyFilters } = storeToRefs(filterStore);
@@ -34,22 +33,25 @@ const updatePages = (pagesInfo: Meta) => {
 
 const getProducts = async () => {
   // Products request
-  loading.value = true;
+  filterStore.loading = true;
   layoutStore.resetLayout();
   cardsStore.resetCards();
   const queries = filterStore.getQueries();
   const productsResponse: ProductResponse = await apiRequest(`products${queries}`);
-  products.value = productsResponse.data;
-  filterStore.updateTrademarks(productsResponse.trademarks);
-  updatePages(productsResponse.meta);
-  applyFilters.value = false;
+  if (!productsResponse.statusCode) {
+    products.value = productsResponse.data;
+    filterStore.updateTrademarks(productsResponse.trademarks);
+    updatePages(productsResponse.meta);
 
-  // Categories request
-  if (!filterStore.categories.length) {
-    const categories: Category[] = await apiRequest('categories?raw=true');
-    filterStore.categories = categories;
+    // Categories request
+    if (!filterStore.categories.length) {
+      const categories: Category[] = await apiRequest('categories?raw=true');
+      filterStore.categories = categories;
+    }
   }
-  loading.value = false;
+
+  applyFilters.value = false;
+  filterStore.loading = false;
 }
 getProducts();
 
@@ -76,7 +78,7 @@ watch(applyFilters, (apply) => {
 
     <div class="w-full min-h-[40vh] lg:min-h-[5vh]">
       <Transition name="fade" mode="out-in">
-        <div v-if="products.length && !loading" class="w-full">
+        <div v-if="products.length && !filterStore.loading" class="w-full">
           <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-x-5 gap-y-8 sm:gap-8 lg:gap-10 2xl:gap-14 min-h-[40vh] lg:min-h-[55vh]">
             <ProductCard
               v-for="product in products"
@@ -98,7 +100,7 @@ watch(applyFilters, (apply) => {
           />
         </div>
 
-        <div v-else-if="loading">
+        <div v-else-if="filterStore.loading">
           <ProductsSkeleton />
         </div>
   

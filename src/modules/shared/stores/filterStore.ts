@@ -5,6 +5,8 @@ import type { Category } from "../types/category.interface";
 import { useStorage } from "@vueuse/core";
 
 export const useFilterStore = defineStore('filterStore', () => {
+  const loading = ref(false);
+
   // Store applicable filters
   const trademarks: Ref<Trademark[]> = ref([]);
   const categories: Ref<Category[]> = ref([]);
@@ -119,6 +121,6 @@ export const useFilterStore = defineStore('filterStore', () => {
     priceMin, priceMax, orderBy, orderType, sale, 
     clearFilters, clearCategories, clearTrademarks,
     clearPrices, resetOrder, applyFilters, getQueries,
-    updateTrademarks
+    updateTrademarks, loading,
   }
 })

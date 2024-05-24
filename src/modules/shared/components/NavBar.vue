@@ -32,6 +32,7 @@ const layoutStore = useLayoutStore();
         </button>
 
         <RouterLink
+          aria-label="Mi perfil"
           class="flex flex-col gap-4 justify-center items-center mb-5 local-menu-fix hover:scale-105 transition-all duration-300 ease-in-out"
           to="/"
         >
@@ -46,13 +47,16 @@ const layoutStore = useLayoutStore();
           <p class="text-xl font-semibold">{{ username }}</p>
         </RouterLink>
 
-        <nav class="flex flex-col local-link-borders overflow-y-scroll hide-scroll-bar">
+        <nav
+          class="flex flex-col local-link-borders overflow-y-scroll hide-scroll-bar"
+          aria-label="Navegación entre páginas"
+        >
           <RouterLink
             v-for="link in links"
             :key="link.name"
             :to="link.path"
-            class="flex gap-3 items-center justify-start py-6 px-16 hover:scale-105 transition-all duration-300 ease-in-out"
             @click="layoutStore.resetLayout"
+            class="flex gap-3 items-center justify-start py-6 px-16 hover:scale-105 transition-all duration-300 ease-in-out"
             :class="layoutStore.showMenu ? '' : 'pointer-events-none'"
           >
             <Icon

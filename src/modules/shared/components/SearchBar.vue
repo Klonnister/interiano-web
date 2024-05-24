@@ -50,6 +50,7 @@ const applyFilter = (event: Event) => {
         type="button"
         class="bg-[#15395A] px-2 rounded-e-lg"
         @click="applyFilter"
+        :disabled="filterStore.loading"
       >
         <Icon
           icon="ic:baseline-search"

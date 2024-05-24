@@ -1,6 +1,7 @@
 import { useAuthStore } from "@/modules/auth/stores/auth.store";
 import { getToken } from "./auth";
 import { useToast } from "vue-toastification";
+import router from "@/router";
 
 const authStore = useAuthStore();
 const toast = useToast();
@@ -43,6 +44,10 @@ export const apiRequest = async(path: string, params?: apiParams) => {
           
           return response;
       }
+    })
+    .catch(() => {
+      router.push({ name: 'dev' });
+      return { statusCode: 503 };
     })
 }
 

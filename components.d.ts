@@ -14,6 +14,7 @@ declare module 'vue' {
     CardButtonBase: typeof import('./src/modules/shared/components/CardButtonBase.vue')['default']
     CardsViewButton: typeof import('./src/modules/shared/components/CardsViewButton.vue')['default']
     CardsViewHeader: typeof import('./src/modules/shared/components/CardsViewHeader.vue')['default']
+    CardsViewHeader2: typeof import('./src/modules/shared/components/CardsViewHeader2.vue')['default']
     CategoriesFilter: typeof import('./src/modules/shared/components/CategoriesFilter.vue')['default']
     CategoryCheckbox: typeof import('./src/modules/shared/components/CategoryCheckbox.vue')['default']
     FiltersButtons: typeof import('./src/modules/shared/components/FiltersButtons.vue')['default']
