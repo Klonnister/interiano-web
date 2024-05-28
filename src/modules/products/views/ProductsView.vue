@@ -31,6 +31,9 @@ const updatePages = (pagesInfo: Meta) => {
   filterStore.page = pagesInfo.currentPage;
 }
 
+// Set loading to false for when coming from auth page
+layoutStore.loading = false;
+
 const getProducts = async () => {
   // Products request
   filterStore.loading = true;

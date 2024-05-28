@@ -2,6 +2,8 @@ import { defineStore } from "pinia";
 import { ref, type Ref } from "vue";
 
 export const useLayoutStore = defineStore('layoutStore', () => {
+  const loading = ref(false);
+
   const showMenu: Ref<boolean> = ref(false);
   const openMenu = () => {
     showMenu.value = true;
@@ -18,6 +20,6 @@ export const useLayoutStore = defineStore('layoutStore', () => {
   
   return {
     showMenu, openMenu, resetLayout, showProductsMenu,
-    showFilters
+    showFilters, loading
   }
 })

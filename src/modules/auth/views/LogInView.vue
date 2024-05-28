@@ -6,7 +6,7 @@ import type { loginForm, loginResponse } from "@/modules/auth/types/auth.types";
 import ButtonCardComponent from "@/modules/auth/components/ButtonCardComponent.vue";
 
 //native imports
-import { reactive, ref } from "vue";
+import { reactive} from "vue";
 import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import { apiAuthRequest } from '@/modules/shared/helpers/api';
@@ -15,13 +15,14 @@ import { saveUserInfo } from "@/modules/shared/helpers/auth";
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
 import { Icon } from '@iconify/vue';
+import { useLayoutStore } from "@/modules/shared/stores/layoutStore";
 
 //variables
 const authStore = useAuthStore();
+const layoutStore = useLayoutStore();
 const toast = useToast();
 const router = useRouter();
 
-const loading = ref(false);
 const form = reactive<loginForm>({
   username: "",
   password: "",
@@ -29,15 +30,16 @@ const form = reactive<loginForm>({
 
 //submit
 async function submit() {
-  loading.value = true;
+  layoutStore.loading = true;
   const response: loginResponse = await apiAuthRequest('auth/login', { method: 'POST', body: form })
   if ( response ) {
     saveUserInfo(response)
     authStore.setSession();
-    toast.success(`Bienvenido(a) ${response.username}`)
     router.push({ name: 'products' })
+    toast.success(`Bienvenido(a) ${response.username}`)
+  } else {
+    layoutStore.loading = false;
   }
-  loading.value = false;
 }
 
 </script>
@@ -57,7 +59,7 @@ async function submit() {
           <span class="group-hover:translate-x-1 duration-500">Usuario</span>
         </label>
         <InputText
-          :disabled="loading"
+          :disabled="layoutStore.loading"
           autocomplete="on"
           id="username"
           name="username"
@@ -72,7 +74,7 @@ async function submit() {
           <span class="group-hover:translate-x-1 duration-500">Contraseña</span>
         </label>
         <Password
-          :disabled="loading"
+          :disabled="layoutStore.loading"
           :feedback="false"
           :input-props="{ autocomplete: 'off' }"
           autocomplete="off"
@@ -84,12 +86,12 @@ async function submit() {
         />
       </div>
       <button
-        :disabled="loading"
+        :disabled="layoutStore.loading"
         class="local-shadow bg-[#15395A] py-2 rounded-sm hover:-translate-y-[2px] flex justify-center transition-all duration-300 ease-in-out"
         type="submit"
       > 
         <Transition name="fade" mode="out-in">
-          <span v-if="!loading">Ingresar</span>
+          <span v-if="!layoutStore.loading">Ingresar</span>
           <div v-else>
             <Icon
               icon="mingcute:loading-fill"
@@ -108,14 +110,14 @@ async function submit() {
         img="/auth/signup.svg"
         path="/sesion/registro"
         class="transition-all duration-200 ease-in-out"
-        :class="{ 'opacity-60 pointer-events-none': loading }"
+        :class="{ 'opacity-60 pointer-events-none': layoutStore.loading }"
       />
       <ButtonCardComponent
         title="Modo invitado"
         img="/auth/guest.svg"
         path=""
         class="transition-all duration-200 ease-in-out"
-        :class="{ 'opacity-60 pointer-events-none': loading }"
+        :class="{ 'opacity-60 pointer-events-none': layoutStore.loading }"
       />
     </div>
     <!-- link buttons -->

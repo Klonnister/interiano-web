@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 //native imports
-import { reactive, ref } from "vue";
+import { reactive } from "vue";
 import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import { apiAuthRequest } from "@/modules/shared/helpers/api";
@@ -10,14 +10,15 @@ import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
 import type { loginResponse, signUpForm } from "../types/auth.types";
 import { Icon } from '@iconify/vue';
+import { useLayoutStore } from "@/modules/shared/stores/layoutStore";
 
+const layoutStore = useLayoutStore();
 const authStore = useAuthStore();
 const toast = useToast();
 const router = useRouter();
 
 //variables
 const pattern = '^(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{6,}$';
-const loading = ref(false);
 const form = reactive<signUpForm>({
   username: "",
   password: "",
@@ -26,15 +27,16 @@ const form = reactive<signUpForm>({
 
 //submit
 async function submit() {
-  loading.value = true;
+  layoutStore.loading = true;
   const response: loginResponse = await apiAuthRequest('auth/register', { method: 'POST', body: form })
   if ( response ) {
     saveUserInfo(response)
     authStore.setSession();
     toast.success(`Bienvenido(a) ${response.username}`)
     router.push({ name: 'products' })
+  } else {
+    layoutStore.loading = false;
   }
-  loading.value = false;
 }
 </script>
 
@@ -53,7 +55,7 @@ async function submit() {
           <span class="group-hover:translate-x-1 duration-500">Nombre de usuario</span>
         </label>
         <InputText
-          :disabled="loading"
+          :disabled="layoutStore.loading"
           type="text"
           name="createName"
           id="createName"
@@ -68,7 +70,7 @@ async function submit() {
           <span class="group-hover:translate-x-1 duration-500">Crear contraseña</span>
         </label>
         <Password
-          :disabled="loading"
+          :disabled="layoutStore.loading"
           :feedback="false"
           :input-props="{
             minlength: '6',
@@ -91,7 +93,7 @@ async function submit() {
           <span class="group-hover:translate-x-1 duration-500">Confirmar contraseña</span>
         </label>
         <Password
-          :disabled="loading"
+          :disabled="layoutStore.loading"
           :feedback="false"
           :input-props="{
             autocomplete: 'off',
@@ -108,12 +110,12 @@ async function submit() {
         />
       </div>
       <button
-        :disabled="loading"
+        :disabled="layoutStore.loading"
         class="local-shadow bg-[#15395A] py-2 rounded-sm flex justify-center transition-all duration-300 ease-in-out"
         type="submit"
       >
         <Transition name="fade-auth" mode="out-in">
-          <span v-if="!loading">Registrarse</span>
+          <span v-if="!layoutStore.loading">Registrarse</span>
           <Icon
             v-else
             icon="mingcute:loading-fill"
@@ -127,7 +129,7 @@ async function submit() {
     <RouterLink
       to="/sesion/inicio"
       class="transition-all duration-200 ease-in-out"
-      :class="{ 'opacity-60 pointer-events-none': loading }"
+      :class="{ 'opacity-60 pointer-events-none': layoutStore.loading }"
     >
       <div class="text-center underline">
         <span>Volver</span>
