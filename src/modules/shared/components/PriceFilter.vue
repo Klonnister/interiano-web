@@ -38,7 +38,7 @@ watch(priceMax, (newValue) => {
           name="priceMin"
           v-model="filterStore.priceMin"
           type="number"
-          class="local-inset-shadow"
+          class="local-inset-shadow transition-all duration-300 ease-in-out"
           step="0.01"
           placeholder="1"
         />
@@ -53,7 +53,7 @@ watch(priceMax, (newValue) => {
           name="priceMax"
           v-model="filterStore.priceMax"
           type="number"
-          class="local-inset-shadow"
+          class="local-inset-shadow transition-all duration-300 ease-in-out"
           step="0.01"
           placeholder="9999"
         />

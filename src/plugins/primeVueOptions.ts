@@ -3,7 +3,7 @@ import type { PrimeVueConfiguration } from "primevue/config";
 export const primeVueOptions: PrimeVueConfiguration = {
   pt: {
     inputtext: {
-      root: 'bg-[#061321] text-[#A8B7EA] py-2.5 px-5 text-base rounded-md border-0 w-full local-inset-shadow disabled:opacity-70',
+      root: 'bg-[#061321] text-[#A8B7EA] py-2.5 px-5 text-base rounded-md border-0 w-full local-inset-shadow disabled:opacity-70 transition-all duration-300 ease-in-out',
     },
 
     password: {
