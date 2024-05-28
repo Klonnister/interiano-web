@@ -1,19 +1,23 @@
 <script lang="ts" setup>
 //native imports
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import InputText from 'primevue/inputtext';
+import Password from 'primevue/password';
 import { apiAuthRequest } from "@/modules/shared/helpers/api";
 import { saveUserInfo } from "@/modules/shared/helpers/auth";
 import { useAuthStore } from "../stores/auth.store";
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
 import type { loginResponse, signUpForm } from "../types/auth.types";
+import { Icon } from '@iconify/vue';
 
 const authStore = useAuthStore();
 const toast = useToast();
 const router = useRouter();
 
 //variables
+const pattern = '^(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{6,}$';
+const loading = ref(false);
 const form = reactive<signUpForm>({
   username: "",
   password: "",
@@ -22,6 +26,7 @@ const form = reactive<signUpForm>({
 
 //submit
 async function submit() {
+  loading.value = true;
   const response: loginResponse = await apiAuthRequest('auth/register', { method: 'POST', body: form })
   if ( response ) {
     saveUserInfo(response)
@@ -29,6 +34,7 @@ async function submit() {
     toast.success(`Bienvenido(a) ${response.username}`)
     router.push({ name: 'products' })
   }
+  loading.value = false;
 }
 </script>
 
@@ -42,11 +48,12 @@ async function submit() {
     <!-- form -->
     <form @submit.prevent="submit" class="flex flex-col gap-8">
       <div class="block group">
-        <label class="flex gap-[0.6rem] p-[0.1rem] mb-1">
+        <label class="flex gap-[0.6rem] p-[0.1rem] mb-1" for="createName">
           <img class="block" src="/auth/user.svg" alt="" />
           <span class="group-hover:translate-x-1 duration-500">Nombre de usuario</span>
         </label>
         <InputText
+          :disabled="loading"
           type="text"
           name="createName"
           id="createName"
@@ -56,44 +63,72 @@ async function submit() {
         />
       </div>
       <div class="block group">
-        <div class="flex gap-[0.6rem] p-[0.1rem] mb-1">
+        <label class="flex items-center gap-[0.6rem] p-[0.1rem] mb-1 w-full" for="createPassword">
           <img class="block" src="/auth/password.svg" alt="" />
           <span class="group-hover:translate-x-1 duration-500">Crear contraseña</span>
-        </div>
-        <InputText
-          type="password"
-          name="createPassword"
-          id="createPassword"
-          required
-          minlength="6"
-          pattern="^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$"
-          title="Debe contener al menos 1 letra mayúscula, 1 carácter especial y un número"
-          v-model="form.password"
+        </label>
+        <Password
+          :disabled="loading"
+          :feedback="false"
+          :input-props="{
+            minlength: '6',
+            pattern,
+            title: 'La contraseña debe contener al menos 1 letra mayúscula, 1 carácter especial y un número',
+            autocomplete: 'off',
+
+          }"
           autocomplete="off"
+          input-id="createPassword"
+          name="createPassword"
+          required
+          toggleMask
+          v-model="form.password"
         />
       </div>
       <div class="block group">
-        <div class="flex gap-[0.6rem] p-[0.1rem] mb-1">
+        <label class="flex gap-[0.6rem] p-[0.1rem] mb-1" for="createPasswordConfirm">
           <img class="block" src="/auth/password.svg" alt="" />
           <span class="group-hover:translate-x-1 duration-500">Confirmar contraseña</span>
-        </div>
-        <InputText
-          type="password"
-          name="createPasswordConfirm"
-          id="createPasswordConfirm"
-          required
-          minlength="6"
-          pattern="^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$"
-          title="Debe contener al menos 1 letra mayúscula, 1 carácter especial y un número"
-          v-model="form.passwordconfirm"
+        </label>
+        <Password
+          :disabled="loading"
+          :feedback="false"
+          :input-props="{
+            autocomplete: 'off',
+            minlength: '6',
+            pattern,
+            title: 'La contraseña debe contener al menos 1 letra mayúscula, 1 carácter especial y un número',
+          }"
           autocomplete="off"
+          input-id="createPasswordConfirm"
+          name="createPasswordConfirm"
+          required
+          toggleMask
+          v-model="form.passwordconfirm"
         />
       </div>
-      <button class="local-shadow bg-[#15395A] py-2 rounded-sm" type="submit">Ingresar</button>
+      <button
+        :disabled="loading"
+        class="local-shadow bg-[#15395A] py-2 rounded-sm flex justify-center"
+        type="submit"
+      >
+        <Transition name="fade-auth" mode="out-in">
+          <span v-if="!loading">Registrarse</span>
+          <Icon
+            v-else
+            icon="mingcute:loading-fill"
+            class="animate-spin w-6 h-6"
+          />
+        </Transition>
+      </button>
     </form>
     <!-- end form -->
     <!-- link buttons -->
-    <RouterLink to="/sesion/inicio">
+    <RouterLink
+      to="/sesion/inicio"
+      class="transition-all duration-200 ease-in-out"
+      :class="{ 'opacity-60 pointer-events-none': loading }"
+    >
       <div class="text-center underline">
         <span>Volver</span>
       </div>
@@ -101,3 +136,16 @@ async function submit() {
     <!-- link buttons -->
   </div>
 </template>
+
+<style scoped>
+.fade-auth-enter-active,
+.fade-auth-leave-active {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.fade-auth-enter-from,
+.fade-auth-leave-to {
+  opacity: 0;
+}
+
+</style>

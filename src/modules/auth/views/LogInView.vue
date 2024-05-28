@@ -6,19 +6,22 @@ import type { loginForm, loginResponse } from "@/modules/auth/types/auth.types";
 import ButtonCardComponent from "@/modules/auth/components/ButtonCardComponent.vue";
 
 //native imports
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import InputText from 'primevue/inputtext';
+import Password from 'primevue/password';
 import { apiAuthRequest } from '@/modules/shared/helpers/api';
 import { useAuthStore } from "../stores/auth.store";
 import { saveUserInfo } from "@/modules/shared/helpers/auth";
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
+import { Icon } from '@iconify/vue';
 
 //variables
 const authStore = useAuthStore();
 const toast = useToast();
 const router = useRouter();
 
+const loading = ref(false);
 const form = reactive<loginForm>({
   username: "",
   password: "",
@@ -26,6 +29,7 @@ const form = reactive<loginForm>({
 
 //submit
 async function submit() {
+  loading.value = true;
   const response: loginResponse = await apiAuthRequest('auth/login', { method: 'POST', body: form })
   if ( response ) {
     saveUserInfo(response)
@@ -33,6 +37,7 @@ async function submit() {
     toast.success(`Bienvenido(a) ${response.username}`)
     router.push({ name: 'products' })
   }
+  loading.value = false;
 }
 
 </script>
@@ -52,29 +57,45 @@ async function submit() {
           <span class="group-hover:translate-x-1 duration-500">Usuario</span>
         </label>
         <InputText
-          type="text"
-          id="username"
-          required
-          v-model="form.username"
+          :disabled="loading"
           autocomplete="on"
+          id="username"
+          name="username"
+          required
+          type="text"
+          v-model="form.username"
         />
       </div>
       <div class="block group">
-        <label for="password" class="flex gap-[0.6rem] p-[0.1rem] mb-1">
+        <label for="userPassword" class="flex gap-[0.6rem] p-[0.1rem] mb-1">
           <img class="block" src="/auth/password.svg" alt="" />
           <span class="group-hover:translate-x-1 duration-500">Contraseña</span>
         </label>
-        <InputText
-          type="password"
-          name="password"
-          id="password"
-          required
-          v-model="form.password"
+        <Password
+          :disabled="loading"
+          :feedback="false"
+          :input-props="{ autocomplete: 'off' }"
           autocomplete="off"
+          input-id="userPassword"
+          name="userPassword"
+          required
+          toggleMask
+          v-model="form.password"
         />
       </div>
-      <button class="local-shadow bg-[#15395A] py-2 rounded-sm" type="submit" >
-        Ingresar
+      <button
+        :disabled="loading"
+        class="local-shadow bg-[#15395A] py-2 rounded-sm hover:-translate-y-[2px] button-transition flex justify-center"
+        type="submit"
+      > 
+        <Transition name="fade-auth" mode="out-in">
+          <span v-if="!loading">Ingresar</span>
+          <Icon
+            v-else
+            icon="mingcute:loading-fill"
+            class="animate-spin w-6 h-6"
+          />
+        </Transition>
       </button>
     </form>
     <!-- end form -->
@@ -85,9 +106,34 @@ async function submit() {
         title="Regístrate"
         img="/auth/signup.svg"
         path="/sesion/registro"
+        class="transition-all duration-200 ease-in-out"
+        :class="{ 'opacity-60 pointer-events-none': loading }"
       />
-      <ButtonCardComponent title="Modo invitado" img="/auth/guest.svg" path="" />
+      <ButtonCardComponent
+        title="Modo invitado"
+        img="/auth/guest.svg"
+        path=""
+        class="transition-all duration-200 ease-in-out"
+        :class="{ 'opacity-60 pointer-events-none': loading }"
+      />
     </div>
     <!-- link buttons -->
   </div>
 </template>
+
+<style>
+.button-transition {
+  transition: transform .3s ease-in-out;
+}
+
+.fade-auth-enter-active,
+.fade-auth-leave-active {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.fade-auth-enter-from,
+.fade-auth-leave-to {
+  opacity: 0;
+}
+
+</style>
