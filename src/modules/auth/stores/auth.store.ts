@@ -25,7 +25,6 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   return {
-    // headers,
     setSession,
     isLogged,
     logOut,
