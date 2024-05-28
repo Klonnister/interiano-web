@@ -85,16 +85,17 @@ async function submit() {
       </div>
       <button
         :disabled="loading"
-        class="local-shadow bg-[#15395A] py-2 rounded-sm hover:-translate-y-[2px] button-transition flex justify-center"
+        class="local-shadow bg-[#15395A] py-2 rounded-sm hover:-translate-y-[2px] flex justify-center transition-all duration-300 ease-in-out"
         type="submit"
       > 
-        <Transition name="fade-auth" mode="out-in">
+        <Transition name="fade" mode="out-in">
           <span v-if="!loading">Ingresar</span>
-          <Icon
-            v-else
-            icon="mingcute:loading-fill"
-            class="animate-spin w-6 h-6"
-          />
+          <div v-else>
+            <Icon
+              icon="mingcute:loading-fill"
+              class="animate-spin w-6 h-6"
+            />
+          </div>
         </Transition>
       </button>
     </form>
@@ -120,20 +121,3 @@ async function submit() {
     <!-- link buttons -->
   </div>
 </template>
-
-<style>
-.button-transition {
-  transition: transform .3s ease-in-out;
-}
-
-.fade-auth-enter-active,
-.fade-auth-leave-active {
-  transition: opacity 0.2s ease-in-out;
-}
-
-.fade-auth-enter-from,
-.fade-auth-leave-to {
-  opacity: 0;
-}
-
-</style>

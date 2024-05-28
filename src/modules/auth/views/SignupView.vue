@@ -109,7 +109,7 @@ async function submit() {
       </div>
       <button
         :disabled="loading"
-        class="local-shadow bg-[#15395A] py-2 rounded-sm flex justify-center"
+        class="local-shadow bg-[#15395A] py-2 rounded-sm flex justify-center transition-all duration-300 ease-in-out"
         type="submit"
       >
         <Transition name="fade-auth" mode="out-in">

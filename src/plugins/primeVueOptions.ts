@@ -11,7 +11,7 @@ export const primeVueOptions: PrimeVueConfiguration = {
     },
 
     dropdown: {
-      root: 'bg-[#061321] text-[#A8B7EA] w-full rounded-md border-0 local-shadow',
+      root: 'bg-[#061321] text-[#A8B7EA] w-full rounded-md border-0 local-shadow transition-all duration-300 ease-in-out',
       wrapper: 'bg-[#061321] rounded-md',
       item: 'bg-[#061321] text-[#A8B7EA] text-[15px] py-[0.6rem] px-4 hover:text-white',
     },
@@ -24,7 +24,7 @@ export const primeVueOptions: PrimeVueConfiguration = {
       root: 'bg-[#061321] mx-4',
     },
     paginator: {
-      root: 'bg-[#0E1D2C] local-shadow',
+      root: 'bg-[#0E1D2C] local-shadow transition-all duration-300 ease-in-out',
     }
   }
 }

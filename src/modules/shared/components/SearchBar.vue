@@ -24,7 +24,7 @@ const applyFilter = (event: Event) => {
 
 <template>
   <form @submit="applyFilter">
-    <div class="w-full flex h-9 local-shadow rounded-lg md:min-w-96 lg:min-w-64 xl:min-w-96 hover:-translate-y-[1px] searchbar-transition relative">
+    <div class="w-full flex h-9 local-shadow rounded-lg md:min-w-96 lg:min-w-64 xl:min-w-96 hover:-translate-y-[1px] searchbar-transition relative transition-all duration-500 ease-in-out">
       <InputText
         type="text"
         :id="props.id"
@@ -79,9 +79,5 @@ const applyFilter = (event: Event) => {
 
 .p-inputtext:hover {
   box-shadow: none
-}
-
-.searchbar-transition {
-  transition: transform .3s ease-in-out;
 }
 </style>
