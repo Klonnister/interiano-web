@@ -35,8 +35,7 @@ const closeMenu = () => {
       <div class="flex flex-col local-link-borders px-8 pt-2 pb-4">
         <RouterLink
           class="flex gap-3 items-center justify-center sm:justify-start py-6 px-4 sm:px- hover:translate-x-[2px] transition-all duration-300 ease-in-out max-w-80 w-full mx-auto"
-          @click="closeMenu"
-          :to="{ name: 'dev' }"
+          :to="{ name: 'products-create-main' }"
         >
           <Icon
             icon="mdi:add"

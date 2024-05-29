@@ -1,3 +1,4 @@
+import type { Category } from "./category.interface";
 import type { Trademark } from "./trademark.interface";
 
 export interface Product {
@@ -31,6 +32,11 @@ export interface ProductResponse {
   trademarks: Trademark[];
   meta: Meta;
   statusCode?: number;
+}
+
+export interface ProductOptions {
+  categories: Category[],
+  trademarks: Trademark[],
 }
 
 export interface Meta {
