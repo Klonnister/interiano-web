@@ -6,15 +6,26 @@ import { useLayoutStore } from '../stores/layoutStore';
 import { useModal } from 'vue-final-modal';
 import ProductsModal from '@/modules/products/components/ProductsModal.vue';
 import { storeToRefs } from 'pinia';
-import { watch } from 'vue';
+import { watch, type Ref } from 'vue';
 import FiltersModal from '../components/FiltersModal.vue';
-import { apiUrl } from '../helpers/api';
+import { apiRequest, apiUrl } from '../helpers/api';
+import type { ProfileInfo } from '../types/profile.interface';
+import { useStorage } from '@vueuse/core';
 
 const layoutStore = useLayoutStore();
 const links = sidebarLinks;
 
-const username = localStorage.getItem('userName');
-const userImage = localStorage.getItem('userImage');
+const username: Ref<string|null> = useStorage('userName', null);
+const userImage: Ref<string|null> = useStorage('userImage', null);
+
+const getUserProfile = async() => {
+  const userResponse: ProfileInfo = await apiRequest('profile');
+  if (userResponse) {
+    username.value = userResponse.username;
+    userImage.value = userResponse.image;
+  }
+}
+if(!username) getUserProfile();
 
 const { showMenu, showProductsMenu, showFilters } = storeToRefs(layoutStore);
 
