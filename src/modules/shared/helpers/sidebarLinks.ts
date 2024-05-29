@@ -6,22 +6,22 @@ export default [
   },
   {
     name: 'Catálogo',
-    path: '/',
+    path: { name: 'dev'},
     icon: 'fluent:draw-image-24-filled',
   },
   {
     name: 'Categorías',
-    path: '/',
+    path: { name: 'dev'},
     icon: 'iconamoon:category-fill',
   },
   {
     name: 'Marcas',
-    path: '/',
+    path: { name: 'dev'},
     icon: 'icon-park-solid:bottle-two',
   },
   {
     name: 'Otros',
-    path: '/',
+    path: { name: 'dev'},
     icon: 'ri:more-fill',
   },
 ];

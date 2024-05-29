@@ -55,7 +55,6 @@ const layoutStore = useLayoutStore();
             v-for="link in links"
             :key="link.name"
             :to="link.path"
-            @click="layoutStore.resetLayout"
             class="flex gap-3 items-center justify-start py-6 px-16 hover:scale-105 transition-all duration-300 ease-in-out"
             :class="layoutStore.showMenu ? '' : 'pointer-events-none'"
           >
