@@ -84,8 +84,8 @@ const openFilters = () => {
 
       <CardsViewButton
         v-if="props.modalButton"
-        name="Agregar"
-        icon="healthicons:ui-menu-grid"
+        name="Opciones"
+        icon="tabler:menu-deep"
         @click="open"
       />
       <RouterLink
@@ -94,8 +94,8 @@ const openFilters = () => {
         :class="{'w-full': props.filtersButton} "
       >
         <CardsViewButton
-          name="Agregar"
-          icon="healthicons:ui-menu-grid"
+          name="Opciones"
+          icon="tabler:menu-deep"
         />
       </RouterLink>
     </div>
