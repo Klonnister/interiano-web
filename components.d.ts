@@ -27,6 +27,7 @@ declare module 'vue' {
     OrderFilter: typeof import('./src/modules/shared/components/OrderFilter.vue')['default']
     PriceFilter: typeof import('./src/modules/shared/components/PriceFilter.vue')['default']
     ProductCard: typeof import('./src/modules/products/components/ProductCard.vue')['default']
+    ProductCreate: typeof import('./src/modules/products/views/ProductCreate.vue')['default']
     ProductId: typeof import('./src/modules/products/views/ProductId.vue')['default']
     ProductsModal: typeof import('./src/modules/products/components/ProductsModal.vue')['default']
     ProductsSkeleton: typeof import('./src/modules/products/components/ProductsSkeleton.vue')['default']

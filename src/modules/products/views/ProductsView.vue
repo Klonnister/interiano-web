@@ -23,7 +23,6 @@ const metaInfo: MetaInfo = reactive({
   lastPage: undefined,
 })
 
-
 const updatePages = (pagesInfo: Meta) => {
   metaInfo.total = pagesInfo.total;
   metaInfo.perPage = pagesInfo.perPage;
@@ -39,7 +38,7 @@ const getProducts = async () => {
   filterStore.loading = true;
   layoutStore.resetLayout();
   cardsStore.resetCards();
-  const queries = filterStore.getQueries();
+  const { queries } = filterStore.getQueries();
   const productsResponse: ProductResponse = await apiRequest(`products${queries}`);
   if (!productsResponse.statusCode) {
     products.value = productsResponse.data;

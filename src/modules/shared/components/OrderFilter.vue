@@ -46,7 +46,7 @@ const otherOrder = ref([
     <button
       class="text-sm underline text-[#D0D9F6] -m-px"
       v-if="
-        filterStore.orderBy !== 'price' || 
+        filterStore.orderBy !== 'trademark' || 
         filterStore.orderType !== 'asc'
       "
       @click="filterStore.resetOrder"

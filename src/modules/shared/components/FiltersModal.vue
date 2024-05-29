@@ -90,7 +90,7 @@ const layoutStore = useLayoutStore();
                       icon="mdi:check-bold"
                       class="text-[#6AAD41] w-[1.1rem] h-[1.1rem] opacity-60"
                       v-if="
-                        filterStore.orderBy !== 'price' || 
+                        filterStore.orderBy !== 'trademark' || 
                         filterStore.orderType !== 'asc'
                       "
                     />
