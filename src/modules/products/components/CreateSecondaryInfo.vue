@@ -15,11 +15,6 @@ const router = useRouter();
 const toast = useToast();
 const createStore = useProductCreateStore();
 
-//Validation before entering route
-if(!createStore.validateView(1)) {
-  router.push({ name: 'products-create-main' })
-}
-
 // Setting view info
 createStore.currentView = 2;
 
@@ -63,13 +58,13 @@ const preventNext = (event: Event) => {
 const previousStep = (event: Event) => {
   event.preventDefault();
   y.value = 0;
-  createStore.goToStep(1);
+  router.push({ name: 'products-create-primary' })
 }
 
 const nextStep = (event: Event) => {
   event.preventDefault();
   y.value = 0;
-  createStore.goToStep(3);
+  router.push({ name: 'products-create-price' })
 }
 </script>
 

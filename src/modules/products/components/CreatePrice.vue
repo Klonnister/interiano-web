@@ -10,7 +10,7 @@ createStore.currentView = 3;
 // const nextStep = (event: Event) => {
 //   event.preventDefault();
 //   y.value = 0;
-//   createStore.goToStep(3);
+// router.push({ name: 'products-create-secondary' })
 // }
 
 </script>

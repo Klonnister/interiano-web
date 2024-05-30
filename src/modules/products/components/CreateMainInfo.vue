@@ -7,10 +7,13 @@ import type { ProductOptions } from '@/modules/shared/types/product.interface';
 import FileUpload, { type FileUploadUploaderEvent } from 'primevue/fileupload';
 import { Icon } from '@iconify/vue';
 import { useWindowScroll } from '@vueuse/core';
+import { useRouter } from 'vue-router';
 
 const { y } = useWindowScroll({ behavior: 'smooth'});
 const createStore = useProductCreateStore();
+const router = useRouter();
 createStore.currentView = 1;
+
 
 const getViewOptions = async() => {
   createStore.loading = true;
@@ -38,7 +41,7 @@ const onImageUpload = async(event: FileUploadUploaderEvent) => {
 const nextStep = (event: Event) => {
   event.preventDefault();
   y.value = 0;
-  createStore.goToStep(2);
+  router.push({ name: 'products-create-secondary' })
 }
 
 </script>

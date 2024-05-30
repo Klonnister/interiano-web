@@ -3,14 +3,11 @@ import type { Trademark } from "@/modules/shared/types/trademark.interface";
 import { useStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
 import { ref, type Ref } from 'vue';
-import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 
 const toast = useToast();
 
 export const useProductCreateStore = defineStore('productCreateStore', () => {
-  const router = useRouter();
-
   // View info
   const currentView = ref(1);
   const loading = ref(false);
@@ -53,35 +50,9 @@ export const useProductCreateStore = defineStore('productCreateStore', () => {
       }
   }
 
-
-  const goToStep = (id: number) => {
-    switch(id) {
-      case 1:
-        router.push({ name: 'products-create-main' })
-        break;
-      case 2: 
-        if(validateView(1)) {
-          router.push({ name: 'products-create-secondary' })
-        }
-        break;
-      case 3: 
-        if(validateView(2)) {
-          router.push({ name: 'products-create-price' })
-        }
-      break;
-      case 4: 
-  
-      break;
-      default: 
-        router.push({ name: 'products-create-main' })
-    }
-  }
-  
-
   return {
     currentView, loading, categories, trademarks,
     name, category, trademark, image, size, stock, description,
-    extraProps, price,
-    goToStep, validateView
+    extraProps, price, validateView,
   }
 })
