@@ -7,9 +7,9 @@ export default [
     path: 'productos',
     name: 'products',
     component: () => import('@/modules/products/views/ProductsView.vue'),
-    beforeEnter: (to, from) => {
+    beforeEnter: (to: RouteLocation, from: RouteLocation) => {
       if (from.name) {
-        if(!from.name.includes('product')) {
+        if(!String(from.name).includes('product')) {
           const filterStore = useFilterStore();  
           filterStore.clearFilters();
         }
