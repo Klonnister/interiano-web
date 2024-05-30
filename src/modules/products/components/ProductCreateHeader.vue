@@ -7,46 +7,89 @@ const createStore = useProductCreateStore();
 
 <template>
   <header class="w-full flex flex-col gap-5 sm:gap-6">
-    <h1 class="text-center uppercase text-2xl sm:text-3xl 2xl:text-4xl font-semibold">Crear Producto</h1>
+    <h1 class="text-center uppercase text-2xl sm:text-3xl 2xl:text-4xl font-semibold">
+      Crear Producto
+    </h1>
     <div class="w-full max-w-sm mx-auto flex items-center justify-between sm:hidden">
       <button
         :disabled="createStore.currentView - 1 === 0"
         class="disabled:opacity-50"
         aria-label="Paso anterior"
+        @click="createStore.goToStep(createStore.currentView - 1)"
       >
         <Icon icon="ic:round-arrow-left" class="w-8 h-8" />
       </button>
-      <h2 class="py-2 px-5 text-xl" aria-current="step">Info. Principal</h2>
+      <CreateHeaderTitle />
       <button
         :disabled="createStore.currentView + 1 === 5"
         class="disabled:opacity-50"
         aria-label="Siguiente paso"
+        @click="createStore.goToStep(createStore.currentView + 1)"
       >
         <Icon icon="ic:round-arrow-right" class="w-8 h-8" />
       </button>
     </div>
     <div class="hidden sm:flex w-full justify-center gap-8">
       <button
-        class="px-4 py-1"
-        :class="{ 'border-b border-white text-white': createStore.currentView === 1 }"
+        class="px-4 py-1 transition-all duration-300 ease-in-out text-[#A8B7EA] border-b relative"
+        :class="
+          createStore.currentView === 1
+            ? 'border-white text-white'
+            : 'border-[#A8B7EA00]'
+        "
+        @click="createStore.goToStep(1)"
       >
         <span>Info. Principal</span>
+        <Icon
+          icon="mdi:check-bold"
+          class="w-4 h-4 text-[#468222] absolute top-1.5 -right-2 opacity-0 transition-all duration-300 ease-in-out"
+          :class="{ 
+            'opacity-50': createStore.currentView !== 1 && createStore.category && createStore.trademark && createStore.name && createStore.image,
+            'opacity-100': createStore.category && createStore.trademark && createStore.name && createStore.image
+          }"
+        />
       </button>
       <button
-        class="px-4 py-1"
-        :class="{ 'border-b border-white text-white': createStore.currentView === 2 }"
+        class="px-4 py-1 transition-all duration-300 ease-in-out text-[#A8B7EA] border-b relative"
+        :class="
+          createStore.currentView === 2
+            ? 'border-white text-white'
+            : 'border-[#A8B7EA00]'
+        "
+        @click="createStore.goToStep(2)"
       >
         <span>Info. Secundaria</span>
+        <Icon
+          icon="mdi:check-bold"
+          class="w-4 h-4 text-[#468222] absolute top-1.5 -right-2 transition-all duration-300 ease-in-out opacity-0"
+          :class="{ 
+            'opacity-50': createStore.currentView !== 2 && createStore.stock,
+            'opacity-100': createStore.stock
+          }"
+        />
       </button>
       <button
-        class="px-4 py-1"
-        :class="{ 'border-b border-white text-white': createStore.currentView === 3 }"
+        class="px-4 py-1 transition-all duration-300 ease-in-out text-[#A8B7EA] border-b relative"
+        :class="
+          createStore.currentView === 3
+            ? 'border-white text-white'
+            : 'border-[#A8B7EA00]'
+        "
+        @click="createStore.goToStep(3)"
       >
         <span>Precio</span>
+        <Icon
+          icon="mdi:check-bold"
+          class="w-4 h-4 text-[#468222] absolute top-1.5 -right-2 transition-all duration-300 ease-in-out opacity-0"
+          :class="{ 
+            'opacity-50': createStore.currentView !== 3 && createStore.price,
+            'opacity-100': createStore.price,
+          }"
+        />
       </button>
       <button
-        class="px-4 py-1"
-        :class="{ 'border-b border-white text-white': createStore.currentView === 4 }"
+        class="px-4 py-1 transition-all duration-300 ease-in-out text-[#A8B7EA]"
+        :class="{ 'text-white': createStore.currentView === 4 }"
       >
         <span>Diseño</span>
       </button>

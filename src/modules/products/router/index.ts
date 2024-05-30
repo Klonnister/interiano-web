@@ -1,14 +1,13 @@
 import router from '@/router';
 import { type RouteLocation } from 'vue-router';
 import { useFilterStore } from '@/modules/shared/stores/filterStore';
-import type { CustomRoute } from '@/modules/shared/types/router.interface';
 
 export default [
   {
     path: 'productos',
     name: 'products',
     component: () => import('@/modules/products/views/ProductsView.vue'),
-    beforeEnter: (to: CustomRoute, from: CustomRoute) => {
+    beforeEnter: (to, from) => {
       if (from.name) {
         if(!from.name.includes('product')) {
           const filterStore = useFilterStore();  
@@ -25,6 +24,16 @@ export default [
         path: 'info-principal',
         name: 'products-create-main',
         component: () => import('@/modules/products/components/CreateMainInfo.vue')
+      },
+      {
+        path: 'info-secundaria',
+        name: 'products-create-secondary',
+        component: () => import('@/modules/products/components/CreateSecondaryInfo.vue')
+      },
+      {
+        path: 'precio',
+        name: 'products-create-price',
+        component: () => import('@/modules/products/components/CreatePrice.vue')
       },
       {
         path: '',
