@@ -8,26 +8,31 @@ import { Icon } from '@iconify/vue';
 import { useToast } from 'vue-toastification';
 import { useRouter } from 'vue-router';
 
+// Stores and tools
 const { width } = useWindowSize();
 const { y } = useWindowScroll({ behavior: 'smooth'});
 const router = useRouter();
 const toast = useToast();
 const createStore = useProductCreateStore();
 
+//Validation before entering route
 if(!createStore.validateView(1)) {
   router.push({ name: 'products-create-main' })
 }
 
+// Setting view info
 createStore.currentView = 2;
 
 const showAddProp = ref(false);
 const propLabel = ref(null);
 const propValue = ref(null);
 
+// Show and hide add prop inputs
 const toggleShowAdd = () => {
   showAddProp.value = !showAddProp.value;
 }
 
+// Adding and deleting props methods
 const addProp = (event: Event) => {
   event.preventDefault();
   if(!propLabel.value) {
@@ -47,6 +52,8 @@ const addProp = (event: Event) => {
 const deleteProp = (key: string|number) => {
   delete createStore.extraProps[key];
 }
+
+// Form submittion methods and going back to previous step
 
 const preventNext = (event: Event) => {
   event.preventDefault();
