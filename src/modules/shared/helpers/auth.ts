@@ -39,7 +39,7 @@ export  function validateToken(): boolean {
 
 export function saveUserInfo(userInfo: loginResponse): void {
   const date = new Date()
-  date.setTime(date.getTime() + 4 * 60 * 60 * 1000)
+  date.setTime(date.getTime() + 24 * 60 * 60 * 1000)
   const expiration = date.toUTCString();
 
   const expires = 'expires=' + expiration + ';'
