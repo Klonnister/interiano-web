@@ -46,6 +46,7 @@ export const apiRequest = async(path: string, params?: apiParams) => {
       }
     })
     .catch(() => {
+      toast.error('Hubo un problema al comunicarse con el servidor.')
       router.push({ name: 'dev' });
       return { statusCode: 503 };
     })
@@ -92,6 +93,7 @@ export const apiImageRequest = async(path: string, body: apiImageParams) => {
       }
     })
     .catch(() => {
+      toast.error('Hubo un problema al comunicarse con el servidor.')
       router.push({ name: 'dev' });
       return { statusCode: 503 };
     })
@@ -129,6 +131,10 @@ export const apiAuthRequest = async(path: string, params: apiParams) => {
           }
           return;
       }
+    })
+    .catch(() => {
+      toast.error('Hubo un problema al comunicarse con el servidor.')
+      return { statusCode: 503 };
     })
 }
 
