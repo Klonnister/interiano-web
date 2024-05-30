@@ -32,7 +32,7 @@ const form = reactive<loginForm>({
 async function submit() {
   layoutStore.loading = true;
   const response: loginResponse = await apiAuthRequest('auth/login', { method: 'POST', body: form })
-  if ( response ) {
+  if ( !response.statusCode ) {
     saveUserInfo(response)
     authStore.setSession();
     router.push({ name: 'products' })
