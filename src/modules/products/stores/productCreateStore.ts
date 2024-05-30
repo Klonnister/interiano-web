@@ -2,7 +2,7 @@ import type { Category } from "@/modules/shared/types/category.interface";
 import type { Trademark } from "@/modules/shared/types/trademark.interface";
 import { useStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
-import { ref, type Ref, reactive } from 'vue';
+import { ref, type Ref } from 'vue';
 import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 
@@ -25,7 +25,7 @@ export const useProductCreateStore = defineStore('productCreateStore', () => {
   const size: Ref<string> = useStorage('productCreateSize', '');
   const stock: Ref<number|null> = useStorage('productCreateStock', null);
   const description: Ref<string> = useStorage('productCreateDescription', '');
-  const extraProps: { [key:string]: string }  = reactive({});
+  const extraProps = useStorage('productCreateExtraProps', {})
   const price: Ref<number|null> = useStorage('productCreatePrice', null);
 
   const validateView = (id: number) => {

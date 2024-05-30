@@ -28,7 +28,8 @@ const toggleShowAdd = () => {
   showAddProp.value = !showAddProp.value;
 }
 
-const addProp = () => {
+const addProp = (event: Event) => {
+  event.preventDefault();
   if(!propLabel.value) {
     toast.error('Agrega un nombre para la propiedad.');
     return;
@@ -45,6 +46,11 @@ const addProp = () => {
 
 const deleteProp = (key: string|number) => {
   delete createStore.extraProps[key];
+}
+
+const preventNext = (event: Event) => {
+  event.preventDefault();
+  return;
 }
 
 const previousStep = (event: Event) => {
@@ -121,9 +127,13 @@ const nextStep = (event: Event) => {
     <div class="flex flex-col gap-4 col-span-2 w-full mt-4">
       <p class="text-2xl text-center">Otras características (Opcional)</p>
       
-      <div class="w-full flex flex-col max-w-sm mx-auto">
+      <form
+        id="createProductAddedProps"
+        class="w-full flex flex-col max-w-sm mx-auto"
+        @submit="preventNext"
+      >
         <div
-          class="flex items-end gap-4"
+          class="flex items-end gap-4 py-2"
           v-for="(value, key) in createStore.extraProps"
           :key="key"
         >
@@ -154,11 +164,11 @@ const nextStep = (event: Event) => {
           />
         </button>
         </div>
-      </div>
+      </form>
 
       <div class="w-full flex flex-col gap-2">
         <Transition name="fade">
-          <div class="w-full flex items-end gap-6 px-6 mb-4" v-if="showAddProp">
+          <form id="createProductPropForm" class="w-full flex flex-col sm:flex-row sm:items-end gap-6 px-6 py-3 mb-4" v-if="showAddProp" @submit="addProp">
             <div class="grow flex flex-col gap-2 group">
               <label
                 for="productCreatePropLabel"
@@ -192,8 +202,8 @@ const nextStep = (event: Event) => {
               />
             </div>
             <button
-              class="p-2 bg-[#15395A] rounded-lg mb-2 local-shadow hover:-translate-y-0.5 transition-all duration-500 ease-in-out hover:bg-[#204b73]"
-              type="button"
+              class="p-2 bg-[#15395A] rounded-lg mb-2 local-shadow hover:-translate-y-0.5 transition-all duration-500 ease-in-out hover:bg-[#204b73] w-max mx-auto sm:mx-none"
+              type="submit"
               @click="addProp"
             >
               <Icon
@@ -201,10 +211,10 @@ const nextStep = (event: Event) => {
                 class="w-4 h-4"
               />
             </button>
-          </div>
+          </form>
         </Transition>
       <button
-        class="w-max hover:-translate-y-0.5 px-4 py-1 transition-all duration-300 ease-in-out mx-auto rounded-lg bg-[#050505]"
+        class="w-max hover:-translate-y-0.5 px-4 py-1 transition-all duration-300 ease-in-out mx-auto rounded-lg bg-[#15395A] local-shadow"
         type="button"
         @click="toggleShowAdd"
       >
