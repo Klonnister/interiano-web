@@ -69,7 +69,7 @@ export const useProductCreateStore = defineStore('productCreateStore', () => {
             toast.error('Ingrese un nombre para el producto.')
           else if(!image.value)
             toast.error('Escoja una imagen para el producto.')
-          
+
           return Boolean(category.value && trademark.value && name.value && image.value);
         case 2: 
           if(typeof stock.value !== 'number')
