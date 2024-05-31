@@ -3,7 +3,7 @@ import { useWindowScroll, useWindowSize } from '@vueuse/core';
 import { useProductCreateStore } from '../stores/productCreateStore';
 import InputText from 'primevue/inputtext';
 import Textarea from 'primevue/textarea';
-import { ref } from 'vue';
+import { ref, type Ref } from 'vue';
 import { Icon } from '@iconify/vue';
 import { useToast } from 'vue-toastification';
 import { useRouter } from 'vue-router';
@@ -19,8 +19,8 @@ const createStore = useProductCreateStore();
 createStore.currentView = 2;
 
 const showAddProp = ref(false);
-const propLabel = ref(null);
-const propValue = ref(null);
+const propLabel: Ref<string> = ref('');
+const propValue: Ref<string> = ref('');
 
 // Show and hide add prop inputs
 const toggleShowAdd = () => {
@@ -30,6 +30,9 @@ const toggleShowAdd = () => {
 // Adding and deleting props methods
 const addProp = (event: Event) => {
   event.preventDefault();
+  propLabel.value = propLabel.value.trim();
+  propValue.value = propValue.value.trim();
+
   if(!propLabel.value) {
     toast.error('Agrega un nombre para la propiedad.');
     return;
@@ -40,8 +43,8 @@ const addProp = (event: Event) => {
   }
 
   createStore.extraProps[propLabel.value] = propValue.value;
-  propLabel.value = null;
-  propValue.value = null;
+  propLabel.value = '';
+  propValue.value = '';
 }
 
 const deleteProp = (key: string) => {

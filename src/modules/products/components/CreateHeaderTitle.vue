@@ -76,21 +76,35 @@ const createStore = useProductCreateStore()
         </div>
         <router-link
           aria-label="Siguiente paso"
-          :to="{ name: 'products-create-price' }"
+          :to="{ name: 'products-create-design' }"
         >
           <Icon icon="ic:round-arrow-right" class="w-8 h-8" />
         </router-link>
       </div>
+      <div class="w-full flex items-center justify-between"
+        v-else-if="createStore.currentView === 4"
+      >
+        <router-link
+          aria-label="Paso anterior"
+          :to="{ name: 'products-create-price' }"
+        >
+          <Icon icon="ic:round-arrow-left" class="w-8 h-8" />
+        </router-link>
+        <div class="relative">
+          <h2 class="py-2 px-5 text-xl" aria-current="step">Diseño</h2>
+          <Icon
+            icon="mdi:check-bold"
+            class="w-4 h-4 text-[#468222] absolute top-3 -right-1 opacity-0 transition-all duration-300 ease-in-out"
+            :class="{ 'opacity-100': createStore.design }"
+          />
+        </div>
+        <button disabled="true"
+          class="disabled:opacity-50"
+          aria-label="Siguiente paso"
+        >
+          <Icon icon="ic:round-arrow-right" class="w-8 h-8" />
+        </button>
+      </div>
     </Transition>
   </div>
-  <!--
-    <div class="relative" v-else-if="createStore.currentView === 4">
-      <h2 class="py-2 px-5 text-xl" aria-current="step">Diseño</h2>
-      <Icon
-        icon="mdi:check-bold"
-        class="w-4 h-4 text-[#468222] absolute top-3 -right-1 opacity-0 transition-all duration-300 ease-in-out"
-        :class="{ 'opacity-100': false }"
-      />
-    </div>
-  </Transition> -->
 </template>

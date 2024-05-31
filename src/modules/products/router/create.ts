@@ -31,6 +31,22 @@ export default [
     },
   },
   {
+    path: 'design',
+    name: 'products-create-design',
+    component: () => import('@/modules/products/components/CreateDesign.vue'),
+    beforeEnter: () => {
+      const createStore = useProductCreateStore();
+      if(!createStore.validateView(1))
+        router.push({ name: 'products-create-main' })
+        
+      else if( !createStore.validateView(2) )
+        router.push({ name: 'products-create-secondary' })
+
+      else if( !createStore.validateView(3) )
+        router.push({ name: 'products-create-price' })
+    },
+  },
+  {
     path: '',
     redirect: { name: 'products-create-main' }
   }

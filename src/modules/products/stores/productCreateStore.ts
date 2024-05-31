@@ -45,9 +45,33 @@ export const useProductCreateStore = defineStore('productCreateStore', () => {
     'productCreatePrice', 
     null,
     undefined,
-  { serializer: StorageSerializers.number }
-);
-
+    { serializer: NSerializer }
+  );
+  const sale: Ref<boolean> = useStorage(
+    'productCreateSale', 
+    false,
+    undefined,
+    { serializer: StorageSerializers.boolean }
+  );
+  const discontinued: Ref<boolean> = useStorage(
+    'productCreateDiscontinued', 
+    false,
+    undefined,
+    { serializer: StorageSerializers.boolean }
+  );
+  const salePrice: Ref<number|null> = useStorage(
+    'productCreateSalePrice', 
+    null,
+    undefined,
+    { serializer: NSerializer }
+  );
+  const design: Ref<number|null> = useStorage(
+    'productCreateDesign',
+    null,
+    undefined,
+    { serializer: NSerializer }
+  );
+  
   const resetCategory = () => {
     category.value = null;
     localStorage.setItem('productCreateCategory', '')
@@ -71,7 +95,14 @@ export const useProductCreateStore = defineStore('productCreateStore', () => {
             toast.error('Escoja una imagen para el producto.')
 
           return Boolean(category.value && trademark.value && name.value && image.value);
-        case 2: 
+        case 2:
+          Object.keys(extraProps.value).forEach(( key:string ) => {
+            if (extraProps.value[key].trim() !== ''){
+              extraProps.value[key] = extraProps.value[key].trim()
+            } else {
+              delete extraProps.value[key];
+            }
+          })
           if(typeof stock.value !== 'number')
             toast.error('Agregue la cantidad de existencias.')
 
@@ -83,16 +114,49 @@ export const useProductCreateStore = defineStore('productCreateStore', () => {
             !String(stock.value).includes('.')
           );
         case 3:
-          
-          return false;
+          if(!price.value)
+            toast.error('Agregue un precio al producto.')
+
+          if(sale.value) {
+            if(!salePrice.value) {
+              sale.value = false;
+              salePrice.value = null;
+              toast('Se ha desaplicado la oferta ya que no se agregó un precio ofertado.')
+            }
+          }
+          return Boolean(price.value);
+        case 4: 
+          if(!design.value)
+            toast.error('Escoja un diseño para su producto.')
+
+          return Boolean(design.value);
         default: 
           return false;
       }
   }
 
+  const resetCreateProduct: () => void = () => {
+    category.value = null,
+    localStorage.setItem('productCreateCategory', '')
+    trademark.value = null,
+    localStorage.setItem('productCreateTrademark', '')
+    name.value = '';
+    image.value = '';
+    size.value = '';
+    stock.value = null;
+    description.value = '';
+    extraProps.value = {};
+    price.value = null;
+    sale.value = false;
+    discontinued.value = false;
+    salePrice.value = null;
+    design.value = null;
+  }
+
   return {
     currentView, loading, categories, trademarks,
     name, category, trademark, image, size, stock, description,
-    extraProps, price, validateView, resetCategory, resetTrademark
+    extraProps, price, sale, salePrice, discontinued, design,
+    validateView, resetCategory, resetTrademark, resetCreateProduct,
   }
 })

@@ -17,7 +17,7 @@ export const primeVueOptions: PrimeVueConfiguration = {
     dropdown: {
       root: 'bg-[#061321] w-full rounded-md border-0 local-shadow transition-all duration-300 ease-in-out',
       input: 'text-[#dae0f5]',
-      wrapper: 'bg-[#061321] rounded-md mt-2 dropdown-scrollbar',
+      wrapper: 'bg-[#061321] rounded-md dropdown-scrollbar',
       panel: 'bg-[#061321]',
       header: 'bg-[#061321]',
       item: 'text-[#A8B7EA] hover:bg-[#071729] text-[15px] py-[0.6rem] px-4 hover:text-white',

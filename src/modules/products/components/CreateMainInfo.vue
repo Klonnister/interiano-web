@@ -122,6 +122,9 @@ const nextStep = (event: Event) => {
         Categoría *
       </span>
       <Dropdown
+        :pt="{
+          wrapper: 'bg-[#061321] rounded-md mt-2 dropdown-scrollbar',
+        }"
         :input-props="{ 
           name: 'productCreateCategory',
           autocomplete: 'off',
@@ -152,6 +155,9 @@ const nextStep = (event: Event) => {
         Marca *
       </span>
       <Dropdown
+        :pt="{
+          wrapper: 'bg-[#061321] rounded-md mt-2 dropdown-scrollbar',
+        }"
         :input-props="{ 
           name: 'productCreateTrademark',
           autocomplete: 'off',
@@ -190,7 +196,7 @@ const nextStep = (event: Event) => {
         autoResize
         maxlength="70"
         placeholder="Shampo Control Caída, Nutre y Crece"
-        rows="1"
+        rows="2"
       />
     </div>
     <div class="flex flex-col gap-2 group">

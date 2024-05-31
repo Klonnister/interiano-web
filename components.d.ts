@@ -18,6 +18,7 @@ declare module 'vue' {
     CategoriesFilter: typeof import('./src/modules/shared/components/CategoriesFilter.vue')['default']
     CategoryCheckbox: typeof import('./src/modules/shared/components/CategoryCheckbox.vue')['default']
     CreateCategoryModal: typeof import('./src/modules/products/components/CreateCategoryModal.vue')['default']
+    CreateDesign: typeof import('./src/modules/products/components/CreateDesign.vue')['default']
     CreateHeaderTitle: typeof import('./src/modules/products/components/CreateHeaderTitle.vue')['default']
     CreateMainInfo: typeof import('./src/modules/products/components/CreateMainInfo.vue')['default']
     CreatePrice: typeof import('./src/modules/products/components/CreatePrice.vue')['default']
