@@ -4,6 +4,7 @@ import InputText from 'primevue/inputtext';
 import { ref } from 'vue';
 import { apiRequest } from '../../shared/helpers/api';
 import { Icon } from '@iconify/vue';
+import type { CategoryResponse } from '@/modules/shared/types/category.interface';
 
 const emit = defineEmits<{
   (e: 'resetCategory'):void,
