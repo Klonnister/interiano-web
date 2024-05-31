@@ -1,7 +1,7 @@
 import router from '@/router';
 import { type RouteLocation } from 'vue-router';
 import { useFilterStore } from '@/modules/shared/stores/filterStore';
-import createRoutes from './createRoutes';
+import productCreateRoutes from './create';
 
 export default [
   {
@@ -18,7 +18,13 @@ export default [
     },
   },
   
-  createRoutes,
+  {
+    path: 'productos/crear',
+    component: () => import('@/modules/products/views/ProductCreate.vue'),
+    children: [ 
+      ...productCreateRoutes 
+    ],
+  },
 
   {
     path: 'productos/:id',
