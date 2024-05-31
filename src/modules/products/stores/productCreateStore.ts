@@ -1,3 +1,4 @@
+import { NSerializer } from "@/modules/shared/helpers/nSerializer";
 import type { Category } from "@/modules/shared/types/category.interface";
 import type { Trademark } from "@/modules/shared/types/trademark.interface";
 import { StorageSerializers, useStorage } from "@vueuse/core";
@@ -6,11 +7,6 @@ import { ref, type Ref } from 'vue';
 import { useToast } from "vue-toastification";
 
 const toast = useToast();
-
-const NSerializer = {
-  read: (v: any) => v === '' ? null : Number(v),
-  write: (v: any) => v !== null ? String(v) : '',
-}
 
 export const useProductCreateStore = defineStore('productCreateStore', () => {
   // View info
@@ -39,7 +35,6 @@ export const useProductCreateStore = defineStore('productCreateStore', () => {
     undefined,
     { serializer: StorageSerializers.number }
   );
-  
   const stock: Ref<number|null> = useStorage(
     'productCreateStock',
     null,
