@@ -40,6 +40,7 @@ watch(priceMax, (newValue) => {
           type="number"
           class="local-inset-shadow transition-all duration-300 ease-in-out"
           step="0.01"
+          max="99999.99"
           placeholder="1"
         />
         <span>Q</span>
@@ -55,6 +56,7 @@ watch(priceMax, (newValue) => {
           type="number"
           class="local-inset-shadow transition-all duration-300 ease-in-out"
           step="0.01"
+          max="99999.99"
           placeholder="9999"
         />
         <span>Q</span>

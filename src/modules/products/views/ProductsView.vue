@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref, watch, type Ref } from 'vue';
-import type { Meta, MetaInfo, Product, ProductResponse } from '../../shared/types/product.interface';
+import type { Meta, MetaInfo, Product, ProductsResponse } from '../../shared/types/product.interface';
 import { useFilterStore } from '@/modules/shared/stores/filterStore';
 import { apiRequest } from '@/modules/shared/helpers/api';
 import type { Category } from '@/modules/shared/types/category.interface';
@@ -39,7 +39,7 @@ const getProducts = async () => {
   layoutStore.resetLayout();
   cardsStore.resetCards();
   const { queries } = filterStore.getQueries();
-  const productsResponse: ProductResponse = await apiRequest(`products${queries}`);
+  const productsResponse: ProductsResponse = await apiRequest(`products${queries}`);
   if (!productsResponse.statusCode) {
     products.value = productsResponse.data;
     filterStore.updateTrademarks(productsResponse.trademarks);
