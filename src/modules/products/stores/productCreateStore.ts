@@ -27,13 +27,13 @@ export const useProductCreateStore = defineStore('productCreateStore', () => {
     'productCreateCategory',
     null,
     undefined,
-    { serializer: StorageSerializers.number }
+    { serializer: NSerializer }
   );
   const trademark: Ref<number|null> = useStorage(
     'productCreateTrademark',
     null,
     undefined,
-    { serializer: StorageSerializers.number }
+    { serializer: NSerializer }
   );
   const stock: Ref<number|null> = useStorage(
     'productCreateStock',
@@ -49,13 +49,13 @@ export const useProductCreateStore = defineStore('productCreateStore', () => {
 );
 
   const resetCategory = () => {
-    category.value = 0;
-    localStorage.setItem('productCreateCategory', '0');
+    category.value = null;
+    localStorage.setItem('productCreateCategory', '')
   }
 
   const resetTrademark = () => {
-    trademark.value = 0;
-    localStorage.setItem('productCreateTrademark', '0');
+    trademark.value = null;
+    localStorage.setItem('productCreateTrademark', '')
   }
 
   const validateView = (id: number) => {

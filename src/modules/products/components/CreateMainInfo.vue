@@ -32,9 +32,9 @@ const getViewOptions = async() => {
   createStore.loading = true;
   const options: ProductOptions = await apiRequest('products/create');
   createStore.categories = options.categories;
-  createStore.categories.unshift({ id: 99999, name: 'Crear +' })
+  createStore.categories.unshift({ id: 0, name: 'Crear +' })
   createStore.trademarks = options.trademarks;
-  createStore.trademarks.unshift({ id: 99999, name: 'Crear +', image: '' })
+  createStore.trademarks.unshift({ id: 0, name: 'Crear +', image: '' })
   createStore.loading = false;
 }
 
@@ -76,7 +76,7 @@ const categoryModal = useModal({
 });
 
 watch(category, (newCategory) => {
-  if(newCategory === 99999) categoryModal.open()
+  if(newCategory === 0) categoryModal.open()
 })
 
 
@@ -101,7 +101,7 @@ const trademarkModal = useModal({
 });
 
 watch(trademark, (newTrademark) => {
-  if(newTrademark === 99999) trademarkModal.open()
+  if(newTrademark === 0) trademarkModal.open()
 })
 
 // Form submittion next step
