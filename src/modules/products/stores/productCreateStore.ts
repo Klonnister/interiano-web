@@ -1,11 +1,16 @@
 import type { Category } from "@/modules/shared/types/category.interface";
 import type { Trademark } from "@/modules/shared/types/trademark.interface";
-import { useStorage } from "@vueuse/core";
+import { StorageSerializers, useStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
 import { ref, type Ref } from 'vue';
 import { useToast } from "vue-toastification";
 
 const toast = useToast();
+
+const NSerializer = {
+  read: (v: any) => v === '' ? null : Number(v),
+  write: (v: any) => v !== null ? String(v) : '',
+}
 
 export const useProductCreateStore = defineStore('productCreateStore', () => {
   // View info
@@ -16,14 +21,37 @@ export const useProductCreateStore = defineStore('productCreateStore', () => {
 
   // Form inputs
   const name: Ref<string> = useStorage('productCreateName', '');
-  const category: Ref<number> = useStorage('productCreateCategory', 0);
-  const trademark: Ref<number> = useStorage('productCreateTrademark', 0);
   const image: Ref<string> = useStorage('productCreateImage', '');
   const size: Ref<string> = useStorage('productCreateSize', '');
-  const stock: Ref<number|null> = useStorage('productCreateStock', null);
-  const description: Ref<string> = useStorage('productCreateDescription', '');
-  const extraProps = useStorage('productCreateExtraProps', {})
-  const price: Ref<number|null> = useStorage('productCreatePrice', null);
+  const description: Ref<string> = useStorage('productCreateDescription', '')
+  const extraProps = useStorage('productCreateExtraProps', {}, undefined, {
+    serializer: StorageSerializers.object,
+  })
+  const category: Ref<number|null> = useStorage(
+    'productCreateCategory',
+    null,
+    undefined,
+    { serializer: StorageSerializers.number }
+  );
+  const trademark: Ref<number|null> = useStorage(
+    'productCreateTrademark',
+    null,
+    undefined,
+    { serializer: StorageSerializers.number }
+  );
+  
+  const stock: Ref<number|null> = useStorage(
+    'productCreateStock',
+    null,
+    undefined,
+    { serializer: NSerializer }
+  );
+  const price: Ref<number|null> = useStorage(
+    'productCreatePrice', 
+    null,
+    undefined,
+  { serializer: StorageSerializers.number }
+);
 
   const resetCategory = () => {
     category.value = 0;
@@ -49,11 +77,18 @@ export const useProductCreateStore = defineStore('productCreateStore', () => {
           
           return Boolean(category.value && trademark.value && name.value && image.value);
         case 2: 
-          if(!stock.value)
+          if(typeof stock.value !== 'number')
             toast.error('Agregue la cantidad de existencias.')
 
-          return Boolean(stock.value)
+          if(String(stock.value).includes('.'))
+            toast.error('Las existencias no pueden contener decimales.')
+
+          return Boolean(
+            typeof stock.value === 'number' && 
+            !String(stock.value).includes('.')
+          );
         case 3:
+          
           return false;
         default: 
           return false;

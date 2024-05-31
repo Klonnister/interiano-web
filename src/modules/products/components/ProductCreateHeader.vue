@@ -47,8 +47,8 @@ const createStore = useProductCreateStore();
           icon="mdi:check-bold"
           class="w-4 h-4 text-[#468222] absolute top-1.5 -right-2 transition-all duration-300 ease-in-out opacity-0"
           :class="{ 
-            'opacity-50 group-hover:opacity-100': createStore.currentView !== 2 && createStore.stock,
-            'opacity-100': createStore.stock
+            'opacity-50 group-hover:opacity-100': createStore.currentView !== 2 && typeof createStore.stock === 'number' && !String(createStore.stock).includes('.'),
+            'opacity-100': typeof createStore.stock === 'number' && !String(createStore.stock).includes('.')
           }"
         />
       </router-link>

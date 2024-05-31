@@ -21,7 +21,7 @@ const createStore = useProductCreateStore()
           <Icon
             icon="mdi:check-bold"
             class="w-4 h-4 text-[#468222] absolute top-3 -right-1 opacity-0 transition-all duration-300 ease-in-out"
-            :class="{ 'opacity-100': createStore.category && createStore.trademark && createStore.name && createStore.image}"
+            :class="{ 'opacity-100': createStore.category && createStore.trademark && createStore.name && createStore.image }"
           />
         </div>
         <router-link
@@ -46,7 +46,7 @@ const createStore = useProductCreateStore()
           <Icon
             icon="mdi:check-bold"
             class="w-4 h-4 text-[#468222] absolute top-3 -right-1 opacity-0 transition-all duration-300 ease-in-out"
-            :class="{ 'opacity-100': createStore.stock }"
+            :class="{ 'opacity-100': typeof createStore.stock === 'number' && !String(createStore.stock).includes('.') }"
           />
         </div>
         <router-link

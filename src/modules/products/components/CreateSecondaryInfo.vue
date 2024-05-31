@@ -44,7 +44,7 @@ const addProp = (event: Event) => {
   propValue.value = null;
 }
 
-const deleteProp = (key: string|number) => {
+const deleteProp = (key: string) => {
   delete createStore.extraProps[key];
 }
 
@@ -162,7 +162,7 @@ const nextStep = (event: Event) => {
           <button
             class="p-2 bg-[#722A2A] rounded-lg mb-2 local-shadow hover:-translate-y-0.5 transition-all duration-500 ease-in-out hover:bg-[#8f2f2f]"
             type="button"
-            @click="deleteProp(key)"
+            @click="deleteProp(String(key))"
           >
           <Icon
             icon="material-symbols-light:delete"
