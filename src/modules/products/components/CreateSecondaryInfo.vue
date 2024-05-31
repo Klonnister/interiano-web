@@ -82,6 +82,7 @@ const nextStep = (event: Event) => {
         autocomplete="on"
         :disabled="createStore.loading"
         id="productCreateSize"
+        maxlength="20"
         placeholder="650 ml"
         v-model="createStore.size"
       />
@@ -101,6 +102,7 @@ const nextStep = (event: Event) => {
         type="number"
         required
         step="1"
+        max="99999"
         class="local-inset-shadow transition-all duration-300 ease-in-out"
         placeholder="5"
       />
@@ -121,6 +123,7 @@ const nextStep = (event: Event) => {
         name="productCreateDescription"
         v-model="createStore.description"
         autoResize
+        maxlength="500"
         placeholder="Nuevo Shampoo Pantene, nutre desde la raíz a las puntas y ayuda al fortalecimiento completo del cabello"
         :rows="width > 1024 ? '4' : '6'"
       />
@@ -148,6 +151,7 @@ const nextStep = (event: Event) => {
             </label>
             <InputText
               autocomplete="on"
+              maxlength="30"
               :disabled="createStore.loading"
               required
               :id="`productCreateProp${key}`"
@@ -184,6 +188,7 @@ const nextStep = (event: Event) => {
                 :disabled="createStore.loading"
                 id="productCreatePropLabel"
                 placeholder="Línea"
+                maxlength="30"
                 v-model="propLabel"
               />
             </div>
@@ -199,6 +204,7 @@ const nextStep = (event: Event) => {
                 autocomplete="off"
                 :disabled="createStore.loading"
                 id="productCreatePropValue"
+                maxlength="30"
                 placeholder="Pro-V"
                 v-model="propValue"
               />

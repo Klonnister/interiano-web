@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import InputText from 'primevue/inputtext';
 import CreateCategoryModal from '../components/CreateCategoryModal.vue';
 import CreateTrademarkModal from '../components/CreateTrademarkModal.vue';
 import { useProductCreateStore } from '../stores/productCreateStore';
@@ -15,6 +14,7 @@ import { watch } from 'vue';
 import { useModal } from 'vue-final-modal';
 import { useToast } from 'vue-toastification';
 import { type ImageResponse } from '../../shared/types/image.interface';
+import Textarea from 'primevue/textarea';
 
 // Tools and stores declarations
 const { y } = useWindowScroll({ behavior: 'smooth'});
@@ -173,22 +173,24 @@ const nextStep = (event: Event) => {
         :placeholder="createStore.loading ? 'Cargando...' : 'Seleccionar...'"
       />
     </div>
-    <div class="flex flex-col gap-2 group">
+    <div class="flex flex-col gap-2 group relative">
       <label
         for="productCreateName"
         class="text-[#A8B7EA] transition-all duration-300 ease-in-out group-hover:-translate-y-0.5 group-hover:text-[#d0d9f6]"
       >
         Nombre *
       </label>
-      <InputText
-        name="productCreateName"
-        autocomplete="off"
-        :disabled="createStore.loading"
+      <span class="text-[#A8B7EA] text-sm absolute top-0 right-0">
+        ({{ createStore.name.length }}/70)
+      </span>
+      <Textarea
         id="productCreateName"
-        placeholder="Shampo Control Caída, Bambú Nutre y Crece"
-        required
-        type="text"
+        name="productCreateName"
         v-model="createStore.name"
+        autoResize
+        maxlength="70"
+        placeholder="Shampo Control Caída, Nutre y Crece"
+        rows="1"
       />
     </div>
     <div class="flex flex-col gap-2 group">
