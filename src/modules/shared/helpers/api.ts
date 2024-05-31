@@ -6,7 +6,7 @@ import router from "@/router";
 const authStore = useAuthStore();
 const toast = useToast();
 
-export const apiUrl = 'http://localhost:3000';
+export const apiUrl = 'http://192.168.1.62:3000';
 
 export const apiRequest = async(path: string, params?: apiParams) => {
   return await fetch(`${apiUrl}/${path}`, {
@@ -145,7 +145,7 @@ interface apiParams {
 
 interface apiImageParams {
   images: File;
-  previousImage?: string;
+  previousImage?: string | null;
 }
 
 // todo: https://documenter.getpostman.com/view/25880124/2sA35MwxUi

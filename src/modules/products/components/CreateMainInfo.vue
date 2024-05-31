@@ -23,7 +23,6 @@ const { category, trademark } = storeToRefs( createStore );
 const toast = useToast();
 const router = useRouter();
 
-
 // Setting Current View step in store
 createStore.currentView = 1;
 

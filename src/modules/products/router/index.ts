@@ -1,7 +1,7 @@
 import router from '@/router';
 import { type RouteLocation } from 'vue-router';
 import { useFilterStore } from '@/modules/shared/stores/filterStore';
-import productCreateRoutes from './create';
+import { createPriceGuard, createSecondaryGuard } from '../guards/createProductGuards';
 
 export default [
   {
@@ -21,8 +21,28 @@ export default [
   {
     path: 'productos/crear',
     component: () => import('@/modules/products/views/ProductCreate.vue'),
-    children: [ 
-      ...productCreateRoutes 
+    children: [
+      {
+        path: 'info-principal',
+        name: 'products-create-main',
+        component: () => import('@/modules/products/components/CreateMainInfo.vue')
+      },
+      {
+        path: 'info-secundaria',
+        name: 'products-create-secondary',
+        component: () => import('@/modules/products/components/CreateSecondaryInfo.vue'),
+        beforeEnter: [ createSecondaryGuard ]
+      },
+      {
+        path: 'precio',
+        name: 'products-create-price',
+        component: () => import('@/modules/products/components/CreatePrice.vue'),
+        beforeEnter: [ createPriceGuard ],
+      },
+      {
+        path: '',
+        redirect: { name: 'products-create-main' }
+      }
     ],
   },
 
