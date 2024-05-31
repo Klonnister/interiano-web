@@ -58,7 +58,7 @@ const preventNext = (event: Event) => {
 const previousStep = (event: Event) => {
   event.preventDefault();
   y.value = 0;
-  router.push({ name: 'products-create-primary' })
+  router.push({ name: 'products-create-main' })
 }
 
 const nextStep = (event: Event) => {

@@ -25,6 +25,16 @@ export const useProductCreateStore = defineStore('productCreateStore', () => {
   const extraProps = useStorage('productCreateExtraProps', {})
   const price: Ref<number|null> = useStorage('productCreatePrice', null);
 
+  const resetCategory = () => {
+    category.value = 0;
+    localStorage.setItem('productCreateCategory', '0');
+  }
+
+  const resetTrademark = () => {
+    trademark.value = 0;
+    localStorage.setItem('productCreateTrademark', '0');
+  }
+
   const validateView = (id: number) => {
       switch(id) {
         case 1:
@@ -53,6 +63,6 @@ export const useProductCreateStore = defineStore('productCreateStore', () => {
   return {
     currentView, loading, categories, trademarks,
     name, category, trademark, image, size, stock, description,
-    extraProps, price, validateView,
+    extraProps, price, validateView, resetCategory, resetTrademark
   }
 })

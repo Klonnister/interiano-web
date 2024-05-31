@@ -155,3 +155,14 @@ input[type='number']::-webkit-outer-spin-button {
   opacity: 0;
   transform: translateY(-25%);
 }
+
+
+.scale-enter-active,
+.scale-leave-active {
+  transition: transform 0.3s ease-in-out;
+}
+
+.scale-enter-from,
+.scale-leave-to {
+  transform: scale(0%);
+}

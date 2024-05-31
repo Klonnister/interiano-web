@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import InputText from 'primevue/inputtext';
+import CreateCategoryModal from '../components/CreateCategoryModal.vue';
+import CreateTrademarkModal from '../components/CreateTrademarkModal.vue';
 import { useProductCreateStore } from '../stores/productCreateStore';
 import Dropdown from 'primevue/dropdown';
 import { apiImageRequest, apiRequest, apiUrl } from '@/modules/shared/helpers/api';
@@ -8,13 +10,25 @@ import FileUpload, { type FileUploadUploaderEvent } from 'primevue/fileupload';
 import { Icon } from '@iconify/vue';
 import { useWindowScroll } from '@vueuse/core';
 import { useRouter } from 'vue-router';
+import { storeToRefs } from 'pinia';
+import { watch } from 'vue';
+import { useModal } from 'vue-final-modal';
+import { useToast } from 'vue-toastification';
+import { type ImageResponse } from '../../shared/types/image.interface';
 
+// Tools and stores declarations
 const { y } = useWindowScroll({ behavior: 'smooth'});
 const createStore = useProductCreateStore();
+const { category, trademark } = storeToRefs( createStore );
+const toast = useToast();
 const router = useRouter();
+
+
+// Setting Current View step in store
 createStore.currentView = 1;
 
 
+// Get Categories and trademarks from API
 const getViewOptions = async() => {
   createStore.loading = true;
   const options: ProductOptions = await apiRequest('products/create');
@@ -28,22 +42,75 @@ const getViewOptions = async() => {
 if (!createStore.categories.length || !createStore.trademarks.length)
   getViewOptions();
 
+
+// Image upload method and call to API
 const onImageUpload = async(event: FileUploadUploaderEvent) => {
-  const response = await apiImageRequest('products/images', {
+  const response: ImageResponse = await apiImageRequest('products/images', {
     images: event.files[0],
     previousImage: createStore.image,
   });
 
-  if( response ) 
+  if( !response.statusCode ) 
     createStore.image = response.path;
 }
 
+
+// Create category modal
+const categoryModal = useModal({
+  component: CreateCategoryModal,
+  attrs: {
+    onResetCategory: () => {
+      createStore.resetCategory();
+    },
+    onResetInfo: () => {
+      toast.success('Categoría creada con éxito.')
+      getViewOptions();
+    },
+    onSetCategory: (id: number) => {
+      createStore.category = id;
+    },
+    onClose: () => {
+      categoryModal.close();
+    },
+
+  }
+});
+
+watch(category, (newCategory) => {
+  if(newCategory === 99999) categoryModal.open()
+})
+
+
+// Create Trademark modal
+const trademarkModal = useModal({
+  component: CreateTrademarkModal,
+  attrs: {
+    onResetTrademark: () => {
+      createStore.resetTrademark();
+    },
+    onResetInfo: () => {
+      toast.success('Marca creada con éxito.')
+      getViewOptions();
+    },
+    onSetTrademark: (id: number) => {
+      createStore.trademark = id;
+    },
+    onClose: () => {
+      trademarkModal.close();
+    },
+  }
+});
+
+watch(trademark, (newTrademark) => {
+  if(newTrademark === 99999) trademarkModal.open()
+})
+
+// Form submittion next step
 const nextStep = (event: Event) => {
   event.preventDefault();
   y.value = 0;
   router.push({ name: 'products-create-secondary' })
 }
-
 </script>
 
 <template>
@@ -148,13 +215,13 @@ const nextStep = (event: Event) => {
 
     <Transition name="fade">
       <div
-        class="w-full lg:max-w-xs mx-auto lg:col-span-2"
+        class="mx-auto lg:col-span-2"
         v-if="createStore.image"
       >
         <img
           :src="`${apiUrl}${createStore.image}`"
           alt=""
-          class="w-full object-contain"
+          class="w-full lg:max-w-xs lg:max-h-[32rem] object-contain"
         >
       </div>
     </Transition>
