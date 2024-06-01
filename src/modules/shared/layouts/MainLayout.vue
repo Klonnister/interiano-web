@@ -76,7 +76,7 @@ watch(showMenu, (newValue) => {
           class="fixed top-0 left-0 right-0 mx-auto pt-3 hover:scale-110 hover:-rotate-2 transition-all ease-in-out duration-700 z-50"
           :class="layoutStore.showMenu ? 'w-48 sm:w-56 translate-y-[3vh]' : 'w-40 sm:w-48'"
         >
-        <NavBar />
+        <SharedNavBar />
       </div>
 
       <div class="hidden lg:flex flex-col justify-center gap-[5vh] 2xl:gap-12 p-5 ps-0 sticky top-14 py-8 lg:h-[82vh] 2xl:h-max 2xl:-ms-8">

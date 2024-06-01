@@ -16,7 +16,7 @@ const filterStore = useFilterStore();
     >
       Limpiar
     </button>
-    <CategoryCheckbox
+    <FiltersSwitchCategory
       v-for="category in filterStore.categories"
       :key="category.id"
       :name="category.name"

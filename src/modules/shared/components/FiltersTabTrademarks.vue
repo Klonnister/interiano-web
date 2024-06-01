@@ -16,7 +16,7 @@ const filterStore = useFilterStore();
     >
       Limpiar
     </button>
-    <TrademarkCheckbox
+    <FiltersSwitchTrademark
       v-for="trademark in filterStore.trademarks"
       :key="trademark.id"
       :name="trademark.name"

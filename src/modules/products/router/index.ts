@@ -1,21 +1,12 @@
 import router from '@/router';
 import { type RouteLocation } from 'vue-router';
-import { useFilterStore } from '@/modules/shared/stores/filterStore';
-import productCreateRoutes from './create';
+import productCreateRoutes from './productCreateRoutes';
 
 export default [
   {
     path: 'productos',
     name: 'products',
     component: () => import('@/modules/products/views/ProductsView.vue'),
-    beforeEnter: (to: RouteLocation, from: RouteLocation) => {
-      if (from.name) {
-        if(!String(from.name).includes('product')) {
-          const filterStore = useFilterStore();  
-          filterStore.clearFilters();
-        }
-      }
-    },
   },
   
   {

@@ -74,7 +74,7 @@ const nextStep = (event: Event) => {
         onIcon="pi pi-tag"
         offIcon="pi pi-box"
         class="w-36"
-        aria-label="Mostrar solo ofertas"
+        aria-label="Aplicar oferta"
       />
       <ToggleButton
         input-id="productCreateDiscontinued"
@@ -85,7 +85,7 @@ const nextStep = (event: Event) => {
         onIcon="pi pi-times"
         offIcon="pi pi-thumbs-up-fill"
         class="w-44"
-        aria-label="Mostrar solo ofertas"
+        aria-label="Producto Descontinuado"
       />
     </div>
 

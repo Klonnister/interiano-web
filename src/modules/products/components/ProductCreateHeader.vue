@@ -11,7 +11,7 @@ const createStore = useProductCreateStore();
       Crear Producto
     </h1>
 
-    <CreateHeaderTitle class="sm:hidden"/>
+    <ProductCreateHeaderTitle class="sm:hidden"/>
 
     <div class="hidden sm:flex w-full justify-center gap-8">
       <router-link

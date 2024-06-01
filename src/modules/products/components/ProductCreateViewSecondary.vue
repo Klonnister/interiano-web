@@ -136,7 +136,7 @@ const nextStep = (event: Event) => {
       <p class="text-2xl text-center">Otras características (Opcional)</p>
       
       <form
-        id="createProductAddedProps"
+        id="productCreateAddedProps"
         class="w-full flex flex-col max-w-sm mx-auto"
         @submit="preventNext"
       >

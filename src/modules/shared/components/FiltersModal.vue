@@ -49,7 +49,7 @@ const layoutStore = useLayoutStore();
                     </Transition>
                 </div>
             </template>
-            <CategoriesFilter />
+            <FiltersTabCategories />
           </AccordionTab>
           <AccordionTab>
               <template #header>
@@ -64,7 +64,7 @@ const layoutStore = useLayoutStore();
                   </Transition>
                 </div>
               </template>
-              <TrademarksFilter />
+              <FiltersTabTrademarks />
           </AccordionTab>
           <AccordionTab>
               <template #header>
@@ -79,7 +79,7 @@ const layoutStore = useLayoutStore();
                   </Transition>
                 </div>
               </template>
-              <PriceFilter />
+              <FiltersTabPrice />
           </AccordionTab>
           <AccordionTab>
               <template #header>
@@ -94,7 +94,7 @@ const layoutStore = useLayoutStore();
                   </Transition>
                 </div>
               </template>
-              <FilterStatus />
+              <FiltersTabStatus />
           </AccordionTab>
           <AccordionTab>
               <template #header>
@@ -112,7 +112,7 @@ const layoutStore = useLayoutStore();
                   </Transition>
                 </div>
               </template>
-              <OrderFilter />
+              <FiltersTabOrder />
           </AccordionTab>
         </Accordion>
 
@@ -129,7 +129,7 @@ const layoutStore = useLayoutStore();
         />
       </div> 
      
-      <FiltersButtons />
+      <FiltersTabButtons />
     </div>
   </VueFinalModal>
 </template>

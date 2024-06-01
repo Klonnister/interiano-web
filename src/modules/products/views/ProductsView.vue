@@ -72,7 +72,7 @@ watch(applyFilters, (apply) => {
 
 <template>
   <div class="flex flex-col gap-8">
-    <CardsViewHeader
+    <SharedCardsViewHeader
       title="productos"
       :filters-button="true"
       :modal-button="true"
@@ -82,7 +82,7 @@ watch(applyFilters, (apply) => {
       <Transition name="fade" mode="out-in">
         <div v-if="products.length && !filterStore.loading" class="w-full">
           <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-x-5 gap-y-8 sm:gap-8 lg:gap-10 2xl:gap-14 min-h-[40vh] lg:min-h-[55vh]">
-            <ProductCard
+            <ProductsCard
               v-for="product in products"
               :product="product"
               :key="product.id"
@@ -103,7 +103,7 @@ watch(applyFilters, (apply) => {
         </div>
 
         <div v-else-if="filterStore.loading">
-          <ProductsSkeleton />
+          <ProductsCardSkeleton />
         </div>
   
         <div v-else class="min-h-[40vh] lg:min-h-[65vh] flex justify-center items-center w-full">

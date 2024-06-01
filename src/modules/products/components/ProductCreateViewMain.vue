@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import CreateCategoryModal from '../components/CreateCategoryModal.vue';
-import CreateTrademarkModal from '../components/CreateTrademarkModal.vue';
+import ProductModalCreateCategory from './ProductModalCreateCategory.vue';
+import ProductModalCreateTrademark from './ProductModalCreateTrademark.vue';
 import { useProductCreateStore } from '../stores/productCreateStore';
 import Dropdown from 'primevue/dropdown';
 import { apiImageRequest, apiRequest, apiUrl } from '@/modules/shared/helpers/api';
@@ -56,7 +56,7 @@ const onImageUpload = async(event: FileUploadUploaderEvent) => {
 
 // Create category modal
 const categoryModal = useModal({
-  component: CreateCategoryModal,
+  component: ProductModalCreateCategory,
   attrs: {
     onResetCategory: () => {
       createStore.resetCategory();
@@ -82,7 +82,7 @@ watch(category, (newCategory) => {
 
 // Create Trademark modal
 const trademarkModal = useModal({
-  component: CreateTrademarkModal,
+  component: ProductModalCreateTrademark,
   attrs: {
     onResetTrademark: () => {
       createStore.resetTrademark();
@@ -116,7 +116,7 @@ const nextStep = (event: Event) => {
   <form class="w-full max-w-md mx-auto flex flex-col gap-8 lg:grid lg:grid-cols-2 lg:max-w-3xl 2xl:gap-y-10" @submit="nextStep" id="productCreateMainForm">
     <div class="flex flex-col gap-2 group">
       <span
-        id="createProductCategory"
+        id="productCreateCategory"
         class="text-[#A8B7EA] transition-all duration-300 ease-in-out group-hover:-translate-y-0.5 group-hover:text-[#d0d9f6]"
       >
         Categoría *
@@ -135,7 +135,7 @@ const nextStep = (event: Event) => {
         :highlightOnSelect="false"
         :loading="createStore.loading"
         :options="createStore.categories"
-        aria-labelledby="createProductCategory"
+        aria-labelledby="productCreateCategory"
         checkmark
         empty-filter-message="No hay categorías para mostrar"
         empty-message="No hay categorías para mostrar"
@@ -149,7 +149,7 @@ const nextStep = (event: Event) => {
     </div>
     <div class="flex flex-col gap-2 group">
       <span
-        id="createProductTrademark"
+        id="productCreateTrademark"
         class="text-[#A8B7EA] transition-all duration-300 ease-in-out group-hover:-translate-y-0.5 group-hover:text-[#d0d9f6]"
       >
         Marca *
@@ -169,7 +169,6 @@ const nextStep = (event: Event) => {
         :loading="createStore.loading"
         aria-labelledby="productCreateTrademark"
         v-model="createStore.trademark"
-        input-id="productCreateTrademark"
         :options="createStore.trademarks"
         optionLabel="name"
         optionValue="id"
@@ -201,7 +200,7 @@ const nextStep = (event: Event) => {
     </div>
     <div class="flex flex-col gap-2 group">
       <span
-        id="createProductImage"
+        id="productCreateImage"
         class="text-[#A8B7EA] transition-all duration-300 ease-in-out group-hover:-translate-y-0.5 group-hover:text-[#d0d9f6]"
       >
         Imagen *
@@ -211,7 +210,7 @@ const nextStep = (event: Event) => {
         :choose-label="createStore.image ? 'Escoger otra' : 'Subir'"
         :maxFileSize="2 * 1024 * 1024"
         @uploader="onImageUpload"
-        aria-labelledby="createproductImage"
+        aria-labelledby="productCreateImage"
         accept=".jpeg,.jpg,.png,.webp,.svg"
         class="local-shadow hover:-translate-y-px text-sm"
         custom-upload

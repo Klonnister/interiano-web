@@ -117,29 +117,29 @@ const deleteFromCatalog = () => {
           class="absolute inset-0 w-32 sm:w-36 h-max flex flex-wrap justify-center items-center gap-2 sm:gap-2.5 mx-auto my-auto">
 
           <RouterLink :to="{ name: 'product-id', params: { id: props.product.id } }" class="z-30 rounded-md">
-            <CardButtonBase background="bg-[#15395A]" icon="ri:edit-2-fill" />
+            <SharedCardButtonBase background="bg-[#15395A]" icon="ri:edit-2-fill" />
           </RouterLink>
 
           <RouterLink :to="{ name: 'dev' }" class="z-30 rounded-md">
-            <CardButtonBase background="bg-[#383838]" icon="mdi:eye" />
+            <SharedCardButtonBase background="bg-[#383838]" icon="mdi:eye" />
           </RouterLink>
 
           <button class="z-30 rounded-md">
-            <CardButtonBase background="bg-[#722A2A]" icon="ic:baseline-delete" />
+            <SharedCardButtonBase background="bg-[#722A2A]" icon="ic:baseline-delete" />
           </button>
 
           <RouterLink :to="{ name: 'dev' }" class="z-30 rounded-md">
-            <CardButtonBase background="bg-[#522965]" icon="solar:box-bold" />
+            <SharedCardButtonBase background="bg-[#522965]" icon="solar:box-bold" />
           </RouterLink>
 
           <div class="z-30 w-[2.05rem] lg:w-[2.30rem] h-[2.05rem] lg:h-[2.30rem]  relative">
             <Transition name="swipe-up" mode="out-in">
               <button class="rounded-md absolute" v-if="!inCatalog" @click="addToCatalog">
-                <CardButtonBase background="bg-[#3A5F34]" icon="mdi:file-plus" />
+                <SharedCardButtonBase background="bg-[#3A5F34]" icon="mdi:file-plus" />
               </button>
 
               <button class="rounded-md absolute" v-else @click="deleteFromCatalog">
-                <CardButtonBase background="bg-[#813651]" icon="mdi:file-minus" />
+                <SharedCardButtonBase background="bg-[#813651]" icon="mdi:file-minus" />
               </button>
             </Transition>
           </div>

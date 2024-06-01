@@ -55,7 +55,7 @@ const submit = async(event: Event) => {
   })
 
   if(!response.statusCode) {
-    createStore.resetCreateProduct();
+    createStore.resetProductCreate();
     toast.success('Producto creado con éxito');
     router.push({ name: 'product-id', params: { id: response.id } })
   }
@@ -66,7 +66,7 @@ const submit = async(event: Event) => {
   <form class="w-full max-w-md mx-auto flex flex-col gap-8 lg:grid lg:grid-cols-2 lg:max-w-3xl 2xl:gap-y-10" @submit="submit" id="productCreateMainForm">
     <div class="flex flex-col gap-2 group lg:col-span-2 lg:max-w-sm lg:w-full lg:mx-auto">
       <span
-        id="createProductDesignLabel"
+        id="productCreateDesignLabel"
         class="text-[#A8B7EA] transition-all duration-300 ease-in-out group-hover:-translate-y-0.5 group-hover:text-[#d0d9f6]"
       >
         Diseño *
@@ -76,16 +76,16 @@ const submit = async(event: Event) => {
           wrapper: 'bg-[#061321] rounded-md mt-2 dropdown-scrollbar',
         }"
         :input-props="{ 
-          name: 'createProductDesign',
+          name: 'productCreateDesign',
           autocomplete: 'off',
         }"
         :filter-input-props="{
-          id: 'createProductDesign',
+          id: 'productCreateDesign',
         }"
         :highlightOnSelect="false"
         :loading="createStore.loading"
         :options="designs"
-        aria-labelledby="createProductDesignLabel"
+        aria-labelledby="productCreateDesignLabel"
         checkmark
         empty-filter-message="No hay diseños para mostrar"
         empty-message="No hay diseños para mostrar"

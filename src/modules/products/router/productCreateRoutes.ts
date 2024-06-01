@@ -5,12 +5,12 @@ export default [
   {
     path: 'info-principal',
     name: 'products-create-main',
-    component: () => import('@/modules/products/components/CreateMainInfo.vue')
+    component: () => import('@/modules/products/components/ProductCreateViewMain.vue')
   },
   {
     path: 'info-secundaria',
     name: 'products-create-secondary',
-    component: () => import('@/modules/products/components/CreateSecondaryInfo.vue'),
+    component: () => import('@/modules/products/components/ProductCreateViewSecondary.vue'),
     beforeEnter: () => {
       const createStore = useProductCreateStore();
       if(!createStore.validateView(1)) 
@@ -20,7 +20,7 @@ export default [
   {
     path: 'precio',
     name: 'products-create-price',
-    component: () => import('@/modules/products/components/CreatePrice.vue'),
+    component: () => import('@/modules/products/components/ProductCreateViewPrice.vue'),
     beforeEnter: () => {
       const createStore = useProductCreateStore();
       if(!createStore.validateView(1))
@@ -33,7 +33,7 @@ export default [
   {
     path: 'design',
     name: 'products-create-design',
-    component: () => import('@/modules/products/components/CreateDesign.vue'),
+    component: () => import('@/modules/products/components/ProductCreateViewDesign.vue'),
     beforeEnter: () => {
       const createStore = useProductCreateStore();
       if(!createStore.validateView(1))

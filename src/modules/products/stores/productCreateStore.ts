@@ -140,7 +140,7 @@ export const useProductCreateStore = defineStore('productCreateStore', () => {
       }
   }
 
-  const resetCreateProduct: () => void = () => {
+  const resetProductCreate: () => void = () => {
     category.value = null,
     localStorage.setItem('productCreateCategory', '')
     trademark.value = null,
@@ -162,6 +162,6 @@ export const useProductCreateStore = defineStore('productCreateStore', () => {
     currentView, loading, categories, trademarks,
     name, category, trademark, image, size, stock, description,
     extraProps, price, sale, salePrice, discontinued, design,
-    validateView, resetCategory, resetTrademark, resetCreateProduct,
+    validateView, resetCategory, resetTrademark, resetProductCreate,
   }
 })

@@ -37,15 +37,15 @@ const openFilters = () => {
       {{ props.title }}
     </h1>
     <div class="flex flex-col gap-4">
-      <SearchBar id="search1" />
+      <SharedSearchBar id="search1" />
       <div class="flex gap-3 sm:gap-6">
-        <CardsViewButton
+        <SharedCardsViewButton
           v-if="props.filtersButton"
           name="Filtros"
           icon="solar:filter-bold"
           @click="openFilters"
         />
-        <CardsViewButton
+        <SharedCardsViewButton
           v-if="props.modalButton"
           name="Opciones"
           icon="tabler:menu-deep"
@@ -56,7 +56,7 @@ const openFilters = () => {
           :to="addButtonPath"
           class="w-full"
         >
-          <CardsViewButton
+          <SharedCardsViewButton
             name="Agregar"
             icon="tabler:menu-deep"
           />
@@ -73,16 +73,16 @@ const openFilters = () => {
     </h1>
       
     <div class="flex gap-6">
-      <CardsViewButton
+      <SharedCardsViewButton
         v-if="props.filtersButton"
         name="Filtros"
         icon="solar:filter-bold"
         @click="openFilters"
       />
 
-      <SearchBar id="search2" :class="{ 'md:w-96': !props.filtersButton }" />
+      <SharedSearchBar id="search2" :class="{ 'md:w-96': !props.filtersButton }" />
 
-      <CardsViewButton
+      <SharedCardsViewButton
         v-if="props.modalButton"
         name="Opciones"
         icon="tabler:menu-deep"
@@ -93,7 +93,7 @@ const openFilters = () => {
         :to="addButtonPath"
         :class="{'w-full': props.filtersButton} "
       >
-        <CardsViewButton
+        <SharedCardsViewButton
           name="Opciones"
           icon="tabler:menu-deep"
         />
@@ -109,16 +109,16 @@ const openFilters = () => {
     </h1>
 
     <div class="flex gap-4 xl:gap-4 items-stretch">
-      <CardsViewButton
+      <SharedCardsViewButton
         v-if="props.filtersButton"
         name="Filtros"
         icon="solar:filter-bold"
         @click="openFilters"
       />
 
-      <SearchBar id="search3" />
+      <SharedSearchBar id="search3" />
   
-      <CardsViewButton
+      <SharedCardsViewButton
         v-if="props.modalButton"
         icon="tabler:menu-deep"
         :shrink="true"
@@ -129,7 +129,7 @@ const openFilters = () => {
         v-if="addButtonPath"
         :to="addButtonPath"
       >
-        <CardsViewButton
+        <SharedCardsViewButton
           icon="tabler:menu-deep"
           :shrink="true"
         />
