@@ -48,7 +48,7 @@ const submit = async(event: Event) => {
         extra_props: createStore.extraProps,
         price: createStore.price,
         sale: createStore.sale,
-        // discontinued: createStore.discontinued,
+        discontinued: createStore.discontinued,
         sale_price: createStore.salePrice || 0,
         design: createStore.design,
       }
