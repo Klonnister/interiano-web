@@ -6,7 +6,6 @@ import Dropdown from 'primevue/dropdown';
 import { apiImageRequest, apiRequest, apiUrl } from '@/modules/shared/helpers/api';
 import type { ProductOptions } from '@/modules/shared/types/product.interface';
 import FileUpload, { type FileUploadUploaderEvent } from 'primevue/fileupload';
-import { Icon } from '@iconify/vue';
 import { useWindowScroll } from '@vueuse/core';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
@@ -108,7 +107,7 @@ watch(trademark, (newTrademark) => {
 const nextStep = (event: Event) => {
   event.preventDefault();
   y.value = 0;
-  router.push({ name: 'products-create-secondary' })
+  router.push({ name: 'product-create-secondary' })
 }
 </script>
 
@@ -232,18 +231,10 @@ const nextStep = (event: Event) => {
       </div>
     </Transition>
 
-    <div class="w-full flex justify-end col-span-2">
-      <button
-        class="bg-[#15395A] py-2 ps-4 pe-2 rounded-md local-shadow hover:-translate-y-0.5 transition-all duration-500 ease-in-out hover:bg-[#205485] flex items-center gap-1"
-        type="submit"
-      >
-        Info. Secundaria
-        <Icon
-          icon="ic:round-arrow-right"
-          class="w-6 h-6"
-        />
-      </button>
-    </div>
+    <ProductCreateStepButtons
+      :hide-previous="true"
+      next-label="Diseño"
+    />
   </form>
     
 </template>

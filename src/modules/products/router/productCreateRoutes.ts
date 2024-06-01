@@ -4,50 +4,50 @@ import { useProductCreateStore } from '../stores/productCreateStore';
 export default [
   {
     path: 'info-principal',
-    name: 'products-create-main',
+    name: 'product-create-main',
     component: () => import('@/modules/products/components/ProductCreateViewMain.vue')
   },
   {
     path: 'info-secundaria',
-    name: 'products-create-secondary',
+    name: 'product-create-secondary',
     component: () => import('@/modules/products/components/ProductCreateViewSecondary.vue'),
     beforeEnter: () => {
       const createStore = useProductCreateStore();
       if(!createStore.validateView(1)) 
-        router.push({ name: 'products-create-main' });
+        router.push({ name: 'product-create-main' });
     }
   },
   {
     path: 'precio',
-    name: 'products-create-price',
+    name: 'product-create-price',
     component: () => import('@/modules/products/components/ProductCreateViewPrice.vue'),
     beforeEnter: () => {
       const createStore = useProductCreateStore();
       if(!createStore.validateView(1))
-        router.push({ name: 'products-create-main' })
+        router.push({ name: 'product-create-main' })
         
       else if( !createStore.validateView(2) )
-        router.push({ name: 'products-create-secondary' })
+        router.push({ name: 'product-create-secondary' })
     },
   },
   {
     path: 'design',
-    name: 'products-create-design',
+    name: 'product-create-design',
     component: () => import('@/modules/products/components/ProductCreateViewDesign.vue'),
     beforeEnter: () => {
       const createStore = useProductCreateStore();
       if(!createStore.validateView(1))
-        router.push({ name: 'products-create-main' })
+        router.push({ name: 'product-create-main' })
         
       else if( !createStore.validateView(2) )
-        router.push({ name: 'products-create-secondary' })
+        router.push({ name: 'product-create-secondary' })
 
       else if( !createStore.validateView(3) )
-        router.push({ name: 'products-create-price' })
+        router.push({ name: 'product-create-price' })
     },
   },
   {
     path: '',
-    redirect: { name: 'products-create-main' }
+    redirect: { name: 'product-create-main' }
   }
 ]

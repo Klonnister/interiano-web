@@ -21,7 +21,7 @@ const createStore = useProductCreateStore();
             ? 'border-white text-white'
             : 'border-[#A8B7EA00]'
         "
-        :to="{ name: 'products-create-main' }"
+        :to="{ name: 'product-create-main' }"
       >
         <span>Info. Principal</span>
         <Icon
@@ -40,7 +40,7 @@ const createStore = useProductCreateStore();
             ? 'border-white text-white'
             : 'border-[#A8B7EA00]'
         "
-        :to="{ name: 'products-create-secondary' }"
+        :to="{ name: 'product-create-secondary' }"
       >
         <span>Info. Secundaria</span>
         <Icon
@@ -59,7 +59,7 @@ const createStore = useProductCreateStore();
             ? 'border-white text-white'
             : 'border-[#A8B7EA00]'
         "
-        :to="{ name: 'products-create-price' }"
+        :to="{ name: 'product-create-price' }"
       >
         <span>Precio</span>
         <Icon
@@ -78,7 +78,7 @@ const createStore = useProductCreateStore();
             ? 'border-white text-white'
             : 'border-[#A8B7EA00]'
         "
-        :to="{ name: 'products-create-design' }"
+        :to="{ name: 'product-create-design' }"
       >
         <span>Diseño</span>
         <Icon

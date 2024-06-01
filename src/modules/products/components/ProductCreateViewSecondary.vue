@@ -58,16 +58,10 @@ const preventNext = (event: Event) => {
   return;
 }
 
-const previousStep = (event: Event) => {
-  event.preventDefault();
-  y.value = 0;
-  router.push({ name: 'products-create-main' })
-}
-
 const nextStep = (event: Event) => {
   event.preventDefault();
   y.value = 0;
-  router.push({ name: 'products-create-price' })
+  router.push({ name: 'product-create-price' })
 }
 </script>
 
@@ -234,28 +228,10 @@ const nextStep = (event: Event) => {
       </div>
     </div>
 
-    <div class="w-full flex justify-between col-span-2 mt-4">
-      <button
-        class="bg-[#1A2F25] py-2 pe-4 ps-2 rounded-md local-shadow hover:-translate-y-0.5 transition-all duration-500 ease-in-out hover:bg-[#274738] flex items-center gap-1"
-        type="button"
-        @click="previousStep"
-      >
-        <Icon
-          icon="ic:round-arrow-left"
-          class="w-6 h-6"
-        />
-        Info. Principal
-      </button>
-      <button
-        class="bg-[#15395A] py-2 ps-4 pe-2 rounded-md local-shadow hover:-translate-y-0.5 transition-all duration-500 ease-in-out hover:bg-[#205485] flex items-center gap-1"
-        type="submit"
-      >
-        Precio
-        <Icon
-          icon="ic:round-arrow-right"
-          class="w-6 h-6"
-        />
-      </button>
-    </div>
+    <ProductCreateStepButtons
+      :previous-view="{ name: 'product-create-main' }"
+      previous-label="Info. Primaria"
+      next-label="Precio"
+    />
   </form>
 </template>

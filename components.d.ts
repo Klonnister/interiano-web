@@ -24,6 +24,7 @@ declare module 'vue' {
     ProductCreate: typeof import('./src/modules/products/views/ProductCreate.vue')['default']
     ProductCreateHeader: typeof import('./src/modules/products/components/ProductCreateHeader.vue')['default']
     ProductCreateHeaderTitle: typeof import('./src/modules/products/components/ProductCreateHeaderTitle.vue')['default']
+    ProductCreateStepButtons: typeof import('./src/modules/products/components/ProductCreateStepButtons.vue')['default']
     ProductCreateViewDesign: typeof import('./src/modules/products/components/ProductCreateViewDesign.vue')['default']
     ProductCreateViewMain: typeof import('./src/modules/products/components/ProductCreateViewMain.vue')['default']
     ProductCreateViewPrice: typeof import('./src/modules/products/components/ProductCreateViewPrice.vue')['default']

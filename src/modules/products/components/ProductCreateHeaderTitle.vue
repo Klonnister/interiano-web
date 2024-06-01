@@ -26,7 +26,7 @@ const createStore = useProductCreateStore()
         </div>
         <router-link
           aria-label="Siguiente paso"
-          :to="{ name: 'products-create-secondary' }"
+          :to="{ name: 'product-create-secondary' }"
         >
           <Icon icon="ic:round-arrow-right" class="w-8 h-8" />
         </router-link>
@@ -37,7 +37,7 @@ const createStore = useProductCreateStore()
       >
         <router-link
           aria-label="Paso anterior"
-          :to="{ name: 'products-create-main' }"
+          :to="{ name: 'product-create-main' }"
         >
           <Icon icon="ic:round-arrow-left" class="w-8 h-8" />
         </router-link>
@@ -51,7 +51,7 @@ const createStore = useProductCreateStore()
         </div>
         <router-link
           aria-label="Siguiente paso"
-          :to="{ name: 'products-create-price' }"
+          :to="{ name: 'product-create-price' }"
         >
           <Icon icon="ic:round-arrow-right" class="w-8 h-8" />
         </router-link>
@@ -62,7 +62,7 @@ const createStore = useProductCreateStore()
       >
         <router-link
           aria-label="Paso anterior"
-          :to="{ name: 'products-create-secondary' }"
+          :to="{ name: 'product-create-secondary' }"
         >
           <Icon icon="ic:round-arrow-left" class="w-8 h-8" />
         </router-link>
@@ -76,7 +76,7 @@ const createStore = useProductCreateStore()
         </div>
         <router-link
           aria-label="Siguiente paso"
-          :to="{ name: 'products-create-design' }"
+          :to="{ name: 'product-create-design' }"
         >
           <Icon icon="ic:round-arrow-right" class="w-8 h-8" />
         </router-link>
@@ -86,7 +86,7 @@ const createStore = useProductCreateStore()
       >
         <router-link
           aria-label="Paso anterior"
-          :to="{ name: 'products-create-price' }"
+          :to="{ name: 'product-create-price' }"
         >
           <Icon icon="ic:round-arrow-left" class="w-8 h-8" />
         </router-link>
