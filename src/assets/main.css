@@ -69,19 +69,19 @@ input:focus-visible {
 
 /* Track */
 .dropdown-scrollbar::-webkit-scrollbar-track {
-  background: #a8b7ea;
+  background: #323c5e;
   border-radius: 10px;
 }
 
 /* Handle */
 .dropdown-scrollbar::-webkit-scrollbar-thumb {
-  background: #39446b;
+  background: #7d8bba;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 .dropdown-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #2e395e;
+  background: #6f799e;
 }
 
 .last-center {
