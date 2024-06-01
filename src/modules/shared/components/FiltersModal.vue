@@ -16,12 +16,12 @@ const layoutStore = useLayoutStore();
 <template>
   <VueFinalModal
     overlay-transition="vfm-fade"
-    :content-transition="width < 640 ? 'vfm-fade' : 'vfm-slide-right'"
+    :content-transition="width < 640 ? 'vfm-slide-down' : 'vfm-slide-right'"
     @closed="layoutStore.resetLayout"
+    class="flex items-end sm:justify-end"
+    content-class="bg-[#0E2032] h-[88vh] w-full sm:w-[24rem] 2xl:w-[25rem] sm:min-h-screen rounded-t-2xl sm:rounded-none sm:rounded-s-2xl overflow-y-scroll hide-scroll-bar"
   > 
-    <div
-      class="fixed bottom-0 sm:top-0 right-0 bg-[#0E2032] h-[88vh] w-full sm:w-[24rem] 2xl:w-[25rem] sm:min-h-screen rounded-t-2xl sm:rounded-none sm:rounded-s-2xl overflow-y-scroll hide-scroll-bar"
-    > 
+    <div> 
       <!-- Modal title -->
       <div class="fixed w-full sm:w-[24rem] 2xl:w-[25rem] bg-[#071524] px-8 py-4 overflow-hidden rounded-t-2xl sm:rounded-none sm:rounded-tl-2xl z-30">
         <button @click="layoutStore.resetLayout" class="fixed right-6">
