@@ -12,16 +12,17 @@ export const useFilterStore = defineStore('filterStore', () => {
   const categories: Ref<Category[]> = ref([]);
   
   // Filters to apply
-  const search: Ref<string> = useStorage('search', '');
-  const selectedCategories: Ref<number[]> = useStorage('selectedCategories', []);
-  const selectedTrademarks: Ref<number[]> = useStorage('selectedTrademarks', []);
-  const priceMin: Ref<number|null> = useStorage('priceMin', null);
-  const priceMax: Ref<number|null> = useStorage('priceMax', null);
-  const orderBy: Ref<string> = useStorage('orderBy', 'trademark');
-  const orderType: Ref<string> = useStorage('orderType', 'asc');
-  const sale: Ref<boolean> = useStorage('sale', false);
-  const onlyStock: Ref<boolean> = useStorage('onlyStock', false);
-  const page: Ref<number> = useStorage('page', 1);
+  const search: Ref<string> = useStorage('filterSearch', '');
+  const selectedCategories: Ref<number[]> = useStorage('filterSelectedCategories', []);
+  const selectedTrademarks: Ref<number[]> = useStorage('filterSelectedTrademarks', []);
+  const priceMin: Ref<number|null> = useStorage('filterPriceMin', null);
+  const priceMax: Ref<number|null> = useStorage('filterPriceMax', null);
+  const orderBy: Ref<string> = useStorage('filterOrderBy', 'trademark');
+  const orderType: Ref<string> = useStorage('filterOrderType', 'asc');
+  const sale: Ref<boolean> = useStorage('filterSale', false);
+  const stock: Ref<string> = useStorage('filterStock', '');
+  const discontinued: Ref<string> = useStorage('filterDiscontinued', '');
+  const page: Ref<number> = useStorage('filterPage', 1);
 
   // Get products and paginate
   const applyFilters: Ref<boolean> = ref(false);
@@ -48,7 +49,8 @@ export const useFilterStore = defineStore('filterStore', () => {
     orderBy.value = 'trademark';
     orderType.value = 'asc';
     sale.value = false;
-    onlyStock.value = false;
+    stock.value = '';
+    discontinued.value = '';
     page.value = 1;
   }
 
@@ -68,6 +70,11 @@ export const useFilterStore = defineStore('filterStore', () => {
   const resetOrder = () => {
     orderBy.value = 'trademark';
     orderType.value = 'asc';
+  }
+
+  const resetStatus = () => {
+    stock.value = '';
+    discontinued.value = '';
   }
 
   const getQueries = () => {
@@ -91,17 +98,14 @@ export const useFilterStore = defineStore('filterStore', () => {
     if(orderBy.value !== 'trademark' || orderType.value !== 'asc')
       queryParamsArr.push(`order=${orderBy.value},${orderType.value}`)
 
-    // if (orderBy.value !== 'price') 
-    //   queryParamsArr.push(`orderBy=${orderBy.value}`)
-
-    // if (orderType.value !== 'asc') 
-    //   queryParamsArr.push(`orderType=${orderType.value}`)
-
     if (sale.value) 
       queryParamsArr.push('sale=true')
 
-    if (onlyStock.value) 
-      queryParamsArr.push('onlyStock=true')
+    if (stock.value) 
+      queryParamsArr.push(`stock=${stock.value}`)
+
+    if (discontinued.value) 
+      queryParamsArr.push(`discontinued=${discontinued.value}`)
 
     if(page.value !== 1)
       queryParamsArr.push(`page=${page.value}`)
@@ -116,11 +120,11 @@ export const useFilterStore = defineStore('filterStore', () => {
   }
 
   return {
-    trademarks, categories, search, onlyStock,
+    trademarks, categories, search, stock,
     selectedTrademarks, selectedCategories, page,
     priceMin, priceMax, orderBy, orderType, sale, 
     clearFilters, clearCategories, clearTrademarks,
     clearPrices, resetOrder, applyFilters, getQueries,
-    updateTrademarks, loading,
+    updateTrademarks, loading, discontinued, resetStatus,
   }
 })

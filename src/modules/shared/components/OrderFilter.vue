@@ -54,7 +54,7 @@ const otherOrder = ref([
       Reestablecer
     </button>
     <div class="flex flex-col gap-2 mb-6">
-      <label for="priceMin" class="text-[0.90rem]">Ordenar por</label>
+      <span id="filterOrderBy" class="text-[0.90rem]">Ordenar por</span>
       <Dropdown
         v-model="filterStore.orderBy"
         :options="columns"
@@ -62,16 +62,18 @@ const otherOrder = ref([
         optionValue="value"
         checkmark
         :highlightOnSelect="false"
+        aria-labelledby="filterOrderBy"
       />
     </div>
     <div class="flex flex-col gap-2">
-      <label for="priceMin" class="text-[0.90rem]">Ordenar de</label>
+      <span id="filterOrderType" class="text-[0.90rem]">Ordenar de</span>
       <Dropdown
         v-model="filterStore.orderType"
         :options="filterStore.orderBy === 'price' ? priceOrder : otherOrder"
         optionLabel="name"
         optionValue="value"
         checkmark
+        aria-labelledby="filterOrderType"
         :highlightOnSelect="false"
       />
     </div>

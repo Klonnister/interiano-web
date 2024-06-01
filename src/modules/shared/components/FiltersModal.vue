@@ -4,9 +4,9 @@ import { Icon } from '@iconify/vue';
 import Accordion from 'primevue/accordion';
 import AccordionTab from 'primevue/accordiontab';
 import { useFilterStore } from '../stores/filterStore';
-import ToggleButton from 'primevue/togglebutton';
 import { useWindowSize } from '@vueuse/core';
 import { useLayoutStore } from '../stores/layoutStore';
+import ToggleButton from 'primevue/togglebutton';
 
 const { width } = useWindowSize();
 const filterStore = useFilterStore();
@@ -84,6 +84,21 @@ const layoutStore = useLayoutStore();
           <AccordionTab>
               <template #header>
                 <div class="w-full flex items-center gap-4">
+                  <span>Estado</span>
+                  <Transition name="fade">
+                    <Icon
+                      icon="mdi:check-bold"
+                      class="text-[#6AAD41] w-[1.1rem] h-[1.1rem] opacity-60"
+                      v-if="filterStore.stock || filterStore.discontinued"
+                    />
+                  </Transition>
+                </div>
+              </template>
+              <FilterStatus />
+          </AccordionTab>
+          <AccordionTab>
+              <template #header>
+                <div class="w-full flex items-center gap-4">
                   <span>Orden</span>
                   <Transition name="fade">
                     <Icon
@@ -100,30 +115,20 @@ const layoutStore = useLayoutStore();
               <OrderFilter />
           </AccordionTab>
         </Accordion>
+
         <ToggleButton
           input-id="sale"
           name="sale"
           v-model="filterStore.sale"
           onLabel="Solo ofertas"
-          offLabel="Mostrar todos"
+          offLabel="Sin filtro de ofertas"
           onIcon="pi pi-tag"
           offIcon="pi pi-box"
-          class="mx-auto w-44 mt-4 mb-4 quepex"
+          class="mx-auto w-52 mt-4 mb-4 quepex"
           aria-label="Mostrar solo ofertas"
         />
-        <ToggleButton
-          input-id="onlyStock"
-          name="onlyStock"
-          v-model="filterStore.onlyStock"
-          onLabel="Ocultar sin existencias"
-          offLabel="Mostrar sin existencias"
-          onIcon="pi pi-eye-slash"
-          offIcon="pi pi-eye"
-          class="mx-auto w-60"
-          aria-label="Mostrar sin existencias"
-        />
       </div> 
-      
+     
       <FiltersButtons />
     </div>
   </VueFinalModal>

@@ -26,6 +26,7 @@ declare module 'vue' {
     CreateTrademarkModal: typeof import('./src/modules/products/components/CreateTrademarkModal.vue')['default']
     FiltersButtons: typeof import('./src/modules/shared/components/FiltersButtons.vue')['default']
     FiltersModal: typeof import('./src/modules/shared/components/FiltersModal.vue')['default']
+    FilterStatus: typeof import('./src/modules/shared/components/FilterStatus.vue')['default']
     Layout: typeof import('./src/modules/shared/layouts/Layout.vue')['default']
     Layout2: typeof import('./src/modules/shared/layouts/Layout2.vue')['default']
     LogInView: typeof import('./src/modules/auth/views/LogInView.vue')['default']
