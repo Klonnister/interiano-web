@@ -85,6 +85,8 @@ export const useProductCreateStore = defineStore('productCreateStore', () => {
   const validateView = (id: number) => {
       switch(id) {
         case 1:
+          name.value = name.value.trim();
+
           if(!category.value)
             toast.error('Seleccione una categoría.')
           else if(!trademark.value)
@@ -103,6 +105,9 @@ export const useProductCreateStore = defineStore('productCreateStore', () => {
               delete extraProps.value[key];
             }
           })
+          size.value = size.value.trim();
+          description.value = description.value.trim();
+          
           if(typeof stock.value !== 'number')
             toast.error('Agregue la cantidad de existencias.')
 
