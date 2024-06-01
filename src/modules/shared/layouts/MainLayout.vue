@@ -25,7 +25,8 @@ const getUserProfile = async() => {
     userImage.value = userResponse.image;
   }
 }
-if(!username) getUserProfile();
+
+if(!username.value) getUserProfile();
 
 const { showMenu, showProductsMenu, showFilters } = storeToRefs(layoutStore);
 
