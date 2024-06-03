@@ -6,7 +6,7 @@ import { useLayoutStore } from '../stores/layoutStore';
 import { useModal } from 'vue-final-modal';
 import ProductsModal from '@/modules/products/components/ProductsModal.vue';
 import { storeToRefs } from 'pinia';
-import { watch, type Ref } from 'vue';
+import { computed, watch, type Ref } from 'vue';
 import FiltersModal from '../components/FiltersModal.vue';
 import { apiRequest, apiUrl } from '../helpers/api';
 import type { ProfileInfo } from '../types/profile.interface';
@@ -15,14 +15,14 @@ import { useStorage } from '@vueuse/core';
 const layoutStore = useLayoutStore();
 const links = sidebarLinks;
 
-const username: Ref<string|null> = useStorage('userName', null);
-const userImage: Ref<string|null> = useStorage('userImage', null);
+const username: Ref<string> = useStorage('userName', '');
+const userImage: Ref<string> = useStorage('userImage', '');
 
 const getUserProfile = async() => {
   const userResponse: ProfileInfo = await apiRequest('profile');
   if (userResponse) {
     username.value = userResponse.username;
-    userImage.value = userResponse.image;
+    userImage.value = userResponse.image || '';
   }
 }
 
@@ -56,6 +56,20 @@ watch(showMenu, (newValue) => {
     : document.body.classList.remove("overflow-y-hidden")
 })
 
+// Computed properties 
+const imagePath = computed(() => {
+  return userImage ? `${apiUrl}${userImage.value}` : '/other/user-template.webp';  
+})
+
+const tabIndexAttr = computed(
+  () => layoutStore.loading ? '-1' : '0'
+)
+const unfocusableOption = computed(() => layoutStore.loading)
+
+const unfocusableByMouse = computed(() => ({
+  'pointer-events-none opacity-60': layoutStore.loading,
+}))
+
 </script>
 
 <template>
@@ -64,7 +78,11 @@ watch(showMenu, (newValue) => {
       <div
         class="w-full pt-6 pb-6 mx-auto fixed top-0 left-0 right-0 flex items-center justify-between px-5 bg-[#0E1D2C] z-40 lg:hidden"
       >
-        <button @click="layoutStore.openMenu" class="z-20">
+        <button
+          @click="layoutStore.openMenu"
+          class="z-20"
+          aria-label="Abrir menú de navegación"
+        >
           <Icon
             icon="mi:menu"
             class="w-7 h-7 sm:w-9 sm:h-9 text-[#D0D9F6]"
@@ -74,29 +92,39 @@ watch(showMenu, (newValue) => {
           src="/interiano-logo-shadowed.svg"
           alt=""
           class="fixed top-0 left-0 right-0 mx-auto pt-3 hover:scale-110 hover:-rotate-2 transition-all ease-in-out duration-700 z-50"
-          :class="layoutStore.showMenu ? 'w-48 sm:w-56 translate-y-[3vh]' : 'w-40 sm:w-48'"
+          :class="{
+            'w-48 sm:w-56 translate-y-[3vh]': layoutStore.showMenu,
+            'w-40 sm:w-48': !layoutStore.showMenu
+          }"
         >
         <SharedNavBar />
       </div>
 
       <div class="hidden lg:flex flex-col justify-center gap-[5vh] 2xl:gap-12 p-5 ps-0 sticky top-14 py-8 lg:h-[82vh] 2xl:h-max 2xl:-ms-8">
-        <RouterLink :to="'/'" class="flex items-center gap-3 2xl:gap-4 py-2 px-6 2xl:py-3 2xl:px-8 rounded-lg hover:bg-[#72838F]/15 transition-all ease-in-out duration-150 link-shadow hover:-translate-x-1">
+        <RouterLink
+          :to="{ name: 'dev' }"
+          :aria-disabled="unfocusableOption"
+          :tabindex="tabIndexAttr"
+          :class="unfocusableByMouse"
+          class="flex items-center gap-3 2xl:gap-4 py-2 px-6 2xl:py-3 2xl:px-8 rounded-lg hover:bg-[#72838F]/15 transition-all ease-in-out duration-150 link-shadow hover:-translate-x-1"
+          aria-label="Mi perfil"
+        >
           <img
-            :src="userImage
-              ? `${apiUrl}${userImage}`
-              : '/other/user-template.webp'
-            "
+            :src="imagePath"
             alt=""
             class="w-10 h-10 2xl:w-12 2xl:h-12 rounded-full object-cover"
           >
           <span class="text-xl 2xl:text-2xl">{{ username }}</span>
         </RouterLink>
 
-        <div class="flex flex-col gap-[2vh] 2xl:gap-6">
+        <nav class="flex flex-col gap-[2vh] 2xl:gap-6">
           <RouterLink
             v-for="link in links"
             :key="link.name"
             :to="link.path"
+            :aria-disabled="unfocusableOption"
+            :tabindex="tabIndexAttr"
+            :class="unfocusableByMouse"
             class="flex gap-4 2xl:gap-5 items-center py-2 px-6 2xl:py-3 2xl:px-8 rounded-lg hover:bg-[#7BAED2]/20 transition-all ease-in-out duration-150 link-shadow hover:-translate-x-1"
           >
             <Icon
@@ -105,7 +133,7 @@ watch(showMenu, (newValue) => {
             />
             <span class="text-lg 2xl:text-2xl">{{ link.name }}</span >
           </RouterLink>
-        </div>
+        </nav>
 
         <img src="/interiano-logo-shadowed.svg" alt="" class="w-40 2xl:w-48 ps-6 hover:scale-110 hover:-rotate-2 transition-all ease-in-out duration-150">
       </div>

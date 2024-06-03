@@ -1,17 +1,21 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { useProductCreateStore } from '../stores/productCreateStore';
 import { Icon } from '@iconify/vue';
 const createStore = useProductCreateStore()
+
+const tabIndexAttr = computed(() => createStore.loading ? '-1' : '0')
 </script>
 
 <template>
-  <div class="w-full max-w-sm mx-auto flex justify-center">
+  <div role="menu" class="w-full max-w-sm mx-auto flex justify-center">
     <Transition name="swipe-up" mode="out-in">
       <div class="w-full flex items-center justify-between"
         v-if="createStore.currentView === 1"
       >
-        <button disabled="true"
-          class="disabled:opacity-50"
+        <button 
+          disabled="true"
+          class="disabled:opacity-50 disabled:pointer-events-none"
           aria-label="Paso anterior"
         >
           <Icon icon="ic:round-arrow-left" class="w-8 h-8" />
@@ -26,6 +30,9 @@ const createStore = useProductCreateStore()
         </div>
         <router-link
           aria-label="Siguiente paso"
+          :aria-disabled="createStore.loading"
+          :tabindex="tabIndexAttr"
+          :class="{ 'opacity-50 pointer-events-none': createStore.loading }"
           :to="{ name: 'product-create-secondary' }"
         >
           <Icon icon="ic:round-arrow-right" class="w-8 h-8" />
@@ -37,6 +44,9 @@ const createStore = useProductCreateStore()
       >
         <router-link
           aria-label="Paso anterior"
+          :aria-disabled="createStore.loading"
+          :tabindex="tabIndexAttr"
+          :class="{ 'opacity-50 pointer-events-none': createStore.loading }"
           :to="{ name: 'product-create-main' }"
         >
           <Icon icon="ic:round-arrow-left" class="w-8 h-8" />
@@ -51,6 +61,9 @@ const createStore = useProductCreateStore()
         </div>
         <router-link
           aria-label="Siguiente paso"
+          :aria-disabled="createStore.loading"
+          :tabindex="tabIndexAttr"
+          :class="{ 'opacity-50 pointer-events-none': createStore.loading }"
           :to="{ name: 'product-create-price' }"
         >
           <Icon icon="ic:round-arrow-right" class="w-8 h-8" />
@@ -62,6 +75,9 @@ const createStore = useProductCreateStore()
       >
         <router-link
           aria-label="Paso anterior"
+          :aria-disabled="createStore.loading"
+          :tabindex="tabIndexAttr"
+          :class="{ 'opacity-50 pointer-events-none': createStore.loading }"
           :to="{ name: 'product-create-secondary' }"
         >
           <Icon icon="ic:round-arrow-left" class="w-8 h-8" />
@@ -76,6 +92,9 @@ const createStore = useProductCreateStore()
         </div>
         <router-link
           aria-label="Siguiente paso"
+          :aria-disabled="createStore.loading"
+          :tabindex="tabIndexAttr"
+          :class="{ 'opacity-50 pointer-events-none': createStore.loading }"
           :to="{ name: 'product-create-design' }"
         >
           <Icon icon="ic:round-arrow-right" class="w-8 h-8" />
@@ -86,6 +105,9 @@ const createStore = useProductCreateStore()
       >
         <router-link
           aria-label="Paso anterior"
+          :aria-disabled="createStore.loading"
+          :tabindex="tabIndexAttr"
+          :class="{ 'opacity-50 pointer-events-none': createStore.loading }"
           :to="{ name: 'product-create-price' }"
         >
           <Icon icon="ic:round-arrow-left" class="w-8 h-8" />
@@ -98,8 +120,9 @@ const createStore = useProductCreateStore()
             :class="{ 'opacity-100': createStore.design }"
           />
         </div>
-        <button disabled="true"
-          class="disabled:opacity-50"
+        <button 
+          disabled="true"
+          class="disabled:opacity-50 disabled:pointer-events-none"
           aria-label="Siguiente paso"
         >
           <Icon icon="ic:round-arrow-right" class="w-8 h-8" />

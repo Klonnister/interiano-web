@@ -30,7 +30,7 @@ const openFilters = () => {
 </script>
 
 <template>
-  <div class="md:hidden">
+  <header class="md:hidden">
     <h1
       class="uppercase font-semibold text-2xl sm:text-3xl text-center mb-4 sm:mb-6"
     >
@@ -63,9 +63,9 @@ const openFilters = () => {
         </RouterLink>
       </div>
     </div>
-  </div>
+  </header>
 
-  <div class="hidden md:block lg:hidden">
+  <header class="hidden md:block lg:hidden">
     <h1
       class="uppercase font-semibold text-3xl text-center mb-6"
     >
@@ -99,9 +99,9 @@ const openFilters = () => {
         />
       </RouterLink>
     </div>
-  </div>
+  </header>
 
-  <div class="hidden lg:flex items-center">
+  <header class="hidden lg:flex items-center">
     <h1
       class="uppercase font-semibold text-3xl 2xl:text-4xl text-center me-auto pe-8"
     >
@@ -136,5 +136,5 @@ const openFilters = () => {
       </RouterLink>
     </div>
 
-  </div>
+  </header>
 </template>

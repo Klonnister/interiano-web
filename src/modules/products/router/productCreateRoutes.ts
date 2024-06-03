@@ -13,8 +13,12 @@ export default [
     component: () => import('@/modules/products/components/ProductCreateViewSecondary.vue'),
     beforeEnter: () => {
       const createStore = useProductCreateStore();
-      if(!createStore.validateView(1)) 
+      createStore.loading = true;
+
+      if(!createStore.validateView(1)) {
         router.push({ name: 'product-create-main' });
+        createStore.loading = false;
+      }
     }
   },
   {
@@ -23,11 +27,17 @@ export default [
     component: () => import('@/modules/products/components/ProductCreateViewPrice.vue'),
     beforeEnter: () => {
       const createStore = useProductCreateStore();
-      if(!createStore.validateView(1))
-        router.push({ name: 'product-create-main' })
+      createStore.loading = true;
+
+      if(!createStore.validateView(1)) {
+        router.push({ name: 'product-create-main' });
+        createStore.loading = false;
+      }
         
-      else if( !createStore.validateView(2) )
-        router.push({ name: 'product-create-secondary' })
+      else if( !createStore.validateView(2) ) {
+        router.push({ name: 'product-create-secondary' });
+        createStore.loading = false;
+      }
     },
   },
   {
@@ -36,14 +46,22 @@ export default [
     component: () => import('@/modules/products/components/ProductCreateViewDesign.vue'),
     beforeEnter: () => {
       const createStore = useProductCreateStore();
-      if(!createStore.validateView(1))
-        router.push({ name: 'product-create-main' })
+      createStore.loading = true;
+      
+      if(!createStore.validateView(1)) {
+        router.push({ name: 'product-create-main' });
+        createStore.loading = false;
+      }
         
-      else if( !createStore.validateView(2) )
-        router.push({ name: 'product-create-secondary' })
+      else if( !createStore.validateView(2) ) {
+        router.push({ name: 'product-create-secondary' });
+        createStore.loading = false;
+      }
 
-      else if( !createStore.validateView(3) )
-        router.push({ name: 'product-create-price' })
+      else if( !createStore.validateView(3) ) {
+        router.push({ name: 'product-create-price' });
+        createStore.loading = false;
+      }
     },
   },
   {

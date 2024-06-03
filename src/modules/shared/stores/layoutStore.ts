@@ -16,6 +16,7 @@ export const useLayoutStore = defineStore('layoutStore', () => {
     showMenu.value = false;
     showProductsMenu.value = false;
     showFilters.value = false;
+    loading.value = false;
   }
   
   return {

@@ -35,8 +35,8 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const store = useAuthStore()
-  if (to.meta.requiresAuth && store.isLogged === false) next('/sesion/inicio')
-  else if(to.meta.isAuthPage && store.isLogged === true) next('/')
+  if (to.meta.requiresAuth && store.isLogged === false) next({ name: 'login' })
+  else if(to.meta.isAuthPage && store.isLogged === true) next({ name: 'products' })
   else {
     const layoutStore = useLayoutStore();
     layoutStore.resetLayout();

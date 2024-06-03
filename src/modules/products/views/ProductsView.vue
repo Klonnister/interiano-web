@@ -78,7 +78,7 @@ watch(applyFilters, (apply) => {
       :modal-button="true"
     />
 
-    <div class="w-full min-h-[40vh] lg:min-h-[5vh]">
+    <main class="w-full min-h-[40vh] lg:min-h-[5vh]">
       <Transition name="fade" mode="out-in">
         <div v-if="products.length && !filterStore.loading" class="w-full">
           <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-x-5 gap-y-8 sm:gap-8 lg:gap-10 2xl:gap-14 min-h-[40vh] lg:min-h-[55vh]">
@@ -110,6 +110,6 @@ watch(applyFilters, (apply) => {
           <p class="lg:text-xl 2xl:text-2xl opacity-70">No hay productos para mostrar</p>
         </div>
       </Transition>
-    </div>
+    </main>
   </div>
 </template>
