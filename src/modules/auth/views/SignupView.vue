@@ -28,6 +28,12 @@ const form = reactive<signUpForm>({
 //submit
 async function submit() {
   layoutStore.loading = true;
+  if (form.password !== form.passwordconfirm) {
+    toast.error('Las contraseñas no coinciden');
+    layoutStore.loading = false;
+    return;
+  }
+
   const response: loginResponse = await apiAuthRequest('auth/register', { method: 'POST', body: form })
   if ( !response.statusCode ) {
     saveUserInfo(response)
@@ -61,6 +67,7 @@ async function submit() {
           id="createName"
           required
           v-model="form.username"
+          maxlength="12"
           autocomplete="on"
         />
       </div>
