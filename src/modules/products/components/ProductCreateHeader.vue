@@ -3,12 +3,21 @@ import { Icon } from '@iconify/vue';
 import { useProductCreateStore } from '../stores/productCreateStore';
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
+import { apiRequest } from '@/modules/shared/helpers/api';
 
 const createStore = useProductCreateStore();
 const router = useRouter();
 
-const restart = () => {
+const restart = async() => {
   createStore.loading = true;
+  if (createStore.image) {
+    await apiRequest('images', {
+      method: 'DELETE',
+      body: {
+        image: createStore.image,
+      }
+    })
+  }
   createStore.resetProductCreate();
   router.push({ name: 'product-create-main' })
   createStore.loading = false;
