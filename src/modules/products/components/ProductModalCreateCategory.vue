@@ -13,19 +13,24 @@ const emit = defineEmits<{
   (e: 'close'):void,
 }>();
 
+const loading = ref(false);
 const categoryName = ref(null);
 
 const createCategory = async(event: Event) => {
   event.preventDefault();
+  loading.value = true;
   const response: CategoryResponse = await apiRequest('categories', {
     method: 'POST',
     body: { name: categoryName.value }
   })
 
   if(!response.statusCode) {
+    loading.value = false;
     emit('resetInfo');
     emit('close');
     emit('setCategory', response.id);
+  } else {
+    loading.value = false;
   }
 }
 </script>
@@ -36,10 +41,16 @@ const createCategory = async(event: Event) => {
     content-transition="scale"
     overlay-transition="fade"
     class="flex items-center justify-center"
-    content-class="max-w-xs w-full sm:max-w-sm h-max py-4 px-5 sm:p-6 rounded-lg shadow-md shadow-black bg-[#10273d]"
+    content-class="max-w-xs w-full sm:max-w-sm h-max rounded-lg shadow-md shadow-black bg-[#10273d]"
   >
-    <div class="w-full h-full relative">
-      <button @click="emit('close')" class="absolute -right-2 -top-2">
+    <div class="w-full h-full relative py-4 px-5 sm:p-6" role="dialog">
+      <button
+        @click="emit('close')"
+        class="absolute right-2 top-2"
+        aria-label="Cerrar modal de crear categoría"
+        :disabled="loading"
+        :class="{ 'pointer-events-none opacity-60': loading }"
+      >
         <Icon
           icon="ic:round-close"
           class="w-[1.4rem] h-[1.4rem] text-white"
@@ -63,6 +74,8 @@ const createCategory = async(event: Event) => {
             placeholder="Acondicionadores"
             required
             type="text"
+            :disabled="loading"
+            maxlength="35"
             v-model="categoryName"
           />
         </div>
@@ -70,6 +83,8 @@ const createCategory = async(event: Event) => {
         <button
           class="py-1 px-5 bg-[#15395A] rounded-md font-medium font-asap w-max local-shadow transition-all duration-300 ease-in-out hover:-translate-y-0.5"
           type="submit"
+          :disabled="loading"
+          :class="{ 'pointer-events-none opacity-70': loading }"
         >
           Crear
         </button>

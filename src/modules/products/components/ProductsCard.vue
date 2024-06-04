@@ -6,6 +6,7 @@ import { ref, watch } from 'vue';
 import { useCatalogStore } from '../../shared/stores/catalogStore';
 import { useToast } from 'vue-toastification';
 import { apiUrl } from '../../shared/helpers/api';
+import { useLayoutStore } from '@/modules/shared/stores/layoutStore';
 
 const props = defineProps<{
   product: Product,
@@ -14,6 +15,7 @@ const props = defineProps<{
 const toast = useToast();
 const cardsStore = useCardsStore();
 const catalogStore = useCatalogStore();
+const layoutStore = useLayoutStore();
 
 const { openProduct } = storeToRefs(cardsStore)
 const { catalog } = storeToRefs(catalogStore);
@@ -60,7 +62,7 @@ const deleteFromCatalog = () => {
 </script>
 
 <template>
-  <div
+  <li
     class="h-[12rem] | sm:h-[13rem] | xl:h-[14rem] 2xl:h-[16rem] bg-white w-full relative rounded-xl overflow-hidden pt-4 px-4 pb-2 mx-auto select-none cursor-pointer hover:scale-[102%] custom-shadow transition-all duration-[.4s] ease-in-out">
     <div class="h-[78%] flex items-center justify-center">
       <img
@@ -100,12 +102,12 @@ const deleteFromCatalog = () => {
     </span>
 
     <!-- Open menu layer -->
-    <div v-if="!showMenu" class="absolute bottom-0 left-0 w-full h-full z-20" @click="openMenu"></div>
+    <button v-if="!showMenu" class="absolute bottom-0 left-0 w-full h-full z-20 rounded-xl" @click="openMenu" aria-label="Abrir menú de opciones del producto" type="button"></button>
 
     <!-- Menu layer -->
     <Transition name="fade">
       <div v-if="showMenu" class="absolute top-0 left-0 h-full w-full z-20">
-        <div class="absolute bottom-0 left-0 w-full h-full z-20 bg-black opacity-40" @click="closeMenu"></div>
+        <button class="absolute bottom-0 left-0 w-full h-full z-20 bg-black opacity-40 rounded-xl" @click="closeMenu" aria-label="Cerrar menú de opciones del producto" type="button"></button>
 
         <!-- Trademark name -->
         <p class="absolute top-1.5 left-2 text-[#d8dee8] text-sm sm:text-base z-30 mx-auto" @click="closeMenu">
@@ -116,29 +118,57 @@ const deleteFromCatalog = () => {
         <div
           class="absolute inset-0 w-32 sm:w-36 h-max flex flex-wrap justify-center items-center gap-2 sm:gap-2.5 mx-auto my-auto">
 
-          <RouterLink :to="{ name: 'product-id', params: { id: props.product.id } }" class="z-30 rounded-md">
+          <RouterLink
+            :to="{ name: 'product-id', params: { id: props.product.id } }"
+            class="z-30 rounded-md"
+            aria-label="Editar producto"
+          >
             <SharedCardButtonBase background="bg-[#15395A]" icon="ri:edit-2-fill" />
           </RouterLink>
 
-          <RouterLink :to="{ name: 'dev' }" class="z-30 rounded-md">
+          <RouterLink
+            :to="{ name: 'dev' }"
+            class="z-30 rounded-md"
+            aria-label="Ver producto"
+          >
             <SharedCardButtonBase background="bg-[#383838]" icon="mdi:eye" />
           </RouterLink>
 
-          <button class="z-30 rounded-md">
+          <button
+            class="z-30 rounded-md"
+            aria-label="Eliminar producto"
+            :disabled="layoutStore.loading"
+          >
             <SharedCardButtonBase background="bg-[#722A2A]" icon="ic:baseline-delete" />
           </button>
 
-          <RouterLink :to="{ name: 'dev' }" class="z-30 rounded-md">
+          <RouterLink
+            :to="{ name: 'dev' }"
+            class="z-30 rounded-md"
+            aria-label="Editar existencias"
+          >
             <SharedCardButtonBase background="bg-[#522965]" icon="solar:box-bold" />
           </RouterLink>
 
           <div class="z-30 w-[2.05rem] lg:w-[2.30rem] h-[2.05rem] lg:h-[2.30rem]  relative">
             <Transition name="swipe-up" mode="out-in">
-              <button class="rounded-md absolute" v-if="!inCatalog" @click="addToCatalog">
+              <button
+                class="rounded-md absolute"
+                v-if="!inCatalog"
+                @click="addToCatalog"
+                :disabled="layoutStore.loading"
+                aria-label="Agregar producto al catálogo"
+              >
                 <SharedCardButtonBase background="bg-[#3A5F34]" icon="mdi:file-plus" />
               </button>
 
-              <button class="rounded-md absolute" v-else @click="deleteFromCatalog">
+              <button
+                class="rounded-md absolute"
+                v-else
+                @click="deleteFromCatalog"
+                :disabled="layoutStore.loading"
+                aria-label="Eliminar el productor del catálogo"
+              >
                 <SharedCardButtonBase background="bg-[#813651]" icon="mdi:file-minus" />
               </button>
             </Transition>
@@ -146,7 +176,7 @@ const deleteFromCatalog = () => {
         </div>
       </div>
     </Transition>
-  </div>
+  </li>
 </template>
 
 <style scoped>

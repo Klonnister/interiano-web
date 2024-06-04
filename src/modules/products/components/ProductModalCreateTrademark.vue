@@ -16,6 +16,7 @@ const emit = defineEmits<{
   (e: 'setTrademark', id: number) :void
 }>();
 
+const loading = ref(false);
 const trademarkName: Ref<string|null> = ref(null);
 const trademarkImage: Ref<string|null> = ref(null);
 
@@ -31,6 +32,7 @@ const onImageUpload = async(event: FileUploadUploaderEvent): Promise<void> => {
 
 const createTrademark = async(event: Event) => {
   event.preventDefault();
+  loading.value = true;
   const response: TrademarkResponse = await apiRequest('trademarks', {
     method: 'POST',
     body: {
@@ -40,9 +42,12 @@ const createTrademark = async(event: Event) => {
   });
 
   if ( !response.statusCode ) {
+    loading.value = false;
     emit('resetInfo');
     emit('setTrademark', response.id);
     emit('close');
+  } else {
+    loading.value = false;
   }
 }
 </script>
@@ -53,10 +58,16 @@ const createTrademark = async(event: Event) => {
     content-transition="scale"
     overlay-transition="fade"
     class="flex justify-center items-center"
-    content-class="py-4 px-5 bg-[#10273d] rounded-lg shadow-md shadow-black max-w-xs w-full sm:max-w-sm h-max sm:p-6 max-h-[90vh]"
+    content-class="bg-[#10273d] rounded-lg shadow-md shadow-black max-w-xs w-full sm:max-w-sm h-max max-h-[90vh]"
   >
-    <div class="w-full h-full relative">
-      <button @click="emit('close')" class="absolute -right-2 -top-2">
+    <div class="w-full h-full relative py-4 px-5 sm:p-6" role="dialog">
+      <button
+        @click="emit('close')"
+        class="absolute right-2 top-2"
+        :disabled="loading"
+        aria-label="Cerrar módulo de crear marca"
+        :class="{ 'pointer-events-none opacity-60': loading }"
+      >
         <Icon
           icon="ic:round-close"
           class="w-[1.4rem] h-[1.4rem] text-white"
@@ -78,8 +89,10 @@ const createTrademark = async(event: Event) => {
             autocomplete="off"
             id="productCreateTrademarkModal"
             placeholder="Acondicionadores"
+            :disabled="loading"
             required
             type="text"
+            maxlength="35"
             v-model="trademarkName"
           />
         </div>
@@ -96,6 +109,7 @@ const createTrademark = async(event: Event) => {
             :choose-label="trademarkImage ? 'Escoger otra' : 'Subir'"
             :maxFileSize="2 * 1024 * 1024"
             @uploader="onImageUpload"
+            :disabled="loading"
             aria-labelledby="createproductImage"
             accept=".jpeg,.jpg,.png,.webp,.svg"
             class="local-shadow hover:-translate-y-px text-sm"
@@ -121,6 +135,8 @@ const createTrademark = async(event: Event) => {
         <button
           class="py-1 px-5 bg-[#15395A] rounded-md font-medium font-asap w-max local-shadow transition-all duration-300 ease-in-out hover:-translate-y-0.5"
           type="submit"
+          :disabled="loading"
+          :class="{ 'pointer-events-none opacity-60': loading }"
         >
           Crear
         </button>

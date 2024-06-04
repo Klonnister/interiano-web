@@ -229,13 +229,13 @@ const nextStep = (event: Event) => {
           @uploader="onImageUpload"
           @progress="setLoading"
           @upload="resetLoading"
+          :disabled="createStore.loading"
           aria-labelledby="productCreateImage"
           accept=".jpeg,.jpg,.png,.webp,.svg"
           class="local-shadow hover:-translate-y-px text-sm"
           custom-upload
           invalid-file-size-message="Seleccione una imagen menos pesada."
           mode="basic"
-          :disabled="createStore.loading"
         />
       </div>
   
