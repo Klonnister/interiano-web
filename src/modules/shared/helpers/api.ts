@@ -129,7 +129,7 @@ export const apiAuthRequest = async(path: string, params: apiParams) => {
               toast.error(message);
             })
           }
-          return;
+          return response;
       }
     })
     .catch(() => {
