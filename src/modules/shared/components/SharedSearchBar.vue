@@ -27,6 +27,7 @@ const applyFilter = (event: Event) => {
     <div class="w-full flex h-9 local-shadow rounded-lg md:min-w-96 lg:min-w-64 xl:min-w-96 hover:-translate-y-[1px] searchbar-transition relative transition-all duration-500 ease-in-out">
       <InputText
         type="text"
+        aria-label="Barra de búsqueda"
         :id="props.id"
         v-model="filterStore.search"
         placeholder="Buscar..."
@@ -38,6 +39,7 @@ const applyFilter = (event: Event) => {
           type="button"
           v-if="filterStore.search"
           @click="clearSearch"
+          aria-label="Borrar búsqueda"
         >
           <Icon
             icon="ic:round-close"
@@ -51,6 +53,7 @@ const applyFilter = (event: Event) => {
         class="bg-[#15395A] px-2 rounded-e-lg"
         @click="applyFilter"
         :disabled="filterStore.loading"
+        aria-label="Aplicar búsqueda"
       >
         <Icon
           icon="ic:baseline-search"

@@ -43,7 +43,7 @@ const createCategory = async(event: Event) => {
     class="flex items-center justify-center"
     content-class="max-w-xs w-full sm:max-w-sm h-max rounded-lg shadow-md shadow-black bg-[#10273d]"
   >
-    <div class="w-full h-full relative py-4 px-5 sm:p-6" role="dialog">
+    <div class="w-full h-full relative py-4 px-5 sm:p-6">
       <button
         @click="emit('close')"
         class="absolute right-2 top-2"

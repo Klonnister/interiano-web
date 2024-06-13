@@ -15,6 +15,7 @@ const filterStore = useFilterStore();
   <button
     class="bg-[#15395A] flex gap-2 items-center justify-center py-1.5 px-4 rounded-lg local-shadow hover:-translate-y-[1px] transition-all duration-300 ease-in-out"
     :class="{'w-full': !props.shrink }"
+    type="button"
     :disabled="filterStore.loading"
   >
     <Icon

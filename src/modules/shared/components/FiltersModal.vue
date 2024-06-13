@@ -21,10 +21,15 @@ const layoutStore = useLayoutStore();
     class="flex items-end sm:justify-end"
     content-class="bg-[#0E2032] h-[88vh] w-full sm:w-[24rem] 2xl:w-[25rem] sm:min-h-screen rounded-t-2xl sm:rounded-none sm:rounded-s-2xl overflow-y-scroll hide-scroll-bar"
   > 
-    <div> 
+    <div>
       <!-- Modal title -->
       <div class="fixed w-full sm:w-[24rem] 2xl:w-[25rem] bg-[#071524] px-8 py-4 overflow-hidden rounded-t-2xl sm:rounded-none sm:rounded-tl-2xl z-30">
-        <button @click="layoutStore.resetLayout" class="fixed right-6">
+        <button
+          @click="layoutStore.resetLayout"
+          class="fixed right-6"
+          type="button"
+          aria-label="Cerrar filtros"
+        >
           <Icon
             icon="iconamoon:close-bold"
             class="w-7 h-7 text-white"

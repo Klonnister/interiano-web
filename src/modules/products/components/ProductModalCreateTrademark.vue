@@ -60,7 +60,7 @@ const createTrademark = async(event: Event) => {
     class="flex justify-center items-center"
     content-class="bg-[#10273d] rounded-lg shadow-md shadow-black max-w-xs w-full sm:max-w-sm h-max max-h-[90vh]"
   >
-    <div class="w-full h-full relative py-4 px-5 sm:p-6" role="dialog">
+    <div class="w-full h-full relative py-4 px-5 sm:p-6">
       <button
         @click="emit('close')"
         class="absolute right-2 top-2"
