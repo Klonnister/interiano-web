@@ -50,7 +50,7 @@ export function saveUserInfo(userInfo: loginResponse): void {
   // const secure = 'Secure;'
 
   document.cookie = 'token=' + userInfo.token + ';' + expires + 'path=/;' + sameSiteLax;
-  document.cookie = `token_expiration=${expiration};`+ 'path=/;' + sameSiteLax;
+  document.cookie = `token_expiration=${expiration};` + expires + 'path=/;' + sameSiteLax;
   localStorage.setItem('userName', userInfo.username)
   localStorage.setItem('userImage', userInfo.image)
 }
