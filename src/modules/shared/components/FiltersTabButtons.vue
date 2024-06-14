@@ -10,6 +10,7 @@ const clearFilters = () => {
 
 const applyFilters = () => {
   filterStore.page = 1;
+  filterStore.first = 0;
   filterStore.applyFilters = true;
 }
 </script>

@@ -61,6 +61,7 @@ const paginate = (pageState: PageState) => {
   const selectedPage = pageState.page + 1;
   if (selectedPage !== filterStore.page) {
     filterStore.page = selectedPage;
+    filterStore.first = pageState.first;
     getProducts();
   }
 }
@@ -94,6 +95,7 @@ watch(applyFilters, (apply) => {
                 '640px': 'FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink',
                 default: 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink'
             }"
+            v-model:first="filterStore.first"
             current-page-report-template="({currentPage} de {totalPages})"
             :rows="metaInfo.perPage"
             :totalRecords="metaInfo.total"

@@ -22,7 +22,10 @@ export const useFilterStore = defineStore('filterStore', () => {
   const sale: Ref<boolean> = useStorage('filterSale', false);
   const stock: Ref<string> = useStorage('filterStock', '');
   const discontinued: Ref<string> = useStorage('filterDiscontinued', '');
+
+  // Paginator
   const page: Ref<number> = useStorage('filterPage', 1);
+  const first: Ref<number> = useStorage('firstProductPaginator', 0)
 
   // Get products and paginate
   const applyFilters: Ref<boolean> = ref(false);
@@ -52,6 +55,7 @@ export const useFilterStore = defineStore('filterStore', () => {
     stock.value = '';
     discontinued.value = '';
     page.value = 1;
+    first.value = 0;
   }
 
   const clearCategories = () => {
@@ -120,7 +124,7 @@ export const useFilterStore = defineStore('filterStore', () => {
   }
 
   return {
-    trademarks, categories, search, stock,
+    trademarks, categories, search, stock, first,
     selectedTrademarks, selectedCategories, page,
     priceMin, priceMax, orderBy, orderType, sale, 
     clearFilters, clearCategories, clearTrademarks,
