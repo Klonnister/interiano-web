@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { useFilterStore } from '../stores/filterStore';
+import { useProductsFilterStore } from '@/modules/products/stores/productsFilterStore';
 import { watch } from 'vue';
 
-const filterStore = useFilterStore();
+const filterStore = useProductsFilterStore();
 const { priceMin, priceMax } = storeToRefs(filterStore);
 
 watch(priceMin, (newValue) => {

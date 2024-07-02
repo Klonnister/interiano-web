@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import Dropdown from 'primevue/dropdown';
-import { useFilterStore } from '../stores/filterStore';
+import { useProductsFilterStore } from '@/modules/products/stores/productsFilterStore';
 import { ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 
-const filterStore = useFilterStore();
+const filterStore = useProductsFilterStore();
 const { orderBy } = storeToRefs(filterStore);
 
 watch(orderBy, (newOrderBy) => {

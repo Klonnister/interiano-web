@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import Dropdown from 'primevue/dropdown';
-import { useFilterStore } from '../stores/filterStore';
+import { useProductsFilterStore } from '@/modules/products/stores/productsFilterStore';
 import { ref } from 'vue';
 
-const filterStore = useFilterStore();
+const filterStore = useProductsFilterStore();
 
 const stock = ref([
     { name: 'Ocultar sin existencias', value: 'hideNoStock' },

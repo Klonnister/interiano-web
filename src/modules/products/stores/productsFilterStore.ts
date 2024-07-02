@@ -1,10 +1,10 @@
 import { defineStore } from "pinia";
 import { ref, type Ref } from "vue";
-import type { Trademark } from "../types/trademark.interface";
-import type { Category } from "../types/category.interface";
+import type { Trademark } from "../../shared/types/trademark.interface";
+import type { Category } from "../../shared/types/category.interface";
 import { useStorage } from "@vueuse/core";
 
-export const useFilterStore = defineStore('filterStore', () => {
+export const useProductsFilterStore = defineStore('productsFilterStore', () => {
   const loading = ref(false);
 
   // Store applicable filters

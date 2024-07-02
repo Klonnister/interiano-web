@@ -1,18 +1,19 @@
 <script setup lang="ts">
 import { reactive, ref, watch, type Ref } from 'vue';
 import type { Meta, MetaInfo, Product, ProductsResponse } from '../../shared/types/product.interface';
-import { useFilterStore } from '@/modules/shared/stores/filterStore';
+import { useProductsFilterStore } from '@/modules/products/stores/productsFilterStore';
 import { apiRequest } from '@/modules/shared/helpers/api';
 import type { Category } from '@/modules/shared/types/category.interface';
 import Paginator, { type PageState } from 'primevue/paginator';
 import { storeToRefs } from 'pinia';
 import { useCardsStore } from '@/modules/shared/stores/cardsStore';
 import { useLayoutStore } from '@/modules/shared/stores/layoutStore';
+import { onBeforeRouteLeave } from 'vue-router';
 
 // Stores to use
 const layoutStore = useLayoutStore();
 const cardsStore = useCardsStore();
-const filterStore = useFilterStore();
+const filterStore = useProductsFilterStore();
 
 // Page Information
 const { applyFilters } = storeToRefs(filterStore);
@@ -68,6 +69,11 @@ const paginate = (pageState: PageState) => {
 
 watch(applyFilters, (apply) => {
   if (apply) getProducts();
+})
+
+onBeforeRouteLeave((to) => {
+  if (!to.fullPath.includes('productos')) 
+    filterStore.clearFilters();
 })
 </script>
 

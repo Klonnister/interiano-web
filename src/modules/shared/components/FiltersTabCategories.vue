@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useFilterStore } from '../stores/filterStore';
+import { useProductsFilterStore } from '@/modules/products/stores/productsFilterStore';
 
-const filterStore = useFilterStore();
+const filterStore = useProductsFilterStore();
 </script>
 
 <template>

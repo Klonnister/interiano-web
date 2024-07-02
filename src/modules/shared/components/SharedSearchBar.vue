@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import InputText from 'primevue/inputtext';
 import { Icon } from '@iconify/vue';
-import { useFilterStore } from '../stores/filterStore';
+import { useProductsFilterStore } from '@/modules/products/stores/productsFilterStore';
 
 const props = defineProps<{
   id: string
 }>();
 
-const filterStore = useFilterStore();
+const filterStore = useProductsFilterStore();
 
 const clearSearch = (event: Event) => {
   event.preventDefault();

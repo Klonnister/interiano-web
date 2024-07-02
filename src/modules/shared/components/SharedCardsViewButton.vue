@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
-import { useFilterStore } from '../stores/filterStore';
+import { useProductsFilterStore } from '@/modules/products/stores/productsFilterStore';
 
 const props = defineProps<{
   name?: string,
@@ -8,7 +8,7 @@ const props = defineProps<{
   shrink?: boolean,
 }>();
 
-const filterStore = useFilterStore();
+const filterStore = useProductsFilterStore();
 </script>
 
 <template>

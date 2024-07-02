@@ -5,7 +5,7 @@ export default [
   {
     path: 'info-principal',
     name: 'product-create-main',
-    component: () => import('@/modules/products/components/ProductCreateViewMain.vue')
+    component: () => import('@/modules/products/components/ProductCreateViewMain.vue'),
   },
   {
     path: 'info-secundaria',
