@@ -58,7 +58,7 @@ const openFilters = () => {
         >
           <SharedCardsViewButton
             name="Agregar"
-            icon="tabler:menu-deep"
+            icon="icon-park-outline:plus"
           />
         </RouterLink>
       </div>
@@ -94,8 +94,8 @@ const openFilters = () => {
         :class="{'w-full': props.filtersButton} "
       >
         <SharedCardsViewButton
-          name="Opciones"
-          icon="tabler:menu-deep"
+          name="Agregar"
+          icon="icon-park-outline:plus"
         />
       </RouterLink>
     </div>
@@ -130,7 +130,7 @@ const openFilters = () => {
         :to="addButtonPath"
       >
         <SharedCardsViewButton
-          icon="tabler:menu-deep"
+          icon="icon-park-outline:plus"
           :shrink="true"
         />
       </RouterLink>

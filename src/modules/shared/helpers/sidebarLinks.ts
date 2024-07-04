@@ -11,7 +11,7 @@ export default [
   },
   {
     name: 'Categorías',
-    path: { name: 'dev'},
+    path: { name: 'categories'},
     icon: 'iconamoon:category-fill',
   },
   {

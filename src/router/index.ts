@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import TestView from '@/modules/test/views/TestView.vue';
 import { useAuthStore } from '@/modules/auth/stores/auth.store';
 import productRoutes from '@/modules/products/router'
+import categoriesRoutes from '@/modules/categories/router'
 import authRoutes from "@/modules/auth/router/authRoutes";
 import { useLayoutStore } from '../modules/shared/stores/layoutStore';
 
@@ -27,6 +28,7 @@ const router = createRouter({
       children: [
 
         ...productRoutes,
+        ...categoriesRoutes,
         
       ],
     },
