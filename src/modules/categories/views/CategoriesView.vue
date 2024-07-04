@@ -1,12 +1,22 @@
 <script setup lang="ts">
 import { apiRequest } from '@/modules/shared/helpers/api';
+import { useCardsStore } from '@/modules/shared/stores/cardsStore';
+import { useLayoutStore } from '@/modules/shared/stores/layoutStore';
 import { useSharedFilterStore } from '@/modules/shared/stores/sharedFilterStore';
 import type { CategoriesResponse, Category } from '@/modules/shared/types/category.interface';
 import type { Meta, MetaInfo } from '@/modules/shared/types/product.interface';
-import Paginator from 'primevue/paginator';
-import { reactive, ref, type Ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import Paginator, { type PageState } from 'primevue/paginator';
+import { reactive, ref, watch, type Ref } from 'vue';
+import { onBeforeRouteLeave } from 'vue-router';
 
+// Stores to use
+const cardsStore = useCardsStore();
+const layoutStore = useLayoutStore();
 const filterStore = useSharedFilterStore();
+
+// Page variables
+const { applyFilters } = storeToRefs(filterStore);
 const categories: Ref<Category[]> = ref([]);
 const metaInfo: MetaInfo = reactive({
   total: undefined,
@@ -18,18 +28,45 @@ const updatePages = (pagesInfo: Meta) => {
   metaInfo.total = pagesInfo.total;
   metaInfo.perPage = pagesInfo.perPage;
   metaInfo.lastPage = pagesInfo.lastPage;
-  // filterStore.page = pagesInfo.currentPage;
+  filterStore.page = pagesInfo.currentPage;
 }
 
 const getCategories = async () => {
-  const categoriesResponse: CategoriesResponse = await apiRequest('categories');
+  // Categories request
+  filterStore.loading = true;
+  layoutStore.resetLayout();
+  cardsStore.resetCards();
+
+  const { queries } = filterStore.getQueries();
+  const categoriesResponse: CategoriesResponse = await apiRequest(`categories${queries}`);
   if (!categoriesResponse.statusCode) {
     categories.value = categoriesResponse.data;
     updatePages(categoriesResponse.meta);
-  }  
+  }
+
+  applyFilters.value = false;
+  filterStore.loading = false;
 }
 
 getCategories();
+
+const paginate = (pageState: PageState) => {
+  const selectedPage = pageState.page + 1;
+  if (selectedPage !== filterStore.page) {
+    filterStore.page = selectedPage;
+    filterStore.first = pageState.first;
+    getCategories();
+  }
+}
+
+watch(applyFilters, (apply) => {
+  if (apply) getCategories();
+})
+
+onBeforeRouteLeave((to) => {
+  if (!to.fullPath.includes('categories')) 
+    filterStore.clearFilters();
+})
 </script>
 
 <template>
@@ -59,14 +96,13 @@ getCategories();
             :rows="metaInfo.perPage"
             :totalRecords="metaInfo.total"
             class="w-max mx-auto mt-10"
-            
+            @page="paginate"
           />
-          <!-- @page="paginate" -->
         </div>
 
-        <div v-else-if="filterStore.loading">
+        <!-- <div v-else-if="filterStore.loading">
           <ProductsCardSkeleton />
-        </div>
+        </div> -->
   
         <div v-else class="min-h-[40vh] lg:min-h-[65vh] flex justify-center items-center w-full">
           <p class="lg:text-xl 2xl:text-2xl opacity-70">No hay productos para mostrar</p>
