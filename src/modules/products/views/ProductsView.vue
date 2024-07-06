@@ -84,7 +84,7 @@ watch(applyFilters, (apply) => {
 
 onBeforeRouteLeave((to) => {
   if (!to.fullPath.includes('productos')) 
-    filterStore.clearFilters();
+    filterStore.resetFilters();
 })
 </script>
 
@@ -92,8 +92,6 @@ onBeforeRouteLeave((to) => {
   <div class="flex flex-col gap-8">
     <SharedCardsViewHeader
       title="productos"
-      :filters-button="true"
-      :modal-button="true"
     />
 
     <main class="w-full min-h-[40vh] lg:min-h-[5vh]">

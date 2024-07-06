@@ -1,19 +1,14 @@
 <script setup lang="ts">
 import type { RouteLocationRaw } from 'vue-router';
 import { useLayoutStore } from '../stores/layoutStore';
+import { useWindowSize } from '@vueuse/core';
 
-interface Props {
+const props = defineProps<{
   title: string;
-  filtersButton?: boolean;
-  modalButton?: boolean;
   addButtonPath?: RouteLocationRaw;
-}
+}>()
 
-const props = withDefaults(defineProps<Props>(), {
-  filtersButton: false,
-  modalButton: false,
-})
-
+const { width } = useWindowSize();
 const layoutStore = useLayoutStore();
 
 const open = () => {
@@ -23,34 +18,25 @@ const open = () => {
 }
 
 const openFilters = () => {
-  if(props.filtersButton) {
-    layoutStore.showFilters = true;
-  }
+  layoutStore.showFilters = true;
 }
 </script>
 
 <template>
   <header class="md:hidden">
-    <h1
-      class="uppercase font-semibold text-2xl sm:text-3xl text-center mb-4 sm:mb-6"
-    >
+    <h1 class="uppercase font-semibold text-2xl sm:text-3xl text-center mb-4 sm:mb-6">
       {{ props.title }}
     </h1>
     <div class="flex flex-col gap-4">
       <FiltersSearchBar id="search1" />
       <div class="flex gap-3 sm:gap-6">
+
         <SharedCardsViewButton
-          v-if="props.filtersButton"
           name="Filtros"
           icon="solar:filter-bold"
           @click="openFilters"
         />
-        <SharedCardsViewButton
-          v-if="props.modalButton"
-          name="Opciones"
-          icon="tabler:menu-deep"
-          @click="open"
-        />
+
         <RouterLink
           v-if="addButtonPath"
           :to="addButtonPath"
@@ -61,80 +47,50 @@ const openFilters = () => {
             icon="icon-park-outline:plus"
           />
         </RouterLink>
+
+        <SharedCardsViewButton
+          v-else
+          name="Opciones"
+          icon="tabler:menu-deep"
+          @click="open"
+        />
       </div>
     </div>
   </header>
 
-  <header class="hidden md:block lg:hidden">
-    <h1
-      class="uppercase font-semibold text-3xl text-center mb-6"
-    >
+  <header class="hidden md:block lg:flex lg:items-center lg:gap-4">
+    <h1 class="uppercase font-semibold text-[2.3rem] 2xl:text-4xl text-center mb-6 lg:mb-0 lg:me-auto lg:pe-8">
       {{ props.title }}
     </h1>
       
-    <div class="flex gap-6">
+    <div class="flex gap-6 lg:gap-4 xl:gap-4 lg:-mt-1">
       <SharedCardsViewButton
-        v-if="props.filtersButton"
         name="Filtros"
         icon="solar:filter-bold"
         @click="openFilters"
       />
 
-      <FiltersSearchBar id="search2" :class="{ 'md:w-96': !props.filtersButton }" />
+      <FiltersSearchBar id="search2" />
 
-      <SharedCardsViewButton
-        v-if="props.modalButton"
-        name="Opciones"
-        icon="tabler:menu-deep"
-        @click="open"
-      />
       <RouterLink
         v-if="addButtonPath"
         :to="addButtonPath"
-        :class="{'w-full': props.filtersButton} "
+        class="w-full"
       >
         <SharedCardsViewButton
-          name="Agregar"
+          :name="width < 1024 ? 'Agregar' : null"
           icon="icon-park-outline:plus"
+          class="h-full"
         />
       </RouterLink>
-    </div>
-  </header>
 
-  <header class="hidden lg:flex items-center">
-    <h1
-      class="uppercase font-semibold text-3xl 2xl:text-4xl text-center me-auto pe-8"
-    >
-      {{ props.title }}
-    </h1>
-
-    <div class="flex gap-4 xl:gap-4 items-stretch">
       <SharedCardsViewButton
-        v-if="props.filtersButton"
-        name="Filtros"
-        icon="solar:filter-bold"
-        @click="openFilters"
-      />
-
-      <FiltersSearchBar id="search3" />
-  
-      <SharedCardsViewButton
-        v-if="props.modalButton"
+        v-else
+        :name="width < 1024 ? 'Opciones' : null"
         icon="tabler:menu-deep"
-        :shrink="true"
         @click="open"
       />
-      
-      <RouterLink
-        v-if="addButtonPath"
-        :to="addButtonPath"
-      >
-        <SharedCardsViewButton
-          icon="icon-park-outline:plus"
-          :shrink="true"
-        />
-      </RouterLink>
-    </div>
 
+    </div>
   </header>
 </template>
