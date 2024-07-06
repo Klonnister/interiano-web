@@ -1,44 +1,37 @@
 <script setup lang="ts">
 import Dropdown from 'primevue/dropdown';
 import { useFilterStore } from '@/modules/shared/stores/filterStore';
-import { ref, watch } from 'vue';
+import { watch } from 'vue';
 import { storeToRefs } from 'pinia';
+import { useOrderTypeDefaults } from '../composables/orderTypeDefaults';
 
+const orderTypeDefaults = useOrderTypeDefaults();
 const filterStore = useFilterStore();
 const { orderBy } = storeToRefs(filterStore);
 
+const updateOrderTypeList = () => {
+  switch(orderBy.value) {
+    case 'price': 
+      filterStore.orderTypeOptions = orderTypeDefaults.price;
+      break;
+    case 'created': 
+      filterStore.orderTypeOptions = orderTypeDefaults.date;
+      break;
+    case 'updated': 
+      filterStore.orderTypeOptions = orderTypeDefaults.date;
+      break;
+    default:
+      filterStore.orderTypeOptions = orderTypeDefaults.alphabetic;
+      break;
+  }
+}
+
+updateOrderTypeList();
+
 watch(orderBy, (newOrderBy) => {
   if (orderBy.value === newOrderBy) filterStore.orderType = 'asc'
+  updateOrderTypeList();
 })
-
-const columns = ref([
-    { name: 'Precio', value: 'price' },
-    { name: 'Nombre', value: 'name' },
-    { name: 'Marca', value: 'trademark' },
-    { name: 'Categoría', value: 'category' },
-]);
-
-const priceOrder = ref([
-    {
-      name: 'Menor a mayor',
-      value: 'asc',
-    },
-    {
-      name: 'Mayor a menor',
-      value: 'desc',
-    },
-])
-
-const otherOrder = ref([
-    {
-      name: 'A-Z',
-      value: 'asc',
-    },
-    {
-      name: 'Z-A',
-      value: 'desc',
-    },
-])
 </script>
 
 <template>
@@ -57,7 +50,7 @@ const otherOrder = ref([
       <span id="filterOrderBy" class="text-[0.90rem]">Ordenar por</span>
       <Dropdown
         v-model="filterStore.orderBy"
-        :options="columns"
+        :options="filterStore.orderByOptions"
         optionLabel="name"
         optionValue="value"
         checkmark
@@ -69,7 +62,7 @@ const otherOrder = ref([
       <span id="filterOrderType" class="text-[0.90rem]">Ordenar de</span>
       <Dropdown
         v-model="filterStore.orderType"
-        :options="filterStore.orderBy === 'price' ? priceOrder : otherOrder"
+        :options="filterStore.orderTypeOptions"
         optionLabel="name"
         optionValue="value"
         checkmark

@@ -41,7 +41,7 @@ const layoutStore = useLayoutStore();
       <!-- Modal body -->
       <div class="flex flex-col px-4 pt-[4.5rem] pb-[8rem]">
         <Accordion>
-          <AccordionTab>
+          <AccordionTab v-if="filterStore.visibleFilters.categories">
             <template #header>
                 <div class="w-full flex items-center gap-4">
                     <span>Categorias</span>
@@ -56,7 +56,7 @@ const layoutStore = useLayoutStore();
             </template>
             <FiltersTabCategories />
           </AccordionTab>
-          <AccordionTab>
+          <AccordionTab v-if="filterStore.visibleFilters.trademarks">
               <template #header>
                 <div class="w-full flex items-center gap-4">
                   <span>Marcas</span>
@@ -71,7 +71,7 @@ const layoutStore = useLayoutStore();
               </template>
               <FiltersTabTrademarks />
           </AccordionTab>
-          <AccordionTab>
+          <AccordionTab v-if="filterStore.visibleFilters.price">
               <template #header>
                 <div class="w-full flex items-center gap-4">
                   <span>Por precio</span>
@@ -86,7 +86,7 @@ const layoutStore = useLayoutStore();
               </template>
               <FiltersTabPrice />
           </AccordionTab>
-          <AccordionTab>
+          <AccordionTab v-if="filterStore.visibleFilters.status">
               <template #header>
                 <div class="w-full flex items-center gap-4">
                   <span>Estado</span>
@@ -101,7 +101,7 @@ const layoutStore = useLayoutStore();
               </template>
               <FiltersTabStatus />
           </AccordionTab>
-          <AccordionTab>
+          <AccordionTab v-if="filterStore.visibleFilters.order">
               <template #header>
                 <div class="w-full flex items-center gap-4">
                   <span>Orden</span>
@@ -131,6 +131,7 @@ const layoutStore = useLayoutStore();
           offIcon="pi pi-box"
           class="mx-auto w-52 mt-4 mb-4 quepex"
           aria-label="Mostrar solo ofertas"
+          v-if="filterStore.visibleFilters.sale"
         />
       </div> 
      

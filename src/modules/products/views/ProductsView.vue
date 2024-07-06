@@ -1,22 +1,24 @@
 <script setup lang="ts">
 import { reactive, ref, watch, type Ref } from 'vue';
-import type { Meta, MetaInfo, Product, ProductsResponse } from '../../shared/types/product.interface';
+import type { Product, ProductsResponse } from '../../shared/types/product.interface';
 import { useFilterStore } from '@/modules/shared/stores/filterStore';
 import { apiRequest } from '@/modules/shared/helpers/api';
-import type { Category } from '@/modules/shared/types/category.interface';
+import type { RawCategoriesResponse } from '@/modules/shared/types/category.interface';
 import Paginator, { type PageState } from 'primevue/paginator';
 import { storeToRefs } from 'pinia';
 import { useCardsStore } from '@/modules/shared/stores/cardsStore';
 import { useLayoutStore } from '@/modules/shared/stores/layoutStore';
 import { onBeforeRouteLeave } from 'vue-router';
+import type { Meta, MetaInfo } from '@/modules/shared/types/apiResponse.interface';
+import { useOrderByDefaults } from '@/modules/shared/composables/orderByDeafults';
 
 // Stores to use
+const orderByDefaults = useOrderByDefaults();
 const layoutStore = useLayoutStore();
 const cardsStore = useCardsStore();
 const filterStore = useFilterStore();
 
 // Page Information
-const { applyFilters } = storeToRefs(filterStore);
 const products: Ref<Product[]> = ref([]);
 const metaInfo: MetaInfo = reactive({
   total: undefined,
@@ -31,26 +33,35 @@ const updatePages = (pagesInfo: Meta) => {
   filterStore.page = pagesInfo.currentPage;
 }
 
-// Set loading to false for when coming from auth page
-layoutStore.loading = false;
+// Filters configuration
+const { applyFilters } = storeToRefs(filterStore);
+filterStore.updateVisibleFilters({
+  categories: true,
+  trademarks: true,
+  price: true,
+  order: true,
+  sale: true,
+  status: true,
+});
+filterStore.orderByOptions = orderByDefaults.products;
 
 const getProducts = async () => {
-  // Products request
+  // Configure page loading, layour and cards.
+  layoutStore.loading = false;
   filterStore.loading = true;
   layoutStore.resetLayout();
   cardsStore.resetCards();
+
+  // Apply filters and send request  
   const { queries } = filterStore.getQueries();
   const productsResponse: ProductsResponse = await apiRequest(`products${queries}`);
-  if (!productsResponse.statusCode) {
+  const categoriesResponse: RawCategoriesResponse = await apiRequest('categories?raw=true');
+
+  if (!productsResponse.statusCode && !categoriesResponse.statusCode ) {
     products.value = productsResponse.data;
+    filterStore.categories = categoriesResponse.data;
     filterStore.updateTrademarks(productsResponse.trademarks);
     updatePages(productsResponse.meta);
-
-    // Categories request
-    if (!filterStore.categories.length) {
-      const categories: Category[] = await apiRequest('categories?raw=true');
-      filterStore.categories = categories;
-    }
   }
 
   applyFilters.value = false;
