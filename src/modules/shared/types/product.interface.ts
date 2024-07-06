@@ -1,3 +1,4 @@
+import type { ApiResponse, Meta } from "./apiResponse.interface";
 import type { Category } from "./category.interface";
 import type { Trademark } from "./trademark.interface";
 
@@ -27,7 +28,7 @@ export interface Product {
   applied_price?: number;
 }
 
-export interface ProductResponse {
+export interface ProductResponse extends ApiResponse {
   id: number;
   category_id: number;
   trademark_id: number;
@@ -51,32 +52,15 @@ export interface ProductResponse {
   sale_price: number;
   design: number;
   applied_price?: number;
-  statusCode?: number;
 }
 
-export interface ProductsResponse {
+export interface ProductsResponse extends ApiResponse {
   data: Product[];
   trademarks: Trademark[];
   meta: Meta;
-  statusCode?: number;
 }
 
 export interface ProductOptions {
   categories: Category[],
   trademarks: Trademark[],
-}
-
-export interface Meta {
-  total: number;
-  lastPage: number;
-  currentPage: number;
-  perPage: number;
-  prev: number | null;
-  next: number | null;
-}
-
-export interface MetaInfo {
-  total: number | undefined;
-  perPage: number | undefined;
-  lastPage: number | undefined;
 }
