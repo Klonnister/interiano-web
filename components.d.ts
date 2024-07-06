@@ -14,6 +14,7 @@ declare module 'vue' {
     CategoriesView: typeof import('./src/modules/categories/views/CategoriesView.vue')['default']
     CategoryCard: typeof import('./src/modules/categories/components/CategoryCard.vue')['default']
     FiltersModal: typeof import('./src/modules/shared/components/FiltersModal.vue')['default']
+    FiltersSearchBar: typeof import('./src/modules/shared/components/FiltersSearchBar.vue')['default']
     FiltersSwitchCategory: typeof import('./src/modules/shared/components/FiltersSwitchCategory.vue')['default']
     FiltersSwitchTrademark: typeof import('./src/modules/shared/components/FiltersSwitchTrademark.vue')['default']
     FiltersTabButtons: typeof import('./src/modules/shared/components/FiltersTabButtons.vue')['default']

@@ -37,7 +37,7 @@ const openFilters = () => {
       {{ props.title }}
     </h1>
     <div class="flex flex-col gap-4">
-      <SharedSearchBar id="search1" />
+      <FiltersSearchBar id="search1" />
       <div class="flex gap-3 sm:gap-6">
         <SharedCardsViewButton
           v-if="props.filtersButton"
@@ -80,7 +80,7 @@ const openFilters = () => {
         @click="openFilters"
       />
 
-      <SharedSearchBar id="search2" :class="{ 'md:w-96': !props.filtersButton }" />
+      <FiltersSearchBar id="search2" :class="{ 'md:w-96': !props.filtersButton }" />
 
       <SharedCardsViewButton
         v-if="props.modalButton"
@@ -116,7 +116,7 @@ const openFilters = () => {
         @click="openFilters"
       />
 
-      <SharedSearchBar id="search3" />
+      <FiltersSearchBar id="search3" />
   
       <SharedCardsViewButton
         v-if="props.modalButton"

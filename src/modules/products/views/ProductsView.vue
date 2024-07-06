@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive, ref, watch, type Ref } from 'vue';
 import type { Meta, MetaInfo, Product, ProductsResponse } from '../../shared/types/product.interface';
-import { useProductsFilterStore } from '@/modules/products/stores/productsFilterStore';
+import { useFilterStore } from '@/modules/shared/stores/filterStore';
 import { apiRequest } from '@/modules/shared/helpers/api';
 import type { Category } from '@/modules/shared/types/category.interface';
 import Paginator, { type PageState } from 'primevue/paginator';
@@ -13,7 +13,7 @@ import { onBeforeRouteLeave } from 'vue-router';
 // Stores to use
 const layoutStore = useLayoutStore();
 const cardsStore = useCardsStore();
-const filterStore = useProductsFilterStore();
+const filterStore = useFilterStore();
 
 // Page Information
 const { applyFilters } = storeToRefs(filterStore);

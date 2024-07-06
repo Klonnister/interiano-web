@@ -3,13 +3,13 @@ import { VueFinalModal } from 'vue-final-modal'
 import { Icon } from '@iconify/vue';
 import Accordion from 'primevue/accordion';
 import AccordionTab from 'primevue/accordiontab';
-import { useProductsFilterStore } from '@/modules/products/stores/productsFilterStore';
+import { useFilterStore } from '@/modules/shared/stores/filterStore';
 import { useWindowSize } from '@vueuse/core';
 import { useLayoutStore } from '../stores/layoutStore';
 import ToggleButton from 'primevue/togglebutton';
 
 const { width } = useWindowSize();
-const filterStore = useProductsFilterStore();
+const filterStore = useFilterStore();
 const layoutStore = useLayoutStore();
 </script>
 

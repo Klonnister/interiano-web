@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useProductsFilterStore } from '@/modules/products/stores/productsFilterStore';
+import { useFilterStore } from '@/modules/shared/stores/filterStore';
 
-const filterStore = useProductsFilterStore();
+const filterStore = useFilterStore();
 
 const clearFilters = () => {
   filterStore.clearFilters();

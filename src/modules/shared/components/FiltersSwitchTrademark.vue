@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import InputSwitch from 'primevue/inputswitch';
-import { useProductsFilterStore } from '@/modules/products/stores/productsFilterStore';
+import { useFilterStore } from '@/modules/shared/stores/filterStore';
 import { storeToRefs } from 'pinia';
 
 const props = defineProps<{
@@ -9,7 +9,7 @@ const props = defineProps<{
   name: string,
 }>()
 
-const filterStore = useProductsFilterStore();
+const filterStore = useFilterStore();
 const { selectedTrademarks } = storeToRefs(filterStore)
 
 const checked = ref(filterStore.selectedTrademarks.includes(props.id));
