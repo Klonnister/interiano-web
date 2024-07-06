@@ -14,10 +14,10 @@ const updateOrderTypeList = () => {
     case 'price': 
       filterStore.orderTypeOptions = orderTypeDefaults.price;
       break;
-    case 'created': 
+    case 'created_at': 
       filterStore.orderTypeOptions = orderTypeDefaults.date;
       break;
-    case 'updated': 
+    case 'updated_at': 
       filterStore.orderTypeOptions = orderTypeDefaults.date;
       break;
     default:
@@ -39,7 +39,7 @@ watch(orderBy, (newOrderBy) => {
     <button
       class="text-sm underline text-[#D0D9F6] -m-px"
       v-if="
-        filterStore.orderBy !== 'trademark' || 
+        filterStore.orderBy !== 'created_at' ||
         filterStore.orderType !== 'asc'
       "
       @click="filterStore.resetOrder"
@@ -59,7 +59,7 @@ watch(orderBy, (newOrderBy) => {
       />
     </div>
     <div class="flex flex-col gap-2">
-      <span id="filterOrderType" class="text-[0.90rem]">Ordenar de</span>
+      <span id="filterOrderType" class="text-[0.90rem]">Tipo de orden</span>
       <Dropdown
         v-model="filterStore.orderType"
         :options="filterStore.orderTypeOptions"

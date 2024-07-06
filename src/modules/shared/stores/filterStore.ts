@@ -34,7 +34,7 @@ export const useFilterStore = defineStore('filterStore', () => {
   const selectedTrademarks: Ref<number[]> = useStorage('filterSelectedTrademarks', []);
   const priceMin: Ref<number|null> = useStorage('filterPriceMin', null);
   const priceMax: Ref<number|null> = useStorage('filterPriceMax', null);
-  const orderBy: Ref<string> = useStorage('filterOrderBy', 'trademark');
+  const orderBy: Ref<string> = useStorage('filterOrderBy', 'created_at');
   const orderType: Ref<string> = useStorage('filterOrderType', 'asc');
   const sale: Ref<boolean> = useStorage('filterSale', false);
   const stock: Ref<string> = useStorage('filterStock', '');
@@ -89,7 +89,7 @@ export const useFilterStore = defineStore('filterStore', () => {
     selectedTrademarks.value = [];
     priceMin.value = null;
     priceMax.value = null;
-    orderBy.value = 'trademark';
+    orderBy.value = 'created_at';
     orderType.value = 'asc';
     sale.value = false;
     stock.value = '';
@@ -112,7 +112,7 @@ export const useFilterStore = defineStore('filterStore', () => {
     selectedTrademarks.value = [];
     priceMin.value = null;
     priceMax.value = null;
-    orderBy.value = 'trademark';
+    orderBy.value = 'created_at';
     orderType.value = 'asc';
     sale.value = false;
     stock.value = '';
@@ -135,7 +135,7 @@ export const useFilterStore = defineStore('filterStore', () => {
   }
 
   const resetOrder = () => {
-    orderBy.value = 'trademark';
+    orderBy.value = 'created_at';
     orderType.value = 'asc';
   }
 
@@ -163,7 +163,7 @@ export const useFilterStore = defineStore('filterStore', () => {
     if (priceMax.value) 
       queryParamsArr.push(`priceMax=${priceMax.value}`)
 
-    if(orderBy.value !== 'trademark' || orderType.value !== 'asc')
+    if(orderBy.value !== 'created_at' || orderType.value !== 'asc')
       queryParamsArr.push(`order=${orderBy.value},${orderType.value}`)
 
     if (sale.value) 
