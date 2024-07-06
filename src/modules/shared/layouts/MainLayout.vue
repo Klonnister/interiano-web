@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
 import { Icon } from '@iconify/vue';
-import sidebarLinks from '../helpers/sidebarLinks';
 import { useLayoutStore } from '../stores/layoutStore';
 import { useModal } from 'vue-final-modal';
 import ProductsModal from '@/modules/products/components/ProductsModal.vue';
@@ -11,9 +10,10 @@ import FiltersModal from '../components/FiltersModal.vue';
 import { apiRequest, apiUrl } from '../helpers/api';
 import type { ProfileInfo } from '../types/profile.interface';
 import { useStorage } from '@vueuse/core';
+import { useSideBarLinks } from '../composables/sideBarLinks';
 
 const layoutStore = useLayoutStore();
-const links = sidebarLinks;
+const sideBarLinks = useSideBarLinks();
 
 const username: Ref<string> = useStorage('userName', '');
 const userImage: Ref<string> = useStorage('userImage', '');
@@ -119,7 +119,7 @@ const unfocusableByMouse = computed(() => ({
 
         <nav class="flex flex-col gap-[2vh] 2xl:gap-6">
           <RouterLink
-            v-for="link in links"
+            v-for="link in sideBarLinks"
             :key="link.name"
             :to="link.path"
             :aria-disabled="unfocusableOption"

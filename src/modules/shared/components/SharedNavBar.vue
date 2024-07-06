@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
 import { useLayoutStore } from '../stores/layoutStore';
-import sidebarLinks from '../helpers/sidebarLinks';
 import { apiUrl } from '../helpers/api';
 import { computed, type Ref } from 'vue';
 import { useStorage } from '@vueuse/core';
+import { useSideBarLinks } from '../composables/sideBarLinks';
 
+const sideBarLinks = useSideBarLinks();
 const username: Ref<string> = useStorage('userName', '');
 const userImage: Ref<string> = useStorage('userImage', '');
-const links = sidebarLinks;
 const layoutStore = useLayoutStore();
 
 const imagePath = computed(() => {
@@ -84,7 +84,7 @@ const unfocusableByMouse = computed(() => ({
           aria-label="Navegación entre páginas"
         >
           <RouterLink
-          v-for="link in links"
+          v-for="link in sideBarLinks"
           :key="link.name"
           :to="link.path"
           class="flex gap-3 items-center justify-start py-6 px-16 hover:scale-105 transition-all duration-300 ease-in-out"
