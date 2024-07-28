@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { apiRequest } from '@/modules/shared/helpers/api';
 import { useCardsStore } from '@/modules/shared/stores/cardsStore';
+import { useFilterStore } from '@/modules/shared/stores/filterStore';
 import { useLayoutStore } from '@/modules/shared/stores/layoutStore';
-import { useSharedFilterStore } from '@/modules/shared/stores/sharedFilterStore';
 import type { Meta, MetaInfo } from '@/modules/shared/types/apiResponse.interface';
 import type { CategoriesResponse, Category } from '@/modules/shared/types/category.interface';
 import { storeToRefs } from 'pinia';
@@ -13,7 +13,7 @@ import { onBeforeRouteLeave } from 'vue-router';
 // Stores to use
 const cardsStore = useCardsStore();
 const layoutStore = useLayoutStore();
-const filterStore = useSharedFilterStore();
+const filterStore = useFilterStore();
 
 // Page variables
 const { applyFilters } = storeToRefs(filterStore);
@@ -72,8 +72,8 @@ onBeforeRouteLeave((to) => {
 <template>
   <div class="flex flex-col gap-8">
     <SharedCardsViewHeader
-      title="Categorías"
-      :add-button-path="{ name: 'dev' }"
+      title="categorías"
+      :plus-icon="true"
     /> 
 
     <Transition name="fade" mode="out-in">

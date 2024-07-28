@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import type { RouteLocationRaw } from 'vue-router';
 import { useLayoutStore } from '../stores/layoutStore';
 import { useWindowSize } from '@vueuse/core';
 
 const props = defineProps<{
   title: string;
-  addButtonPath?: RouteLocationRaw;
+  plusIcon?: boolean;
 }>()
 
 const { width } = useWindowSize();
@@ -14,6 +13,10 @@ const layoutStore = useLayoutStore();
 const open = () => {
   if(props.title === 'productos') {
     layoutStore.showProductsMenu = true;
+  }
+
+  if (props.title === 'categorías') {
+    layoutStore.showCategoriesModal = true;
   }
 }
 
@@ -37,21 +40,11 @@ const openFilters = () => {
           @click="openFilters"
         />
 
-        <RouterLink
-          v-if="addButtonPath"
-          :to="addButtonPath"
-          class="w-full"
-        >
-          <SharedCardsViewButton
-            name="Agregar"
-            icon="icon-park-outline:plus"
-          />
-        </RouterLink>
-
         <SharedCardsViewButton
-          v-else
           name="Opciones"
-          icon="tabler:menu-deep"
+          :icon="props.plusIcon 
+            ? 'icon-park-outline:plus' 
+            :'tabler:menu-deep'"
           @click="open"
         />
       </div>
@@ -72,22 +65,12 @@ const openFilters = () => {
 
       <FiltersSearchBar id="search2" />
 
-      <RouterLink
-        v-if="addButtonPath"
-        :to="addButtonPath"
-        class="w-full"
-      >
-        <SharedCardsViewButton
-          :name="width < 1024 ? 'Agregar' : null"
-          icon="icon-park-outline:plus"
-          class="h-full"
-        />
-      </RouterLink>
 
       <SharedCardsViewButton
-        v-else
         :name="width < 1024 ? 'Opciones' : null"
-        icon="tabler:menu-deep"
+        :icon="props.plusIcon 
+            ? 'icon-park-outline:plus' 
+            :'tabler:menu-deep'"
         @click="open"
       />
 

@@ -11,6 +11,7 @@ declare module 'vue' {
     AuthLayout: typeof import('./src/modules/auth/layout/AuthLayout.vue')['default']
     ButtonCardComponent: typeof import('./src/modules/auth/components/ButtonCardComponent.vue')['default']
     CategoriesCard: typeof import('./src/modules/categories/components/CategoriesCard.vue')['default']
+    CategoriesCreateModal: typeof import('./src/modules/categories/components/CategoriesCreateModal.vue')['default']
     CategoriesView: typeof import('./src/modules/categories/views/CategoriesView.vue')['default']
     CategoryCard: typeof import('./src/modules/categories/components/CategoryCard.vue')['default']
     FiltersModal: typeof import('./src/modules/shared/components/FiltersModal.vue')['default']

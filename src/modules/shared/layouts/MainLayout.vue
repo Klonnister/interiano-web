@@ -11,6 +11,7 @@ import { apiRequest, apiUrl } from '../helpers/api';
 import type { ProfileInfo } from '../types/profile.interface';
 import { useStorage } from '@vueuse/core';
 import { useSideBarLinks } from '../composables/sideBarLinks';
+import CategoriesCreateModal from '@/modules/categories/components/CategoriesCreateModal.vue';
 
 const layoutStore = useLayoutStore();
 const sideBarLinks = useSideBarLinks();
@@ -28,20 +29,35 @@ const getUserProfile = async() => {
 
 if(!username.value) getUserProfile();
 
-const { showMenu, showProductsMenu, showFilters } = storeToRefs(layoutStore);
+const { 
+  showMenu, 
+  showProductsMenu,
+  showCategoriesModal,
+  showFilters
+} = storeToRefs(layoutStore);
 
-const addProductModal = useModal({
+const productsModal = useModal({
   component: ProductsModal,
-})
-
-const filtersModal = useModal({
-  component: FiltersModal,
 })
 
 watch(showProductsMenu, (newValue) => {
   newValue 
-    ? addProductModal.open()
-    : addProductModal.close()
+  ? productsModal.open()
+  : productsModal.close()
+})
+
+const categoriesCreateModal = useModal({
+  component: CategoriesCreateModal
+})
+
+watch(showCategoriesModal, (newValue) => {
+  newValue 
+    ? categoriesCreateModal.open()
+    : categoriesCreateModal.close()
+})
+
+const filtersModal = useModal({
+  component: FiltersModal,
 })
 
 watch(showFilters, (newValue) => {
