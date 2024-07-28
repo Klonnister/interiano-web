@@ -40,7 +40,7 @@ watch(orderBy, (newOrderBy) => {
       class="text-sm underline text-[#D0D9F6] -m-px"
       v-if="
         filterStore.orderBy !== 'created_at' ||
-        filterStore.orderType !== 'asc'
+        filterStore.orderType !== 'desc'
       "
       @click="filterStore.resetOrder"
     >

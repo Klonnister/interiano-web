@@ -24,11 +24,11 @@ export const useOrderTypeDefaults = () => {
   const date = [
     {
       name: 'Recientes primero',
-      value: 'asc',
+      value: 'desc',
     },
     {
       name: 'Más antiguos primero',
-      value: 'desc',
+      value: 'asc',
     }
   ];
 
