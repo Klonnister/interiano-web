@@ -7,6 +7,8 @@ import { storeToRefs } from 'pinia';
 import { apiRequest } from '@/modules/shared/helpers/api';
 import { useToast } from 'vue-toastification';
 import { useFilterStore } from '@/modules/shared/stores/filterStore';
+import { useModal } from 'vue-final-modal';
+import CategoriesDeleteModal from './CategoriesDeleteModal.vue';
 
 const props = defineProps<{
   category: Category,
@@ -63,6 +65,25 @@ const deleteCategory = async () => {
     layoutStore.loading = false;
   }
 }
+
+
+const deleteModal = useModal({
+  component: CategoriesDeleteModal,
+  attrs: {
+    name: props.category.name,
+    onConfirm: () => {
+      deleteModal.close();
+      deleteCategory();
+    },
+    onCancel: () => {
+      deleteModal.close();
+    }
+  },
+});
+
+const openDeleteModal = () => {
+  deleteModal.open();
+}
 </script>
 
 <template>
@@ -115,7 +136,7 @@ const deleteCategory = async () => {
             aria-label="Eliminar producto"
             :disabled="layoutStore.loading"
             type="button"
-            @click="deleteCategory"
+            @click="openDeleteModal"
           >
             <SharedCardButtonBase background="bg-[#722A2A]" icon="ic:baseline-delete" />
           </button>
