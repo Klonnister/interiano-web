@@ -4,10 +4,10 @@ import { useWindowSize } from '@vueuse/core';
 import { useLayoutStore } from '@/modules/shared/stores/layoutStore';
 import { Icon } from '@iconify/vue/dist/iconify.js';
 import { computed, ref, type Ref } from 'vue';
-import Textarea from 'primevue/textarea';
 import { apiRequest } from '@/modules/shared/helpers/api';
 import { useToast } from 'vue-toastification';
 import { useFilterStore } from '@/modules/shared/stores/filterStore';
+import InputText from 'primevue/inputtext';
 // import type { FileUploadUploaderEvent } from 'primevue/fileupload';
 // import type { ImageResponse } from '@/modules/shared/types/image.interface';
 // import { apiImageRequest, apiUrl } from '@/modules/shared/helpers/api';
@@ -82,7 +82,7 @@ const submit = async(event: Event) => {
           @click="layoutStore.resetLayout"
           class="fixed right-6"
           type="button"
-          aria-label="Cerrar filtros"
+          aria-label="Cancelar creación de categoría"
         >
           <Icon
             icon="iconamoon:close-bold"
@@ -96,7 +96,7 @@ const submit = async(event: Event) => {
        <form class="flex flex-col px-8 pt-[5.5rem] pb-4 gap-6" @submit="submit">
         <div class="flex flex-col gap-2 group relative">
           <label
-            for="productCreateName"
+            for="categoryCreateName"
             class="text-[#A8B7EA] transition-all duration-300 ease-in-out group-hover:-translate-y-0.5 group-hover:text-[#d0d9f6]"
           >
             Nombre *
@@ -104,15 +104,15 @@ const submit = async(event: Event) => {
           <span class="text-[#A8B7EA] text-sm absolute top-0 right-0">
             ({{ nameLength }}/35)
           </span>
-          <Textarea
-            id="productCreateName"
-            name="productCreateName"
-            v-model="name"
-            autoResize
-            maxlength="35"
+          <InputText
             :disabled="loading"
-            placeholder="Shampo Control Caída, Nutre y Crece"
-            rows="1"
+            autocomplete="on"
+            id="categoryCreateName"
+            maxlength="35"
+            name="categoryCreateName"
+            placeholder="Acondicionadores"
+            required
+            v-model="name"
           />
         </div>
 
