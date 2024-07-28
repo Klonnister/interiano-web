@@ -1,14 +1,19 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { type Category } from '../../shared/types/category.interface';
+import { type Category, type CategoryResponse } from '../../shared/types/category.interface';
 import { useLayoutStore } from '@/modules/shared/stores/layoutStore';
 import { useCardsStore } from '@/modules/shared/stores/cardsStore';
 import { storeToRefs } from 'pinia';
+import { apiRequest } from '@/modules/shared/helpers/api';
+import { useToast } from 'vue-toastification';
+import { useFilterStore } from '@/modules/shared/stores/filterStore';
 const props = defineProps<{
   category: Category,
 }>();
 
+const toast = useToast();
 const cardsStore = useCardsStore();
+const filterStore = useFilterStore();
 const layoutStore = useLayoutStore();
 const { openCard } = storeToRefs(cardsStore)
 
@@ -35,6 +40,23 @@ const toggleMenu = () => {
 const openEditModal = () => {
   cardsStore.editCategory = props.category;
   layoutStore.showCategoriesEditModal = true;
+}
+
+const deleteCategory = async () => {
+  layoutStore.loading = true;
+  const response: CategoryResponse = await apiRequest(
+    `categories/${props.category.id}`, {
+      method: 'DELETE',
+    }
+  );
+
+  if (!response.statusCode) {
+    layoutStore.loading = false;
+    toast.success('Categoría eliminada con éxito');
+    filterStore.applyFilters = true;
+  } else {
+    layoutStore.loading = false;
+  }
 }
 </script>
 
@@ -86,6 +108,8 @@ const openEditModal = () => {
             class="z-30 rounded-md"
             aria-label="Eliminar producto"
             :disabled="layoutStore.loading"
+            type="button"
+            @click="deleteCategory"
           >
             <SharedCardButtonBase background="bg-[#722A2A]" icon="ic:baseline-delete" />
           </button>
