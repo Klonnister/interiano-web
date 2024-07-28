@@ -7,8 +7,13 @@ import { storeToRefs } from 'pinia';
 import { apiRequest } from '@/modules/shared/helpers/api';
 import { useToast } from 'vue-toastification';
 import { useFilterStore } from '@/modules/shared/stores/filterStore';
+
 const props = defineProps<{
   category: Category,
+}>();
+
+const emit = defineEmits<{
+  (e: 'viewCategoryProducts', id: number): void
 }>();
 
 const toast = useToast();
@@ -96,13 +101,14 @@ const deleteCategory = async () => {
             />
           </button>
           
-          <RouterLink
-            :to="{ name: 'dev' }"
+          <button
             class="z-30 rounded-md"
-            aria-label="Editar existencias"
+            aria-label="Ver todos los productos de esta categoría"
+            type="button"
+            @click="emit('viewCategoryProducts', props.category.id)"
           >
             <SharedCardButtonBase background="bg-[#383838]" icon="fluent:box-search-16-filled" />
-          </RouterLink>
+          </button>
           
           <button
             class="z-30 rounded-md"

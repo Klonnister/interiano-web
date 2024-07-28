@@ -8,9 +8,10 @@ import type { CategoriesResponse, Category } from '@/modules/shared/types/catego
 import { storeToRefs } from 'pinia';
 import Paginator, { type PageState } from 'primevue/paginator';
 import { reactive, ref, watch, type Ref } from 'vue';
-import { onBeforeRouteLeave } from 'vue-router';
+import { onBeforeRouteLeave, useRouter } from 'vue-router';
 
 // Stores to use
+const router = useRouter();
 const cardsStore = useCardsStore();
 const layoutStore = useLayoutStore();
 const filterStore = useFilterStore();
@@ -18,6 +19,7 @@ const filterStore = useFilterStore();
 // Page variables
 const { applyFilters } = storeToRefs(filterStore);
 const categories: Ref<Category[]> = ref([]);
+const searchCategory: Ref<number> = ref(0);
 const metaInfo: MetaInfo = reactive({
   total: undefined,
   perPage: undefined,
@@ -59,6 +61,11 @@ const paginate = (pageState: PageState) => {
   }
 }
 
+const updateCategorySearch = (id: number) => {
+  searchCategory.value = id;
+  router.push({ name: 'products' })
+}
+
 watch(applyFilters, (apply) => {
   if (apply) getCategories();
 })
@@ -66,6 +73,9 @@ watch(applyFilters, (apply) => {
 onBeforeRouteLeave((to) => {
   if (!to.fullPath.includes('categories')) 
     filterStore.clearFilters();
+
+  if (searchCategory.value)
+    filterStore.selectedCategories.push(searchCategory.value)
 })
 </script>
 
@@ -83,6 +93,7 @@ onBeforeRouteLeave((to) => {
               v-for="category in categories"
               :category="category"
               :key="category.id"
+              @view-category-products="updateCategorySearch"
             />
           </ul>
           <Paginator
