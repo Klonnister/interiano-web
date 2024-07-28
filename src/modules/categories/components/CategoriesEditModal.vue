@@ -72,7 +72,7 @@ const submit = async(event: Event) => {
   })
 
   if (!response.statusCode) {
-    toast.success('Categoría creada con éxito');
+    toast.success('La categoría ha sido guardada');
     filterStore.applyFilters = true;
     layoutStore.resetLayout();
   } else {
