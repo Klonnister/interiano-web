@@ -12,6 +12,7 @@ import type { ProfileInfo } from '../types/profile.interface';
 import { useStorage } from '@vueuse/core';
 import { useSideBarLinks } from '../composables/sideBarLinks';
 import CategoriesCreateModal from '@/modules/categories/components/CategoriesCreateModal.vue';
+import CategoriesEditModal from '@/modules/categories/components/CategoriesEditModal.vue';
 
 const layoutStore = useLayoutStore();
 const sideBarLinks = useSideBarLinks();
@@ -33,6 +34,7 @@ const {
   showMenu, 
   showProductsMenu,
   showCategoriesModal,
+  showCategoriesEditModal,
   showFilters
 } = storeToRefs(layoutStore);
 
@@ -54,6 +56,16 @@ watch(showCategoriesModal, (newValue) => {
   newValue 
     ? categoriesCreateModal.open()
     : categoriesCreateModal.close()
+})
+
+const categoriesEditModal = useModal({
+  component: CategoriesEditModal
+})
+
+watch(showCategoriesEditModal, (newValue) => {
+  newValue 
+    ? categoriesEditModal.open()
+    : categoriesEditModal.close()
 })
 
 const filtersModal = useModal({

@@ -1,12 +1,25 @@
 import { defineStore } from "pinia";
-import { ref, type Ref } from "vue";
+import { reactive, ref, type Ref } from "vue";
+import type { Category } from "../types/category.interface";
 
 export const useCardsStore = defineStore('cardsStore', () => {
-  const openProduct: Ref<number|null> = ref(null);
+  const openCard: Ref<number|null> = ref(null);
+
+  const editCategory: Category = reactive({
+    id: 0,
+    name: ''
+  });
 
   const resetCards = () => {
-    openProduct.value = null;
+    openCard.value = null;
   }
 
-  return { openProduct, resetCards }
+  const resetCategoryEdit = () => {
+    editCategory.id = 0;
+    editCategory.name = '';
+  }
+
+  return { 
+    openCard, resetCards, editCategory, resetCategoryEdit,
+  }
 })

@@ -10,26 +10,31 @@ const props = defineProps<{
 
 const cardsStore = useCardsStore();
 const layoutStore = useLayoutStore();
-const { openProduct } = storeToRefs(cardsStore)
+const { openCard } = storeToRefs(cardsStore)
 
-const showMenu = ref(cardsStore.openProduct === props.category.id);
-watch(openProduct, (newId) => {
+const showMenu = ref(cardsStore.openCard === props.category.id);
+watch(openCard, (newId) => {
   showMenu.value = newId === props.category.id;
 })
 
 
 const openMenu = () => {
-  openProduct.value = props.category.id;
+  openCard.value = props.category.id;
 }
 
 const closeMenu = () => {
-  openProduct.value = null;
+  openCard.value = null;
 }
 
 const toggleMenu = () => {
   !showMenu.value
-    ? openProduct.value = props.category.id
-    : openProduct.value = null
+    ? openCard.value = props.category.id
+    : openCard.value = null
+}
+
+const openEditModal = () => {
+  cardsStore.editCategory = props.category;
+  layoutStore.showCategoriesEditModal = true;
 }
 </script>
 
@@ -57,13 +62,17 @@ const toggleMenu = () => {
         <div
           class="absolute inset-0 w-32 sm:w-36 h-max flex flex-wrap justify-center items-center gap-2 sm:gap-2.5 top-6 mx-auto my-auto">
 
-          <RouterLink
-            :to="{ name: 'dev' }"
+          <button
             class="z-30 rounded-md"
             aria-label="Editar producto"
+            type="button"
+            @click="openEditModal"
           >
-            <SharedCardButtonBase background="bg-[#15395A]" icon="ri:edit-2-fill" />
-          </RouterLink>
+            <SharedCardButtonBase
+              background="bg-[#15395A]"
+              icon="ri:edit-2-fill"
+            />
+          </button>
           
           <RouterLink
             :to="{ name: 'dev' }"

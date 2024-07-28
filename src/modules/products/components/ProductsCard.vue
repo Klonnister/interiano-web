@@ -17,27 +17,27 @@ const cardsStore = useCardsStore();
 const catalogStore = useCatalogStore();
 const layoutStore = useLayoutStore();
 
-const { openProduct } = storeToRefs(cardsStore)
+const { openCard } = storeToRefs(cardsStore)
 const { catalog } = storeToRefs(catalogStore);
 
-const showMenu = ref(cardsStore.openProduct === props.product.id);
+const showMenu = ref(cardsStore.openCard === props.product.id);
 
 const openMenu = () => {
-  openProduct.value = props.product.id;
+  openCard.value = props.product.id;
 }
 
-watch(openProduct, (newId) => {
+watch(openCard, (newId) => {
   showMenu.value = newId === props.product.id;
 })
 
 const closeMenu = () => {
-  openProduct.value = null;
+  openCard.value = null;
 }
 
 const toggleMenu = () => {
   !showMenu.value
-    ? openProduct.value = props.product.id
-    : openProduct.value = null
+    ? openCard.value = props.product.id
+    : openCard.value = null
 }
 
 
