@@ -80,6 +80,7 @@ const submit = async(event: Event) => {
       <div class="fixed w-full sm:w-[24rem] 2xl:w-[25rem] bg-[#071524] px-8 py-4 overflow-hidden rounded-t-2xl sm:rounded-none sm:rounded-tl-2xl z-30">
         <button
           @click="layoutStore.resetLayout"
+          :disabled="loading"
           class="fixed right-6"
           type="button"
           aria-label="Cancelar creación de categoría"
