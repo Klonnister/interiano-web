@@ -1,11 +1,16 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { useLayoutStore } from '../stores/layoutStore';
 import { useWindowSize } from '@vueuse/core';
 
-const props = defineProps<{
+interface Props {
   title: string;
-  plusIcon?: boolean;
-}>()
+  createModal?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  createModal: false,
+})
 
 const { width } = useWindowSize();
 const layoutStore = useLayoutStore();
@@ -23,6 +28,13 @@ const open = () => {
 const openFilters = () => {
   layoutStore.showFilters = true;
 }
+
+const addButtonName = computed(() => {
+  if (width.value < 1024) 
+    return props.createModal ? 'Agregar' : 'Opciones';
+
+  return null;
+})
 </script>
 
 <template>
@@ -41,10 +53,11 @@ const openFilters = () => {
         />
 
         <SharedCardsViewButton
-          name="Opciones"
-          :icon="props.plusIcon 
+          :name="addButtonName"
+          :icon="props.createModal
             ? 'icon-park-outline:plus' 
-            :'tabler:menu-deep'"
+            :'tabler:menu-deep'
+          "
           @click="open"
         />
       </div>
@@ -67,8 +80,9 @@ const openFilters = () => {
 
 
       <SharedCardsViewButton
-        :name="width < 1024 ? 'Opciones' : null"
-        :icon="props.plusIcon 
+        :shrink="width > 1024"
+        :name="addButtonName"
+        :icon="props.createModal 
             ? 'icon-park-outline:plus' 
             :'tabler:menu-deep'"
         @click="open"

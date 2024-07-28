@@ -73,7 +73,7 @@ onBeforeRouteLeave((to) => {
   <div class="flex flex-col gap-8">
     <SharedCardsViewHeader
       title="categorías"
-      :plus-icon="true"
+      :createModal="true"
     /> 
 
     <Transition name="fade" mode="out-in">

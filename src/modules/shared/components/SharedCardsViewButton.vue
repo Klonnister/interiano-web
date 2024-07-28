@@ -2,11 +2,15 @@
 import { Icon } from '@iconify/vue';
 import { useFilterStore } from '@/modules/shared/stores/filterStore';
 
-const props = defineProps<{
+interface Props {
   name?: string,
   icon: string,
   shrink?: boolean,
-}>();
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  shrink: false,
+})
 
 const filterStore = useFilterStore();
 </script>
