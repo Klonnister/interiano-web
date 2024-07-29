@@ -12,7 +12,6 @@ const filterStore = useFilterStore();
 const clearSearch = (event: Event) => {
   event.preventDefault();
   filterStore.search = '';
-  filterStore.applyFilters = true;
 }
 
 const applyFilter = (event: Event) => {

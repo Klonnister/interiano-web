@@ -34,7 +34,7 @@ const updatePages = (pagesInfo: Meta) => {
 }
 
 // Filters configuration
-const { applyFilters } = storeToRefs(filterStore);
+const { applyFilters, search } = storeToRefs(filterStore);
 filterStore.updateVisibleFilters({
   categories: true,
   trademarks: true,
@@ -77,6 +77,10 @@ const paginate = (pageState: PageState) => {
     getProducts();
   }
 }
+
+watch(search, (newSearch) => {
+  if (!newSearch) getProducts();
+})
 
 watch(applyFilters, (apply) => {
   if (apply) getProducts();

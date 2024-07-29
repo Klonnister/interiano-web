@@ -19,7 +19,7 @@ const filterStore = useFilterStore();
 const orderByDefaults = useOrderByDefaults();
 
 // Page variables
-const { applyFilters } = storeToRefs(filterStore);
+const { applyFilters, search } = storeToRefs(filterStore);
 const categories: Ref<Category[]> = ref([]);
 const searchCategory: Ref<number> = ref(0);
 const metaInfo: MetaInfo = reactive({
@@ -72,6 +72,10 @@ const updateCategorySearch = (id: number) => {
   searchCategory.value = id;
   router.push({ name: 'products' })
 }
+
+watch(search, (newSearch) => {
+  if (!newSearch) getCategories();
+})
 
 watch(applyFilters, (apply) => {
   if (apply) getCategories();
