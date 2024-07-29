@@ -149,7 +149,7 @@ export const useFilterStore = defineStore('filterStore', () => {
     const queryParamsArr = [];
 
     if (search.value) 
-      queryParamsArr.push(`title=${search.value}`)
+      queryParamsArr.push(`name=${search.value}`)
 
     if (selectedCategories.value.length)
       queryParamsArr.push(`categories=${selectedCategories.value.toString()}`)

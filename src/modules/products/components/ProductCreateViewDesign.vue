@@ -44,7 +44,7 @@ const submit = async(event: Event) => {
       body: {
         category_id: createStore.category,
         trademark_id: createStore.trademark,
-        title: createStore.name.trim(),
+        name: createStore.name.trim(),
         image: createStore.image,
         size: createStore.size.trim(),
         stock: createStore.stock,

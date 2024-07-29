@@ -15,7 +15,7 @@ export interface Product {
     name: string,
     image: string | null,
   };
-  title: string;
+  name: string;
   image: string;
   size?: string;
   description?: string;
@@ -41,7 +41,7 @@ export interface ProductResponse extends ApiResponse {
     name: string,
     image: string | null,
   };
-  title: string;
+  name: string;
   image: string;
   size?: string;
   description?: string;

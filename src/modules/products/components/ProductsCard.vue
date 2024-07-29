@@ -73,10 +73,10 @@ const deleteFromCatalog = () => {
       >
     </div>
 
-    <!-- Product title -->
+    <!-- Product name -->
     <p class="absolute bottom-2 right-0 left-0 text-center text-[0.82rem] lg:text-sm leading-4 lg:leading-[18px] z-30 h-[17%] overflow-hidden px-2 text-white max-w-[24ch] mx-auto"
       @click="toggleMenu">
-      {{ props.product.title }}
+      {{ props.product.name }}
     </p>
 
     <!-- Card bottom shadow -->

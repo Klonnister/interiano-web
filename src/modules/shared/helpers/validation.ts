@@ -14,7 +14,7 @@ export interface category {
 export interface product {
   category: number,
   trademark: number,
-  title: 70,
+  name: 70,
   image: string,
   size?: 20,
   stock: 99999,
