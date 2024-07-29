@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useOrderByDefaults } from '@/modules/shared/composables/orderByDeafults';
 import { apiRequest } from '@/modules/shared/helpers/api';
 import { useCardsStore } from '@/modules/shared/stores/cardsStore';
 import { useFilterStore } from '@/modules/shared/stores/filterStore';
@@ -15,6 +16,7 @@ const router = useRouter();
 const cardsStore = useCardsStore();
 const layoutStore = useLayoutStore();
 const filterStore = useFilterStore();
+const orderByDefaults = useOrderByDefaults();
 
 // Page variables
 const { applyFilters } = storeToRefs(filterStore);
@@ -32,6 +34,11 @@ const updatePages = (pagesInfo: Meta) => {
   metaInfo.lastPage = pagesInfo.lastPage;
   filterStore.page = pagesInfo.currentPage;
 }
+
+filterStore.updateVisibleFilters({
+  order: true,
+});
+filterStore.orderByOptions = orderByDefaults.categoriesAndTrademarks;
 
 const getCategories = async () => {
   // Categories request

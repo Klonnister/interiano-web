@@ -29,7 +29,24 @@ const updateOrderTypeList = () => {
 updateOrderTypeList();
 
 watch(orderBy, (newOrderBy) => {
-  if (orderBy.value === newOrderBy) filterStore.orderType = 'asc'
+  switch(newOrderBy) {
+    case 'price': 
+      filterStore.orderType = 'asc';
+      break;
+    case 'name': 
+      filterStore.orderType = 'asc';
+      break;
+    case 'category': 
+      filterStore.orderType = 'asc';
+      break;
+    case 'trademark': 
+      filterStore.orderType = 'asc';
+      break;
+    default: 
+      filterStore.orderType = 'desc';
+      break;
+  }
+  
   updateOrderTypeList();
 })
 </script>
