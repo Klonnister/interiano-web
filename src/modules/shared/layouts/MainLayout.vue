@@ -13,6 +13,8 @@ import { useStorage } from '@vueuse/core';
 import { useSideBarLinks } from '../composables/sideBarLinks';
 import CategoriesCreateModal from '@/modules/categories/components/CategoriesCreateModal.vue';
 import CategoriesEditModal from '@/modules/categories/components/CategoriesEditModal.vue';
+import TrademarksCreateModal from '@/modules/trademarks/components/TrademarksCreateModal.vue';
+import TrademarksEditModal from '@/modules/trademarks/components/TrademarksEditModal.vue';
 
 const layoutStore = useLayoutStore();
 const sideBarLinks = useSideBarLinks();
@@ -35,6 +37,8 @@ const {
   showProductsMenu,
   showCategoriesModal,
   showCategoriesEditModal,
+  showTrademarksModal,
+  showTrademarksEditModal,
   showFilters
 } = storeToRefs(layoutStore);
 
@@ -66,6 +70,26 @@ watch(showCategoriesEditModal, (newValue) => {
   newValue 
     ? categoriesEditModal.open()
     : categoriesEditModal.close()
+})
+
+const trademarksCreateModal = useModal({
+  component: TrademarksCreateModal,
+})
+
+watch(showTrademarksModal, (newValue) => {
+  newValue
+    ? trademarksCreateModal.open()
+    : trademarksCreateModal.close()
+})
+
+const trademarksEditModal = useModal({
+  component: TrademarksEditModal
+})
+
+watch(showTrademarksEditModal, (newValue) => {
+  newValue
+    ? trademarksEditModal.open()
+    : trademarksEditModal.close()
 })
 
 const filtersModal = useModal({

@@ -9,8 +9,10 @@ declare module 'vue' {
   export interface GlobalComponents {
     App: typeof import('./src/App.vue')['default']
     AuthLayout: typeof import('./src/modules/auth/layout/AuthLayout.vue')['default']
+    BrandsView: typeof import('./src/modules/brands/views/BrandsView.vue')['default']
     ButtonCardComponent: typeof import('./src/modules/auth/components/ButtonCardComponent.vue')['default']
     CategoriesCard: typeof import('./src/modules/categories/components/CategoriesCard.vue')['default']
+    CategoriesCardSkeleton: typeof import('./src/modules/categories/components/CategoriesCardSkeleton.vue')['default']
     CategoriesCreateModal: typeof import('./src/modules/categories/components/CategoriesCreateModal.vue')['default']
     CategoriesDeleteModal: typeof import('./src/modules/categories/components/CategoriesDeleteModal.vue')['default']
     CategoriesEditModal: typeof import('./src/modules/categories/components/CategoriesEditModal.vue')['default']
@@ -54,5 +56,9 @@ declare module 'vue' {
     SharedSearchBar: typeof import('./src/modules/shared/components/SharedSearchBar.vue')['default']
     SignupView: typeof import('./src/modules/auth/views/SignupView.vue')['default']
     TestView: typeof import('./src/modules/test/views/TestView.vue')['default']
+    TrademarksCard: typeof import('./src/modules/trademarks/components/TrademarksCard.vue')['default']
+    TrademarksCreateModal: typeof import('./src/modules/trademarks/components/TrademarksCreateModal.vue')['default']
+    TrademarksEditModal: typeof import('./src/modules/trademarks/components/TrademarksEditModal.vue')['default']
+    TrademarksView: typeof import('./src/modules/trademarks/views/TrademarksView.vue')['default']
   }
 }

@@ -12,6 +12,8 @@ export const useLayoutStore = defineStore('layoutStore', () => {
   const showProductsMenu = ref(false);
   const showCategoriesModal = ref(false);
   const showCategoriesEditModal = ref(false);
+  const showTrademarksModal = ref(false);
+  const showTrademarksEditModal = ref(false);
   const showFilters = ref(false);
 
   const resetLayout = () => {
@@ -19,12 +21,15 @@ export const useLayoutStore = defineStore('layoutStore', () => {
     showProductsMenu.value = false;
     showCategoriesModal.value = false;
     showCategoriesEditModal.value = false;
+    showTrademarksModal.value = false;
+    showTrademarksEditModal.value = false;
     showFilters.value = false;
     loading.value = false;
   }
   
   return {
     showMenu, openMenu, resetLayout, showProductsMenu,
-    showFilters, loading, showCategoriesModal, showCategoriesEditModal
+    showFilters, loading, showCategoriesModal, showCategoriesEditModal, showTrademarksModal,
+    showTrademarksEditModal
   }
 })

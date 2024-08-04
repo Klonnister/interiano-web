@@ -23,6 +23,10 @@ const open = () => {
   if (props.title === 'categorías') {
     layoutStore.showCategoriesModal = true;
   }
+
+  if (props.title === 'marcas') {
+    layoutStore.showTrademarksModal = true;
+  }
 }
 
 const openFilters = () => {

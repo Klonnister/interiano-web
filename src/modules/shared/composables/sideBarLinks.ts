@@ -17,8 +17,8 @@ export const useSideBarLinks = () => {
     },
     {
       name: 'Marcas',
-      path: { name: 'dev'},
-      icon: 'icon-park-solid:bottle-two',
+      path: { name: 'trademarks' },
+      icon: 'material-symbols:label',
     },
     {
       name: 'Otros',

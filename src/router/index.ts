@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import TestView from '@/modules/test/views/TestView.vue';
 import { useAuthStore } from '@/modules/auth/stores/auth.store';
-import productRoutes from '@/modules/products/router'
-import categoriesRoutes from '@/modules/categories/router'
-import authRoutes from "@/modules/auth/router/authRoutes";
 import { useLayoutStore } from '../modules/shared/stores/layoutStore';
+import TestView from '@/modules/test/views/TestView.vue';
+import authRoutes from "@/modules/auth/router/authRoutes";
+import productRoutes from '@/modules/products/router';
+import categoryRoutes from '@/modules/categories/router';
+import trademarkRoutes from '@/modules/trademarks/router';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,7 +29,8 @@ const router = createRouter({
       children: [
 
         ...productRoutes,
-        ...categoriesRoutes,
+        ...categoryRoutes,
+        ...trademarkRoutes,
         
       ],
     },
