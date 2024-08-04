@@ -2,7 +2,7 @@
 import { useCardsStore } from '@/modules/shared/stores/cardsStore';
 import type { Product } from '@/modules/shared/types/product.interface';
 import { storeToRefs } from 'pinia';
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useCatalogStore } from '../../shared/stores/catalogStore';
 import { useToast } from 'vue-toastification';
 import { apiUrl } from '../../shared/helpers/api';
@@ -19,6 +19,8 @@ const layoutStore = useLayoutStore();
 
 const { openCard } = storeToRefs(cardsStore)
 const { catalog } = storeToRefs(catalogStore);
+
+const imageUrl = computed(() => `${apiUrl}${props.product.image}`)
 
 const showMenu = ref(cardsStore.openCard === props.product.id);
 
@@ -66,7 +68,7 @@ const deleteFromCatalog = () => {
     class="h-[12rem] | sm:h-[13rem] | xl:h-[14rem] 2xl:h-[16rem] bg-white w-full relative rounded-xl overflow-hidden pt-4 px-4 pb-2 mx-auto select-none cursor-pointer hover:scale-[102%] custom-shadow transition-all duration-[.4s] ease-in-out">
     <div class="h-[78%] flex items-center justify-center">
       <img
-        :src="`${apiUrl}${props.product.image}`"
+        :src="imageUrl"
         alt=""
         class="h-full w-full object-contain"
         :class="{ 'grayscale': !props.product.stock }"
@@ -107,10 +109,10 @@ const deleteFromCatalog = () => {
     <!-- Menu layer -->
     <Transition name="fade">
       <div v-if="showMenu" class="absolute top-0 left-0 h-full w-full z-20">
-        <button class="absolute bottom-0 left-0 w-full h-full z-20 bg-black opacity-40 rounded-xl" @click="closeMenu" aria-label="Cerrar menú de opciones del producto" type="button"></button>
+        <button class="absolute bottom-0 left-0 w-full h-full z-20 bg-black opacity-50 rounded-xl" @click="closeMenu" aria-label="Cerrar menú de opciones del producto" type="button"></button>
 
         <!-- Trademark name -->
-        <p class="absolute top-1.5 left-2 text-[#d8dee8] text-sm sm:text-base z-30 mx-auto" @click="closeMenu">
+        <p class="absolute top-1.5 left-2 text-zinc-300 text-sm sm:text-base z-30 mx-auto" @click="closeMenu">
           {{ props.product.trademark.name }}
         </p>
 
