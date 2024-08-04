@@ -30,6 +30,7 @@ const applyFilter = (event: Event) => {
         aria-label="Barra de búsqueda"
         :id="props.id"
         v-model="filterStore.search"
+        :disabled="filterStore.loading"
         placeholder="Buscar..."
         class="w-full text-sm lg:text-base"
       />
@@ -39,6 +40,7 @@ const applyFilter = (event: Event) => {
           type="button"
           v-if="filterStore.search"
           @click="clearSearch"
+          :disabled="filterStore.loading"
           aria-label="Borrar búsqueda"
         >
           <Icon
@@ -47,7 +49,16 @@ const applyFilter = (event: Event) => {
           />
         </button>
       </Transition>
-      <div class="w-1 bg-[#D0D9F6]"></div>
+
+      <div
+        class="w-1"
+        :class="{
+          'bg-[#D0D9F6]': !filterStore.loading,
+          'bg-gray-400': filterStore.loading,
+        }"
+      >
+      </div>
+
       <button
         type="button"
         class="bg-[#15395A] px-2 rounded-e-lg"

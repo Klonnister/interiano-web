@@ -122,9 +122,9 @@ onBeforeRouteLeave((to) => {
           />
         </div>
 
-        <!-- <div v-else-if="filterStore.loading">
-          <ProductsCardSkeleton />
-        </div> -->
+        <div v-else-if="filterStore.loading">
+          <CategoriesCardSkeleton />
+        </div>
   
         <div v-else class="min-h-[40vh] lg:min-h-[65vh] flex justify-center items-center w-full">
           <p class="lg:text-xl 2xl:text-2xl opacity-70">No hay productos para mostrar</p>
