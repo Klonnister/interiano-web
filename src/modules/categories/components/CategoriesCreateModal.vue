@@ -7,16 +7,19 @@ import { computed, ref, type Ref } from 'vue';
 import { apiRequest } from '@/modules/shared/helpers/api';
 import { useToast } from 'vue-toastification';
 import { useFilterStore } from '@/modules/shared/stores/filterStore';
+import { useCategoriesCreateStore } from '@/modules/shared/stores/categoriesCreateStore';
 import InputText from 'primevue/inputtext';
+import type { CategoryResponse } from '@/modules/shared/types/category.interface';
 // import type { FileUploadUploaderEvent } from 'primevue/fileupload';
 // import type { ImageResponse } from '@/modules/shared/types/image.interface';
 // import { apiImageRequest, apiUrl } from '@/modules/shared/helpers/api';
 // import FileUpload from 'primevue/fileupload';
 
 const { width } = useWindowSize();
-const layoutStore = useLayoutStore();
 const toast = useToast();
+const layoutStore = useLayoutStore();
 const filterStore = useFilterStore();
+const categoriesCreateStore = useCategoriesCreateStore();
 
 const loading = ref(false);
 const name: Ref<string> = ref('');
@@ -48,7 +51,7 @@ const submit = async(event: Event) => {
   loading.value = true;
   layoutStore.loading = true;
 
-  const response = await apiRequest('categories', {
+  const response: CategoryResponse = await apiRequest('categories', {
       method: 'POST',
       body: {
         name: name.value
@@ -57,6 +60,7 @@ const submit = async(event: Event) => {
 
   if (!response.statusCode) {
     toast.success('Categoría creada con éxito');
+    categoriesCreateStore.newCategoryId = response.id;
     filterStore.applyFilters = true;
     layoutStore.resetLayout();
   } else {

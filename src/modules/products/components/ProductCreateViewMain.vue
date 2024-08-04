@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import ProductModalCreateCategory from './ProductModalCreateCategory.vue';
 import ProductModalCreateTrademark from './ProductModalCreateTrademark.vue';
 import { useProductCreateStore } from '../stores/productCreateStore';
 import Dropdown from 'primevue/dropdown';
@@ -14,13 +13,19 @@ import { useModal } from 'vue-final-modal';
 import { useToast } from 'vue-toastification';
 import { type ImageResponse } from '../../shared/types/image.interface';
 import Textarea from 'primevue/textarea';
+import { useLayoutStore } from '../../shared/stores/layoutStore';
+import { useCategoriesCreateStore } from '@/modules/shared/stores/categoriesCreateStore';
 
 // Tools and stores declarations
 const { y } = useWindowScroll({ behavior: 'smooth'});
+const layoutStore = useLayoutStore();
+const categoriesCreateStore = useCategoriesCreateStore();
 const createStore = useProductCreateStore();
-const { category, trademark } = storeToRefs( createStore );
 const toast = useToast();
 const router = useRouter();
+
+const { category, trademark } = storeToRefs( createStore );
+const { newCategoryId } = storeToRefs(categoriesCreateStore);
 
 // Setting Current View step in store
 createStore.currentView = 1;
@@ -59,30 +64,19 @@ const resetLoading = () => {
   createStore.loading = false;
 }
 
-
-// Create category modal
-const categoryModal = useModal({
-  component: ProductModalCreateCategory,
-  attrs: {
-    onResetCategory: () => {
-      createStore.resetCategory();
-    },
-    onResetInfo: () => {
-      toast.success('Categoría creada con éxito.')
-      getViewOptions();
-    },
-    onSetCategory: (id: number) => {
-      createStore.category = id;
-    },
-    onClose: () => {
-      categoryModal.close();
-    },
-
-  }
-});
-
 watch(category, (newCategory) => {
-  if(newCategory === 0) categoryModal.open()
+  if(newCategory === 0) {
+    createStore.resetCategory();
+    layoutStore.showCategoriesModal = true;
+  } 
+})
+
+watch(newCategoryId, (newValue: number) => {
+  if (newValue !== 0) {
+    createStore.category = newValue;
+    categoriesCreateStore.newCategoryId = 0;
+    getViewOptions();
+  }
 })
 
 
