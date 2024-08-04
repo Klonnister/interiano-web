@@ -14,18 +14,15 @@ import { useToast } from 'vue-toastification';
 import { type ImageResponse } from '../../shared/types/image.interface';
 import Textarea from 'primevue/textarea';
 import { useLayoutStore } from '../../shared/stores/layoutStore';
-import { useCategoriesCreateStore } from '@/modules/shared/stores/categoriesCreateStore';
 
 // Tools and stores declarations
 const { y } = useWindowScroll({ behavior: 'smooth'});
 const layoutStore = useLayoutStore();
-const categoriesCreateStore = useCategoriesCreateStore();
 const createStore = useProductCreateStore();
 const toast = useToast();
 const router = useRouter();
 
-const { category, trademark } = storeToRefs( createStore );
-const { newCategoryId } = storeToRefs(categoriesCreateStore);
+const { category, trademark, createdCategoryId } = storeToRefs( createStore );
 
 // Setting Current View step in store
 createStore.currentView = 1;
@@ -71,10 +68,10 @@ watch(category, (newCategory) => {
   } 
 })
 
-watch(newCategoryId, (newValue: number) => {
+watch(createdCategoryId, (newValue: number) => {
   if (newValue !== 0) {
     createStore.category = newValue;
-    categoriesCreateStore.newCategoryId = 0;
+    createStore.createdCategoryId = 0;
     getViewOptions();
   }
 })

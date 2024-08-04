@@ -15,6 +15,9 @@ export const useProductCreateStore = defineStore('productCreateStore', () => {
   const categories: Ref<Category[]> = ref([]);
   const trademarks: Ref<Trademark[]> = ref([]);
 
+  const createdCategoryId: Ref<number> = ref(0);
+  const createdTrademarkId: Ref<number> = ref(0);
+
   // Form inputs
   const name: Ref<string> = useStorage('productCreateName', '');
   const image: Ref<string> = useStorage('productCreateImage', '');
@@ -163,5 +166,6 @@ export const useProductCreateStore = defineStore('productCreateStore', () => {
     name, category, trademark, image, size, stock, description,
     extraProps, price, sale, salePrice, discontinued, design,
     validateView, resetCategory, resetTrademark, resetProductCreate,
+    createdCategoryId, createdTrademarkId
   }
 })
