@@ -6,7 +6,7 @@ import router from "@/router";
 const authStore = useAuthStore();
 const toast = useToast();
 
-export const apiUrl = 'http://192.168.1.39:3000';
+export const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
 export const apiRequest = async(path: string, params?: apiParams) => {
   return await fetch(`${apiUrl}/${path}`, {
